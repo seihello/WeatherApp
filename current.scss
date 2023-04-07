@@ -4,6 +4,14 @@
 }
 
 #input-section {
+  height: 2rem;
+
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+#search-city {
+  width: 20%;
+  height: 100%;
 }
