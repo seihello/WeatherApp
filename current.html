@@ -14,7 +14,7 @@
       <!-- Write your codes here -->
       <div id="main-section">
         <div id="input-section">
-          <select name="favorite-cities">
+          <select id="favorite-cities">
             <option value="">Favorite Cities</option>
             <option>Vancouver</option>
             <option>Toronto</option>
@@ -22,7 +22,13 @@
           </select>
           <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
         </div>
-        <div class="current-weather-section">
+        <div id="current-weather-section">
+          <div id="city-name-line">
+            <p id="city-name">City Name</p>
+            <p id="favorite-star">☆</p>
+          </div>
+          <p id="temperature">#C</p>
+          <p id="weather-info">Weather Info</p>
         </div>
       </div>
     </main>

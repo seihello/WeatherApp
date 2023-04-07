@@ -10,7 +10,35 @@
   align-items: center;
 }
 
+#favorite-cities {
+  width: 20%;
+  height: 100%;
+}
+
 #search-city {
   width: 20%;
   height: 100%;
+}
+
+#current-weather-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#city-name-line {
+  width: 50%;
+  position: relative;
+}
+
+#city-name {
+  text-align: center;
+}
+
+#favorite-star {
+  position: absolute;
+  top: 0;
+  right: 0;
 }/*# sourceMappingURL=current.css.map */
