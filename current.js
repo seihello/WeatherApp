@@ -34,4 +34,6 @@ function showWeather(cityName) {
     .catch((error) => {
         console.log("Fetch Error: " + error)
     })
+
+    // Call the function to display the weather of the next 5 days
 }
