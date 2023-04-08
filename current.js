@@ -12,7 +12,10 @@ function initMap() {
 // Current Weather
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
-const currentWeatherElement = document.querySelector("#weather-info")
+
+const selectedCityNameElement = document.querySelector("#city-name")
+const currentTemperatureElement = document.querySelector("#current-temperature")
+const currentWeatherElement = document.querySelector("#current-weather")
 
 showWeather(defaultCity)
 
@@ -25,6 +28,8 @@ function showWeather(cityName) {
     .then((data) => {
         console.log(data)
     
+        selectedCityNameElement.innerHTML = cityName
+        currentTemperatureElement.innerHTML = data["main"]["temp"]
         currentWeatherElement.innerHTML = data["weather"][0]["main"]
     })
     .catch((error) => {
