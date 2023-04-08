@@ -41,3 +41,15 @@ function showWeather(cityName) {
 
     // Call the function to display the weather of the next 5 days
 }
+
+// Favorite Cities
+const favoriteStarElement = document.querySelector("#favorite-star")
+favoriteStarElement.addEventListener("click", onFavoriteStarClicked)
+
+const favoriteCitiesMenu = document.querySelector("#favorite-cities")
+
+function onFavoriteStarClicked() {
+    const newFavoriteCity = document.createElement("option")
+    newFavoriteCity.innerHTML = selectedCityNameElement.innerHTML
+    favoriteCitiesMenu.appendChild(newFavoriteCity)
+}
