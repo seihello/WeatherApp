@@ -17,7 +17,7 @@ const selectedCityNameElement = document.querySelector("#city-name")
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
 
-showWeather(defaultCity)
+showWeather("Vancouver, BC, Canada")
 
 function showWeather(cityName) {
     const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
@@ -43,13 +43,23 @@ function showWeather(cityName) {
 }
 
 // Favorite Cities
+let favoriteCities = []
+
 const favoriteStarElement = document.querySelector("#favorite-star")
 favoriteStarElement.addEventListener("click", onFavoriteStarClicked)
 
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 
 function onFavoriteStarClicked() {
-    const newFavoriteCity = document.createElement("option")
-    newFavoriteCity.innerHTML = selectedCityNameElement.innerHTML
-    favoriteCitiesMenu.appendChild(newFavoriteCity)
+    // Add to the list of the favorite cities
+    const newFavoriteCity = selectedCityNameElement.innerHTML
+    if(favoriteCities.includes(newFavoriteCity)) {
+        return
+    }
+    favoriteCities.push(newFavoriteCity)
+
+    // Add to the pull-down menu
+    const newFavoriteCityOption = document.createElement("option")
+    newFavoriteCityOption.innerHTML = newFavoriteCity
+    favoriteCitiesMenu.appendChild(newFavoriteCityOption)
 }
