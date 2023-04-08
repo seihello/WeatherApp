@@ -16,8 +16,9 @@ const currentWeatherElement = document.querySelector("#weather-info")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const limit = 1
+const defaultCity = "Vancouver"
 
-showWeather("Tokyo")
+showWeather(defaultCity)
 
 function showWeather(cityName) {
     const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
