@@ -20,24 +20,9 @@ const limit = 1
 showWeather("Tokyo")
 
 function showWeather(cityName) {
-    
-    const locationRequest = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${apiKey}`
+    const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
 
-    let lat = 0
-    let lon = 0
-    fetch(locationRequest).then((response) => {
-        return response.json()
-    })
-    .then((data) => {
-        let location = data[0]
-        lat = location["lat"]
-        lon = location["lon"]
-    
-        const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
-    
-        return fetch(weatherRequest)
-    })
-    .then((response) => {
+    fetch(weatherRequest).then((response) => {
         return response.json()
     })
     .then((data) => {
