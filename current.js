@@ -1,9 +1,15 @@
 // Auto Complete
 let autocomplete
+let searchCityInput
+
 function initMap() {
-    const searchCityInput = document.querySelector("#search-city")
+    searchCityInput = document.querySelector("#search-city")
 
     autocomplete = new google.maps.places.Autocomplete(searchCityInput);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        console.log(searchCityInput.value)
+    });
 }
 
 
