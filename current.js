@@ -9,13 +9,29 @@ function initMap() {
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 let cityName = "Vancouver"
 const limit = 1
-let requestURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${apiKey}`
+let locationRequest = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${apiKey}`
 
+let lat = 0
+let lon = 0
+fetch(locationRequest).then((response) => {
+    return response.json()
+})
+.then((data) => {
+    let location = data[0]
+    lat = location["lat"]
+    lon = location["lon"]
+    console.log(lat)
+    console.log(lon)
 
-fetch(requestURL).then((responce) => {
-    responce.json().then((data) => {
-        console.log(data)
-    })
+    let weatherRequest = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+
+    return fetch(weatherRequest)
+})
+.then((response) => {
+    return response.json()
+})
+.then((data) => {
+    console.log(data)
 })
 .catch((error) => {
     console.log("Fetch Error: " + error)
