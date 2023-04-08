@@ -20,7 +20,7 @@ const currentWeatherElement = document.querySelector("#current-weather")
 showWeather(defaultCity)
 
 function showWeather(cityName) {
-    const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
+    const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
 
     fetch(weatherRequest).then((response) => {
         return response.json()
