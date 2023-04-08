@@ -1,3 +1,4 @@
+// Auto Complete
 let autocomplete
 function initMap() {
     const searchCityInput = document.querySelector("#search-city")
@@ -5,6 +6,8 @@ function initMap() {
     autocomplete = new google.maps.places.Autocomplete(searchCityInput);
 }
 
+
+let currentWeatherElement = document.querySelector("#weather-info")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 let cityName = "Vancouver"
@@ -32,6 +35,8 @@ fetch(locationRequest).then((response) => {
 })
 .then((data) => {
     console.log(data)
+
+    currentWeatherElement.innerHTML = data["weather"][0]["main"]
 })
 .catch((error) => {
     console.log("Fetch Error: " + error)
