@@ -23,6 +23,9 @@ function showWeather(cityName) {
     const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
 
     fetch(weatherRequest).then((response) => {
+        if(response.status !== 200) {
+            return;
+        }
         return response.json()
     })
     .then((data) => {
