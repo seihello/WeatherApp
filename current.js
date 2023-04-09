@@ -1,3 +1,14 @@
+// Get user's current location
+function showWeatherInCurrentLocation(currentLocation) {
+    showWeatherByLocation(currentLocation["coords"]["latitude"], currentLocation["coords"]["longitude"])
+}
+function showWeatherInDefaultCity() {
+    showWeatherByCityName("Vancouver")
+}
+navigator.geolocation.getCurrentPosition(showWeatherInCurrentLocation, showWeatherInDefaultCity);
+
+
+
 // Auto Complete
 const searchCityInput = document.querySelector("#search-city")
 
@@ -5,7 +16,7 @@ function initMap() {
     const autocomplete = new google.maps.places.Autocomplete(searchCityInput);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        showWeather(searchCityInput.value)
+        showWeatherByCityName(searchCityInput.value)
     });
 }
 
@@ -58,19 +69,16 @@ const defaultCity = "Vancouver"
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
 
-showWeather("Vancouver, BC, Canada")
+function showWeather(request) {
 
-function showWeather(cityName) {
-    const weatherRequest = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
-
-    fetch(weatherRequest).then((response) => {
+    fetch(request).then((response) => {
         if(response.status !== 200) {
             return;
         }
         return response.json()
     })
     .then((data) => {
-        selectedCityNameElement.innerHTML = cityName
+        selectedCityNameElement.innerHTML = data["name"]
         currentTemperatureElement.innerHTML = data["main"]["temp"]
         currentWeatherElement.innerHTML = data["weather"][0]["main"]
 
@@ -83,4 +91,16 @@ function showWeather(cityName) {
 
 
     // Call the function to display the weather of the next 5 days
+}
+
+function showWeatherByCityName(cityName) {
+    const request = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
+
+    showWeather(request)
+}
+
+function showWeatherByLocation(latitude, longtitude) {
+    const request = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&appid=${apiKey}`
+
+    showWeather(request)
 }
