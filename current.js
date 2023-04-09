@@ -120,7 +120,7 @@ function showWeatherByCityName(cityName) {
 }
 
 function showWeatherByLocation(latitude, longtitude) {
-    const request = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&appid=${apiKey}`
+    const request = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&units=metric&appid=${apiKey}`
 
     showWeather(request)
 }
