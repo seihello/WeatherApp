@@ -66,6 +66,8 @@ function onFavoriteStarClicked() {
 
     // Update the star sign
     setFavoriteStar()
+
+    changeSelectedFavoriteCityOption(selectedCityNameElement.innerHTML)
 }
 
 function setFavoriteStar() {
@@ -80,6 +82,16 @@ function onFavoriteCitySelected(event) {
     showWeatherByCityName(event.target.value)
 
     setFavoriteStar()
+}
+
+function changeSelectedFavoriteCityOption(displayedCityName) {
+    for(favoriteCityOption of favoriteCitiesMenu.children) {
+        if(favoriteCityOption.innerHTML === "Favorite Cities" || favoriteCityOption.innerHTML === displayedCityName) {
+            favoriteCityOption.selected = true
+        } else {
+            favoriteCityOption = false
+        }
+    }
 }
 
 // Current Weather
@@ -103,6 +115,8 @@ function showWeather(request) {
         currentWeatherElement.innerHTML = data["weather"][0]["main"]
 
         setFavoriteStar()
+
+        changeSelectedFavoriteCityOption(selectedCityNameElement.innerHTML)
     })
     .catch((error) => {
         console.log("Fetch Error: " + error)
