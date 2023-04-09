@@ -22,14 +22,22 @@ function initMap() {
 
 
 // Favorite Cities
-let favoriteCities = []
-
 const selectedCityNameElement = document.querySelector("#city-name")
 const favoriteStarElement = document.querySelector("#favorite-star")
 favoriteStarElement.addEventListener("click", onFavoriteStarClicked)
 
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 favoriteCitiesMenu.addEventListener("change", onFavoriteCitySelected)
+
+let favoriteCities = JSON.parse(localStorage.getItem("favorite-cities"))
+if(favoriteCities === null) {
+    favoriteCities = []
+}
+for(let favoriteCity of favoriteCities) {
+    const favoriteCityOption = document.createElement("option")
+    favoriteCityOption.innerHTML = favoriteCity
+    favoriteCitiesMenu.appendChild(favoriteCityOption)
+}
 
 function onFavoriteStarClicked() {
     const selectedCity = selectedCityNameElement.innerHTML
@@ -42,6 +50,7 @@ function onFavoriteStarClicked() {
         const newFavoriteCityOption = document.createElement("option")
         newFavoriteCityOption.innerHTML = selectedCity
         favoriteCitiesMenu.appendChild(newFavoriteCityOption)
+        
     } else {
         let index = favoriteCities.indexOf(selectedCity)
 
@@ -52,6 +61,10 @@ function onFavoriteStarClicked() {
         favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[index+1])
     }
 
+    // Update user's local storage
+    localStorage.setItem("favorite-cities", JSON.stringify(favoriteCities))
+
+    // Update the star sign
     setFavoriteStar()
 }
 
