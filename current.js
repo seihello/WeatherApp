@@ -100,6 +100,7 @@ const defaultCity = "Vancouver"
 
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
+const weatherIconElement = document.querySelector("#weather-icon")
 
 function showWeather(request) {
 
@@ -110,9 +111,11 @@ function showWeather(request) {
         return response.json()
     })
     .then((data) => {
+        console.log(data)
         selectedCityNameElement.innerHTML = data["name"]
         currentTemperatureElement.innerHTML = data["main"]["temp"]
         currentWeatherElement.innerHTML = data["weather"][0]["main"]
+        weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@2x.png"
 
         setFavoriteStar()
 
