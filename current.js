@@ -29,6 +29,7 @@ const favoriteStarElement = document.querySelector("#favorite-star")
 favoriteStarElement.addEventListener("click", onFavoriteStarClicked)
 
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
+favoriteCitiesMenu.addEventListener("change", onFavoriteCitySelected)
 
 function onFavoriteStarClicked() {
     const selectedCity = selectedCityNameElement.innerHTML
@@ -60,6 +61,12 @@ function setFavoriteStar() {
     } else {
         favoriteStarElement.src = "img/star-off.png"
     }
+}
+
+function onFavoriteCitySelected(event) {
+    showWeatherByCityName(event.target.value)
+
+    setFavoriteStar()
 }
 
 // Current Weather
