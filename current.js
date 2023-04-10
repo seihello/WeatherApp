@@ -6,6 +6,7 @@ const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
 const weatherIconElement = document.querySelector("#weather-icon")
+const nationalFlagElement = document.querySelector("#national-flag")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"  
 const defaultCity = "Vancouver"
@@ -152,6 +153,7 @@ function showWeather(request) {
         currentTemperatureElement.innerHTML = data["main"]["temp"]
         currentWeatherElement.innerHTML = data["weather"][0]["main"]
         weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@4x.png"
+        nationalFlagElement.src = `https://flagsapi.com/${data["sys"]["country"]}/flat/64.png`
 
         // Update the star sign
         setFavoriteStar()
