@@ -7,7 +7,7 @@ const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
 const weatherIconElement = document.querySelector("#weather-icon")
 
-const apiKey = "c5b83392add58be24fb5a7bd362ced83"
+const apiKey = "c5b83392add58be24fb5a7bd362ced83"  
 const defaultCity = "Vancouver"
 const isCelsius = true
 
@@ -19,10 +19,12 @@ let favoriteCities = []
 navigator.geolocation.getCurrentPosition(showWeatherInCurrentLocation, showWeatherInDefaultCity);
 
 function showWeatherInCurrentLocation(currentLocation) {
+    favoriteStarElement.style["opacity"] = 100
     showWeatherByLocation(currentLocation["coords"]["latitude"], currentLocation["coords"]["longitude"])
 }
 
 function showWeatherInDefaultCity() {
+    favoriteStarElement.style["opacity"] = 100
     showWeatherByCityName(defaultCity)
 }
 
