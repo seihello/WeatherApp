@@ -151,7 +151,7 @@ function showWeather(request) {
         cityNameElement.innerHTML = data["name"]
         currentTemperatureElement.innerHTML = data["main"]["temp"]
         currentWeatherElement.innerHTML = data["weather"][0]["main"]
-        weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@2x.png"
+        weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@4x.png"
 
         // Update the star sign
         setFavoriteStar()
