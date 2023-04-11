@@ -32,7 +32,7 @@ function showWeatherInDefaultCity() {
 
 
 /* Auto Complete */
-function initMap() {
+window.initMap = function() {
     const autocomplete = new google.maps.places.Autocomplete(searchCityInput);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
