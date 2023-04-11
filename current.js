@@ -147,17 +147,17 @@ function showWeather(request) {
         }
         return response.json()
     })
-    .then((data) => {
+    .then((currentWeather) => {
         // Show the data obtained from API (Debug)
-        console.log(data)
+        console.log(currentWeather)
 
         // Update the display using the data
-        cityNameElement.innerText = data["name"]
-        currentTemperatureElement.innerText = Math.floor(data["main"]["temp"])
-        currentWeatherElement.innerText = data["weather"][0]["main"]
-        weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@4x.png"
+        cityNameElement.innerText = currentWeather["name"]
+        currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
+        currentWeatherElement.innerText = currentWeather["weather"][0]["main"]
+        weatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
-        const countryCode = data["sys"]["country"]
+        const countryCode = currentWeather["sys"]["country"]
         countryCodeElement.innerText = countryCode
         nationalFlagElement.src = `https://flagsapi.com/${countryCode}/flat/64.png`
 
