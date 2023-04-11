@@ -3,10 +3,11 @@ const searchCityInput = document.querySelector("#search-city")
 const cityNameElement = document.querySelector("#city-name")
 const favoriteStarElement = document.querySelector("#favorite-star")
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
+const countryCodeElement = document.querySelector("#country-code")
+const nationalFlagElement = document.querySelector("#national-flag")
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
 const weatherIconElement = document.querySelector("#weather-icon")
-const nationalFlagElement = document.querySelector("#national-flag")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"  
 const defaultCity = "Vancouver"
@@ -63,14 +64,14 @@ function getFavoriteCitiesFromStorage() {
         for(let favoriteCity of favoriteCities) {
             const favoriteCityOption = document.createElement("option")
             favoriteCityOption.classList.add("favorite-city")
-            favoriteCityOption.innerHTML = favoriteCity
+            favoriteCityOption.innerText = favoriteCity
             favoriteCitiesMenu.appendChild(favoriteCityOption)
         }
     }
 }
 
 function onFavoriteStarClicked() {
-    const displayedCity = cityNameElement.innerHTML
+    const displayedCity = cityNameElement.innerText
 
     // If the displayed city is new
     if(!favoriteCities.includes(displayedCity)) {
@@ -80,7 +81,7 @@ function onFavoriteStarClicked() {
         // Add to the pull-down menu
         const newFavoriteCityOption = document.createElement("option")
         newFavoriteCityOption.classList.add("favorite-city")
-        newFavoriteCityOption.innerHTML = displayedCity
+        newFavoriteCityOption.innerText = displayedCity
         favoriteCitiesMenu.appendChild(newFavoriteCityOption)
         
     }
@@ -129,7 +130,7 @@ function changeSelectedFavoriteCityOption(displayedCityName) {
 
     // Check every option and make it selected if it matches the displayed city
     for(favoriteCityOption of favoriteCitiesMenu.children) {
-        if(favoriteCityOption.innerHTML === displayedCityName) {
+        if(favoriteCityOption.innerText === displayedCityName) {
             favoriteCityOption.selected = true
         } else {
             favoriteCityOption = false
@@ -151,11 +152,14 @@ function showWeather(request) {
         console.log(data)
 
         // Update the display using the data
-        cityNameElement.innerHTML = data["name"]
-        currentTemperatureElement.innerHTML = data["main"]["temp"]
-        currentWeatherElement.innerHTML = data["weather"][0]["main"]
+        cityNameElement.innerText = data["name"]
+        currentTemperatureElement.innerText = data["main"]["temp"]
+        currentWeatherElement.innerText = data["weather"][0]["main"]
         weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@4x.png"
-        nationalFlagElement.src = `https://flagsapi.com/${data["sys"]["country"]}/flat/64.png`
+
+        const countryCode = data["sys"]["country"]
+        countryCodeElement.innerText = countryCode
+        nationalFlagElement.src = `https://flagsapi.com/${countryCode}/flat/64.png`
 
         // Update the star sign
         setFavoriteStar()
