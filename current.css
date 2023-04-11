@@ -77,6 +77,10 @@ p {
   gap: 0 1px;
 }
 
+#country-code {
+  color: rgb(110, 110, 110);
+}
+
 #national-flag-box {
   width: 30px;
   height: 30px;
