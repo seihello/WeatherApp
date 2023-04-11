@@ -62,6 +62,7 @@ function getFavoriteCitiesFromStorage() {
         // Deploy to the pull-down menu
         for(let favoriteCity of favoriteCities) {
             const favoriteCityOption = document.createElement("option")
+            favoriteCityOption.classList.add("favorite-city")
             favoriteCityOption.innerHTML = favoriteCity
             favoriteCitiesMenu.appendChild(favoriteCityOption)
         }
@@ -78,6 +79,7 @@ function onFavoriteStarClicked() {
 
         // Add to the pull-down menu
         const newFavoriteCityOption = document.createElement("option")
+        newFavoriteCityOption.classList.add("favorite-city")
         newFavoriteCityOption.innerHTML = displayedCity
         favoriteCitiesMenu.appendChild(newFavoriteCityOption)
         

@@ -4,20 +4,20 @@
 }
 
 #input-section {
-  height: 2rem;
+  height: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 #favorite-cities {
-  width: 20%;
+  width: 25%;
   height: 100%;
 }
 
 #search-city {
-  width: 20%;
-  height: 100%;
+  width: 25%;
+  height: 90%;
 }
 
 #current-weather-section {
