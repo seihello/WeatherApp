@@ -153,7 +153,7 @@ function showWeather(request) {
 
         // Update the display using the data
         cityNameElement.innerText = data["name"]
-        currentTemperatureElement.innerText = data["main"]["temp"]
+        currentTemperatureElement.innerText = Math.floor(data["main"]["temp"])
         currentWeatherElement.innerText = data["weather"][0]["main"]
         weatherIconElement.src = "https://openweathermap.org/img/wn/" + data["weather"][0]["icon"] + "@4x.png"
 
