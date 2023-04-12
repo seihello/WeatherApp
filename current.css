@@ -9,7 +9,6 @@ p {
 
 #input-section {
   height: 2.5rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,7 +29,6 @@ p {
   height: 1000px;
   font-size: 1.2rem;
   padding-top: 1rem;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -46,7 +44,6 @@ p {
 
 #city {
   padding: 0 0 0 30px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +70,7 @@ p {
 }
 
 #country {
-  padding: 0 0 0 30px;;
+  padding: 0 0 0 30px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -103,5 +100,4 @@ p {
 #weather-icon {
   width: 150px;
   height: auto;
-}
-
+}/*# sourceMappingURL=current.css.map */
