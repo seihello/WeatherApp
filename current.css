@@ -1,10 +1,14 @@
+* {
+  margin: 0 0;
+}
+
 p {
   margin: 0 0;
 }
 
 #main-section {
   width: 60%;
-  margin: 5rem auto;
+  margin: 10rem auto;
 }
 
 #input-section {
