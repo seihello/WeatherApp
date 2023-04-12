@@ -1,0 +1,21 @@
+.threeH-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  background-color: blue;
+  height: 7rem;
+}
+
+.threeH-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: yellow;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=threeHours.css.map */
