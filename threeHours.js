@@ -1,4 +1,4 @@
-threeHRange("Vancouver", 1);
+threeHRange("Vancouver", 2);
 
 function threeHRange (city, day) {
 
@@ -25,8 +25,7 @@ fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da947
           let rangeIndex = 0;
 
            weatherList.forEach((weather, index) => {
-           
-
+            
 
             let date = new Date(weather["dt"] * 1000);
             
@@ -34,20 +33,20 @@ fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da947
             if (date.getDate() === compareDate) {
                 const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
                 weatherRange[0].innerText = weather["weather"][0]["main"];
+                
+                let weatherIconElement = document.getElementsByClassName("weatherImg");
+                weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
+                
                 rangeIndex += 1;
 
                 console.log(weatherRange)
             
             
             }
-
             
 
           })
-           
-
-    
-          
+        
         })
     }
 )
