@@ -1,4 +1,4 @@
-threeHRange("Osaka", 2);
+threeHRange("Vancouver", 1);
 
 function threeHRange (city, day) {
 
@@ -22,14 +22,22 @@ fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da947
 
            let threeHBox = document.getElementsByClassName("threeH-box");
 
+          let rangeIndex = 0;
+
            weatherList.forEach((weather, index) => {
            
 
 
             let date = new Date(weather["dt"] * 1000);
+            
 
             if (date.getDate() === compareDate) {
-                threeHBox.getElementsByClassName("weatherRange")
+                const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
+                weatherRange[0].innerText = weather["weather"][0]["main"];
+                rangeIndex += 1;
+
+                console.log(weatherRange)
+            
             
             }
 
