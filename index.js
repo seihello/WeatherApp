@@ -198,6 +198,51 @@ const temperatureType = "metric"
 const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityNameTaiki
 }&units=${temperatureType}&appid=${apiKey}`
 
+let selectedCity =""
+let selectedDay =0
+
+const firstDayWeather = document.getElementById("firstDay")
+const secondDayWeather = document.getElementById("secondDay")
+const thirdDayWeather = document.getElementById("thirdDay")
+const forthDayWeather = document.getElementById("forthDay")
+const fifthDayWeather = document.getElementById("fifthDay")
+
+// currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
+
+// let weatherIconElement = document.getElementsByClassName("weatherImg");
+let weatherIcon =document.getElementsByClassName("dayWeatherImg")
+weatherIcon.src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png"
+
+firstDayWeather.addEventListener("click", ()=> {
+    selectedDay = 1
+    selectedCity = cityNameTaiki
+    threeHRange()
+})
+
+secondDayWeather.addEventListener("click", ()=> {
+    selectedDay = 2
+    selectedCity = cityNameTaiki
+    threeHRange()
+})
+
+thirdDayWeather.addEventListener("click", ()=> {
+    selectedDay = 3
+    selectedCity = cityNameTaiki
+    threeHRange()
+})
+
+forthDayWeather.addEventListener("click", ()=> {
+    selectedDay = 4
+    selectedCity = cityNameTaiki
+    threeHRange()
+})
+
+fifthDayWeather.addEventListener("click", ()=> {
+    selectedDay = 5
+    selectedCity = cityNameTaiki
+    threeHRange()
+})
+
 
 showFiveDaysWeather()
 function showFiveDaysWeather() {
@@ -220,18 +265,18 @@ function showFiveDaysWeather() {
                 // get all the weather info
                 fiveDaysWeather["list"].forEach( eachWeatherInfo=> {
                     console.log(eachWeatherInfo);
-
+                
                     // convert unix-time to date
-                    let date = new Date(eachWeatherInfo["dt"] * 1000);
-                    
+                    let date = new Date(eachWeatherInfo["dt"] * 1000);                   
 
                     // show the next 5 days' weather              
                     if(date.getDate() === currentDate.getDate() + day) {
-                        if(date.getHours() >=12 && date.getHours() <=15) {
-                            console.log(eachWeatherInfo["weather"][0]["main"],eachWeatherInfo["main"]["temp_max"],eachWeatherInfo["main"]["temp_min"]);
+                        if(date.getHours() >=6 && date.getHours() <=9) {
+                            // console.log(eachWeatherInfo["weather"][0]["main"],eachWeatherInfo["main"]["temp_max"],eachWeatherInfo["main"]["temp_min"]);
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
-                            document.getElementById(`day${day}-temp-max`).innerHTML= eachWeatherInfo["main"]["temp_max"]
-                            document.getElementById(`day${day}-temp-min`).innerHTML= eachWeatherInfo["main"]["temp_min"]
+                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]
+                            // document.getElementById(`day${day}-temp-max`).innerHTML= eachWeatherInfo["main"]["temp_max"]
+                            // document.getElementById(`day${day}-temp-min`).innerHTML= eachWeatherInfo["main"]["temp_min"]
                                     
                             day = day +1; 
                         }
@@ -243,14 +288,14 @@ function showFiveDaysWeather() {
 }
 
 
-threeHRange("Vancouver", 1);
+
+// threeHRange("Vancouver", 1);
 
 let weatherIconElement = document.getElementsByClassName("weatherImg");
 let rangeIndex = 0;
 
-function threeHRange (city, day) {
-    
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da94770c5c8f2ed979107d60b61299`)
+function threeHRange () {
+    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&appid=42da94770c5c8f2ed979107d60b61299`)
     .then(
         function(response) {
             response.json() .then(function(data) {
@@ -266,12 +311,13 @@ function threeHRange (city, day) {
 
 
             const currentDate = new Date();
-            const compareDate = currentDate.getDate() + day;
+            const compareDate = currentDate.getDate() + selectedDay;
 
             let threeHBox = document.getElementsByClassName("threeH-box");
 
             
 
+            rangeIndex = 0
             weatherList.forEach((weather, index) => {
                 
 
