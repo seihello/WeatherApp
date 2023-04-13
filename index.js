@@ -167,7 +167,8 @@ function showWeather(request) {
         // Change the selected city on the pull-down menu
         changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
 
-        // Todo: Call the function to display the weather of the next 5 days here
+        // Call the function to display the weather of the next 5 days here
+        showFiveDaysWeather(currentWeather["name"])
     })
     .catch((error) => {
         console.log("Fetch Error: " + error)
@@ -190,17 +191,16 @@ function showWeatherByLocation(latitude, longtitude) {
 
 
 
-const cityNameTaiki ="Fukuoka"
+
 //const apiKey ="3b2df1883208190d986bcd1b1e48eff4"
 
 // to change the unit of temperature from Kelvin to Celsius
 const temperatureType = "metric"
-const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityNameTaiki
+
+
+function showFiveDaysWeather(cityName) {
+    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName
 }&units=${temperatureType}&appid=${apiKey}`
-
-
-showFiveDaysWeather()
-function showFiveDaysWeather() {
     fetch(request)
     .then(
         function(response) {
