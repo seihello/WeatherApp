@@ -167,7 +167,10 @@ function showWeather(request) {
         // Change the selected city on the pull-down menu
         changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
 
-        // Todo: Call the function to display the weather of the next 5 days here
+        // Call the function to display the weather of the next 5 days here
+        selectedCity = currentWeather["name"]
+        showFiveDaysWeather()
+        threeHRange()
     })
     .catch((error) => {
         console.log("Fetch Error: " + error)
@@ -190,17 +193,52 @@ function showWeatherByLocation(latitude, longtitude) {
 
 
 
-const cityNameTaiki ="Fukuoka"
+
 //const apiKey ="3b2df1883208190d986bcd1b1e48eff4"
 
 // to change the unit of temperature from Kelvin to Celsius
 const temperatureType = "metric"
-const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityNameTaiki
-}&units=${temperatureType}&appid=${apiKey}`
+
+let selectedCity = ""
+let selectedDay = 0
+
+const firstDayWeather = document.getElementById("firstDay")
+const secondDayWeather = document.getElementById("secondDay")
+const thirdDayWeather = document.getElementById("thirdDay")
+const forthDayWeather = document.getElementById("forthDay")
+const fifthDayWeather = document.getElementById("fifthDay")
 
 
-showFiveDaysWeather()
+let weatherIcon =document.getElementsByClassName("dayWeatherImg")
+
+
+firstDayWeather.addEventListener("click", ()=> {
+    selectedDay = 1
+    threeHRange()
+})
+
+secondDayWeather.addEventListener("click", ()=> {
+    selectedDay = 2
+    threeHRange()
+})
+
+thirdDayWeather.addEventListener("click", ()=> {
+    selectedDay = 3
+    threeHRange()
+})
+
+forthDayWeather.addEventListener("click", ()=> {
+    selectedDay = 4
+    threeHRange()
+})
+
+fifthDayWeather.addEventListener("click", ()=> {
+    selectedDay = 5
+    threeHRange()
+})
+
 function showFiveDaysWeather() {
+    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=${apiKey}`
     fetch(request)
     .then(
         function(response) {
@@ -214,25 +252,23 @@ function showFiveDaysWeather() {
                 // get currentDate
                 let currentDate = new Date();
 
+                
                 // for the if statement to specific the date, the time and weather infos
                 let day = 1;
-                
+
+
                 // get all the weather info
                 fiveDaysWeather["list"].forEach( eachWeatherInfo=> {
                     console.log(eachWeatherInfo);
-
+                
                     // convert unix-time to date
-                    let date = new Date(eachWeatherInfo["dt"] * 1000);
-                    
-
+                    let date = new Date(eachWeatherInfo["dt"] * 1000);                   
                     // show the next 5 days' weather              
                     if(date.getDate() === currentDate.getDate() + day) {
-                        if(date.getHours() >=12 && date.getHours() <=15) {
-                            console.log(eachWeatherInfo["weather"][0]["main"],eachWeatherInfo["main"]["temp_max"],eachWeatherInfo["main"]["temp_min"]);
+                        if(date.getHours() >=6 && date.getHours() <=9) {
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
-                            document.getElementById(`day${day}-temp-max`).innerHTML= eachWeatherInfo["main"]["temp_max"]
-                            document.getElementById(`day${day}-temp-min`).innerHTML= eachWeatherInfo["main"]["temp_min"]
-                                    
+                            weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
+                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]                                    
                             day = day +1; 
                         }
                     }
@@ -243,17 +279,17 @@ function showFiveDaysWeather() {
 }
 
 
-threeHRange("Vancouver", 1);
+
+// threeHRange("Vancouver", 1);
 
 let weatherIconElement = document.getElementsByClassName("weatherImg");
 let rangeIndex = 0;
 
-function threeHRange (city, day) {
-    
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da94770c5c8f2ed979107d60b61299`)
+function threeHRange () {
+    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&appid=42da94770c5c8f2ed979107d60b61299`)
     .then(
         function(response) {
-            response.json() .then(function(data) {
+            response.json().then(function(data) {
                 console.log(data);
 
                 console.log(data["list"][0]);
@@ -265,37 +301,36 @@ function threeHRange (city, day) {
                 console.log(weatherList[0]["weather"][0]["main"])
 
 
-            const currentDate = new Date();
-            const compareDate = currentDate.getDate() + day;
+                const currentDate = new Date();
+                const compareDate = currentDate.getDate() + selectedDay;
 
-            let threeHBox = document.getElementsByClassName("threeH-box");
+                let threeHBox = document.getElementsByClassName("threeH-box");
 
-            
-
-            weatherList.forEach((weather, index) => {
                 
 
-                let date = new Date(weather["dt"] * 1000);
-                
-
-                if (date.getDate() === compareDate) {
-                    const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
-                    weatherRange[0].innerText = weather["weather"][0]["main"];
+                rangeIndex = 0
+                weatherList.forEach((weather, index) => {
                     
-                    weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
+
+                    let date = new Date(weather["dt"] * 1000);
                     
-                    rangeIndex += 1;
 
-                    console.log(weatherRange)
-                
-                
-                }
-                
+                    if (date.getDate() === compareDate) {
+                        const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
+                        weatherRange[0].innerText = weather["weather"][0]["main"];
+                        
+                        weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
+                        
+                        rangeIndex += 1;
 
-            })
-            
+                        console.log(weatherRange)
+                    
+                    
+                    }
+                    
+
+                })
             })
         }
     )
-
 }
