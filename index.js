@@ -250,7 +250,8 @@ let rangeIndex = 0;
 
 function threeHRange (city, day) {
     
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da94770c5c8f2ed979107d60b61299`)
+    //Fetching the API
+    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=42da94770c5c8f2ed979107d60b61299`)
     .then(
         function(response) {
             response.json() .then(function(data) {
@@ -271,7 +272,7 @@ function threeHRange (city, day) {
             let threeHBox = document.getElementsByClassName("threeH-box");
 
             
-
+            //For Each Loop to show the Weather through all the hour Ranges
             weatherList.forEach((weather, index) => {
                 
 
@@ -283,6 +284,10 @@ function threeHRange (city, day) {
                     weatherRange[0].innerText = weather["weather"][0]["main"];
                     
                     weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
+                    
+                    //Adding the Degrees to the loop
+                    let threeHRangeDegrees = document.getElementsByClassName("threeHRange-degrees" + rangeIndex);
+                    threeHRangeDegrees[0].innerText = Math.floor(weather["main"]["temp"]) + "°C";
                     
                     rangeIndex += 1;
 

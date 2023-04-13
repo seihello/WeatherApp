@@ -18,23 +18,134 @@ body {
   padding-right: 5rem;
   gap: 1.5rem;
   background-color: #81C3D7;
-  height: 14rem;
+  height: 17rem;
   margin: 1rem 5rem 1rem 5rem;
   border-radius: 0.5rem;
 }
 
 .threeH-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
-  background-color: white;
-  width: 7rem;
-  height: 12rem;
+  background-color: #9bd1e1;
+  width: 8rem;
+  height: 15rem;
   border-radius: 1rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 .threeH-container img:hover {
   opacity: 0.8;
   transform: scale(1.04);
+}
+.threeH-container .rangeH {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 1rem;
+}
+.threeH-container .weatherRange0 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange4 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange5 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange6 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .weatherRange7 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+}
+.threeH-container .threeHRange-degrees0 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees4 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees5 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees6 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
+}
+.threeH-container .threeHRange-degrees7 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #3d4a4f;
+  font-size: 1.5rem;
 }/*# sourceMappingURL=threeHours.css.map */
