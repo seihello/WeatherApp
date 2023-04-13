@@ -207,11 +207,7 @@ const thirdDayWeather = document.getElementById("thirdDay")
 const forthDayWeather = document.getElementById("forthDay")
 const fifthDayWeather = document.getElementById("fifthDay")
 
-// currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
-
-// let weatherIconElement = document.getElementsByClassName("weatherImg");
 let weatherIcon =document.getElementsByClassName("dayWeatherImg")
-weatherIcon.src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png"
 
 firstDayWeather.addEventListener("click", ()=> {
     selectedDay = 1
@@ -259,25 +255,23 @@ function showFiveDaysWeather() {
                 // get currentDate
                 let currentDate = new Date();
 
+                
                 // for the if statement to specific the date, the time and weather infos
                 let day = 1;
-                
+
+
                 // get all the weather info
                 fiveDaysWeather["list"].forEach( eachWeatherInfo=> {
                     console.log(eachWeatherInfo);
                 
                     // convert unix-time to date
                     let date = new Date(eachWeatherInfo["dt"] * 1000);                   
-
                     // show the next 5 days' weather              
                     if(date.getDate() === currentDate.getDate() + day) {
                         if(date.getHours() >=6 && date.getHours() <=9) {
-                            // console.log(eachWeatherInfo["weather"][0]["main"],eachWeatherInfo["main"]["temp_max"],eachWeatherInfo["main"]["temp_min"]);
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
-                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]
-                            // document.getElementById(`day${day}-temp-max`).innerHTML= eachWeatherInfo["main"]["temp_max"]
-                            // document.getElementById(`day${day}-temp-min`).innerHTML= eachWeatherInfo["main"]["temp_min"]
-                                    
+                            weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
+                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]                                    
                             day = day +1; 
                         }
                     }
