@@ -3,18 +3,21 @@ const searchCityInput = document.querySelector("#search-city")
 const cityNameElement = document.querySelector("#city-name")
 const favoriteStarElement = document.querySelector("#favorite-star")
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
+const currentWeatherSectionElement = document.querySelector("#current-weather-section")
 const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
 const currentTemperatureElement = document.querySelector("#current-temperature")
-const currentTemperatureSignElement = document.querySelector("#current-temperature-sign")
 const currentWeatherElement = document.querySelector("#current-weather")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
 
-const apiKey = "c5b83392add58be24fb5a7bd362ced83"  
+const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
 const isCelsius = true
 
 let favoriteCities = []
+
+// Hide the current weather until calling all API finishes
+currentWeatherSectionElement.style["opacity"] = 0
 
 /* User's location */
 // If user's current location is sucessful to get, display the weather there
@@ -143,8 +146,12 @@ function changeSelectedFavoriteCityOption(displayedCityName) {
 function showWeather(request) {
     // Call OpenWeather API to get data
     fetch(request).then((response) => {
-        if(response.status !== 200) {
+        if(response.status === 404) {
+            alert("No weather data of the selected place.")
             return;
+        } else if(response.status !== 200) {
+            console.log("Status Error!", response.status)
+            return
         }
         return response.json()
     })
@@ -155,7 +162,6 @@ function showWeather(request) {
         // Update the display using the data
         cityNameElement.innerText = currentWeather["name"]
         currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
-        currentTemperatureSignElement.innerText = "℃"
         currentWeatherElement.innerText = currentWeather["weather"][0]["main"]
         currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
@@ -165,6 +171,9 @@ function showWeather(request) {
 
         // Update the star sign
         setFavoriteStar()
+
+        // Show the current weather
+        currentWeatherSectionElement.style["opacity"] = 1
 
         // Change the selected city on the pull-down menu
         changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
