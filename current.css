@@ -8,7 +8,7 @@ p {
 
 #main-section {
   width: 60%;
-  margin: 10rem auto 1rem;
+  margin: 100px auto 1rem;
 }
 
 #input-section {
@@ -41,6 +41,7 @@ p {
 }
 
 #place {
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -97,12 +98,24 @@ p {
   width: auto;
 }
 
+#weather-icon {
+  width: 200px;
+  height: auto;
+}
+
+#current-temperature-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 #current-temperature {
-  margin: 2rem 0 0;
   font-size: 3rem;
 }
 
-#weather-icon {
-  width: 150px;
-  height: auto;
-} /*# sourceMappingURL=current.css.map */
+#current-temperature-sign {
+  font-size: 2rem;
+  padding-bottom: 0.2rem;
+}
+
+/*# sourceMappingURL=current.css.map */

@@ -6,6 +6,7 @@ const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
 const currentTemperatureElement = document.querySelector("#current-temperature")
+const currentTemperatureSignElement = document.querySelector("#current-temperature-sign")
 const currentWeatherElement = document.querySelector("#current-weather")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
 
@@ -154,6 +155,7 @@ function showWeather(request) {
         // Update the display using the data
         cityNameElement.innerText = currentWeather["name"]
         currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
+        currentTemperatureSignElement.innerText = "℃"
         currentWeatherElement.innerText = currentWeather["weather"][0]["main"]
         currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
@@ -199,8 +201,7 @@ const temperatureType = "metric"
 
 
 function showFiveDaysWeather(cityName) {
-    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName
-}&units=${temperatureType}&appid=${apiKey}`
+    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${temperatureType}&appid=${apiKey}`
     fetch(request)
     .then(
         function(response) {
