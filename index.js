@@ -7,7 +7,7 @@ const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
-const weatherIconElement = document.querySelector("#weather-icon")
+const currentWeatherIconElement = document.querySelector("#weather-icon")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"  
 const defaultCity = "Vancouver"
@@ -155,7 +155,7 @@ function showWeather(request) {
         cityNameElement.innerText = currentWeather["name"]
         currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
         currentWeatherElement.innerText = currentWeather["weather"][0]["main"]
-        weatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
+        currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
         const countryCode = currentWeather["sys"]["country"]
         countryCodeElement.innerText = countryCode
@@ -243,60 +243,59 @@ function showFiveDaysWeather() {
 }
 
 
-
-
-
 threeHRange("Vancouver", 1);
-function threeHRange (city, day) {
 
+let weatherIconElement = document.getElementsByClassName("weatherImg");
+let rangeIndex = 0;
+
+function threeHRange (city, day) {
+    
     fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=42da94770c5c8f2ed979107d60b61299`)
     .then(
         function(response) {
             response.json() .then(function(data) {
                 console.log(data);
-    
+
                 console.log(data["list"][0]);
-                var date = new Date(data["list"][0]["dt"] * 1000);
+                let date = new Date(data["list"][0]["dt"] * 1000);
                 console.log(date)
-    
+
                 let weatherList = data["list"]
                 
                 console.log(weatherList[0]["weather"][0]["main"])
-    
-    
-               const currentDate = new Date();
-               const compareDate = currentDate.getDate() + day;
-    
-               let threeHBox = document.getElementsByClassName("threeH-box");
-    
-              let rangeIndex = 0;
-    
-               weatherList.forEach((weather, index) => {
-               
-    
-    
+
+
+            const currentDate = new Date();
+            const compareDate = currentDate.getDate() + day;
+
+            let threeHBox = document.getElementsByClassName("threeH-box");
+
+            
+
+            weatherList.forEach((weather, index) => {
+                
+
                 let date = new Date(weather["dt"] * 1000);
                 
-    
+
                 if (date.getDate() === compareDate) {
                     const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
                     weatherRange[0].innerText = weather["weather"][0]["main"];
+                    
+                    weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
+                    
                     rangeIndex += 1;
-    
+
                     console.log(weatherRange)
                 
                 
                 }
-    
                 
-    
-              })
-               
-    
-        
-              
+
+            })
+            
             })
         }
     )
-    
+
 }
