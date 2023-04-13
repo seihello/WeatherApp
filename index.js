@@ -272,7 +272,7 @@ function threeHRange (city, day) {
             let threeHBox = document.getElementsByClassName("threeH-box");
 
             
-            //For Each Loop to show the Weather through all the hour Ranges
+            //For Each to show the Weather through all the hour Ranges
             weatherList.forEach((weather, index) => {
                 
 
@@ -280,12 +280,15 @@ function threeHRange (city, day) {
                 
 
                 if (date.getDate() === compareDate) {
+
+                    //Adding the Weather
                     const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
                     weatherRange[0].innerText = weather["weather"][0]["main"];
                     
+                    //Adding the Weather Icons
                     weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
                     
-                    //Adding the Degrees to the loop
+                    //Adding the Degrees
                     let threeHRangeDegrees = document.getElementsByClassName("threeHRange-degrees" + rangeIndex);
                     threeHRangeDegrees[0].innerText = Math.floor(weather["main"]["temp"]) + "°C";
                     
