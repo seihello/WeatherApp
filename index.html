@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="./current.css" />
+    <link rel="stylesheet" href="./fiveDays.css" />
+    <link rel="stylesheet" href="./threeHours.css" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <header>
+      <div id="header">
+        <h1>Weather App</h1>
+      </div>
+    </header>
+    <main>
+      <!-- Write your codes here -->
+      <div id="main-section">
+        <div id="input-section">
+          <select id="favorite-cities">
+            <option class="favorite-city" value="">Favorite Cities</option>
+          </select>
+          <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
+        </div>
+        <div id="current-weather-section">
+          
+          <div id="place">
+            <div id="city">
+              <p id="city-name"></p>
+              <div id="favorite-star-box"><img id="favorite-star" src="img/star-off.png"></div>
+            </div>
+            <div id="country">
+              <p id="country-code"></p>
+              <div id="national-flag-box"><img id="national-flag"></div>
+            </div>
+          </div>
+          <div id="current-temperature"></div>
+          <div id="current-weather"></div>
+          <img id="weather-icon">
+        </div>
+      </div>
+
+
+
+      <div class="five-days-forecast">
+        <div class="daily-forecast">
+          <p id="day1"></p>
+          <p id="day1-temp-max"></p>
+          <p id="day1-temp-min"></p>
+        </div>
+        <div class="daily-forecast">
+          <p id="day2"></p>
+          <p id="day2-temp-max"></p>
+          <p id="day2-temp-min"></p>
+        </div>
+        <div class="daily-forecast">
+          <p id="day3"></p>
+          <p id="day3-temp-max"></p>
+          <p id="day3-temp-min"></p>
+        </div>
+        <div class="daily-forecast">
+          <p id="day4"></p>
+          <p id="day4-temp-max"></p>
+          <p id="day4-temp-min"></p>
+        </div>
+        <div class="daily-forecast">
+          <p id="day5"></p>
+          <p id="day5-temp-max"></p>
+          <p id="day5-temp-min"></p>
+        </div>
+      </div>
+      <div class="three-hours-range">
+        <div class="forecast-in-detail">
+
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+        <div class="forecast-in-detail">
+          
+        </div>
+      </div>
+
+
+
+      <h1 class="threeH-title">3 Hours Range</h1>
+
+      <div class="threeH-box">
+
+        <div class="threeH-container">
+          <p>0-3</p>
+          <p class="weatherRange0"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>3-6</p>
+          <p class="weatherRange1"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>6-9</p>
+          <p class="weatherRange2"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>9-12</p>
+          <p class="weatherRange3"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>12-15</p>
+          <p class="weatherRange4"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>15-18</p>
+          <p class="weatherRange5"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>18-21</p>
+          <p class="weatherRange6"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+        <div class="threeH-container">
+          <p>21-00</p>
+          <p class="weatherRange7"></p>
+          <img class="weatherImg" src="" alt="Weather Icon">
+        </div>
+
+      </div>
+
+    </main>
+    <footer>
+    </footer>
+    <script src="index.js"></script>
+
+  </body>
+</html>
