@@ -1,7 +1,9 @@
 const cityName ="Fukuoka"
 const apiKey ="3b2df1883208190d986bcd1b1e48eff4"
+
+// to change the unit of temperature from Kelvin to Celsius
 const temperatureType = "metric"
-const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`
+const request = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${temperatureType}&appid=${apiKey}`
 
 
 fetch(request)
