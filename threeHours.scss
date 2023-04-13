@@ -12,10 +12,11 @@ body {
 .threeH-box {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-left: 5rem;
     padding-right: 5rem;
+    gap: 1.5rem;
     background-color: #81C3D7;
     height: 14rem;
     margin: 1rem 5rem 1rem 5rem;
@@ -32,4 +33,14 @@ body {
     border-radius: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+
+    img:hover {
+        opacity: 0.8;
+        -webkit-transform: scale(1.04);
+        -moz-transform: scale(1.04);
+        -o-transform: scale(1.04);
+        -ms-transform: scale(1.04);
+        transform: scale(1.04);
+    }
 }
+
