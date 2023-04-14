@@ -31,6 +31,11 @@
     .fiveDaysTemp {
         padding: 0 0 10% 0;
     }
+
+    .dayWeatherImg {
+        height: auto;
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 375px) {
@@ -58,11 +63,6 @@
         p {
             font-size: 1rem;
             font-style: normal;
-        }
-
-        .dayWeatherImg {
-            height: auto;
-            width: 100%;
         }
     }
 }

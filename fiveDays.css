@@ -27,6 +27,10 @@
 .daily-forecast .fiveDaysTemp {
   padding: 0 0 10% 0;
 }
+.daily-forecast .dayWeatherImg {
+  height: auto;
+  width: 100%;
+}
 
 @media only screen and (max-width: 375px) {
   .five-days-forecast {
@@ -49,9 +53,5 @@
   .daily-forecast p {
     font-size: 1rem;
     font-style: normal;
-  }
-  .daily-forecast .dayWeatherImg {
-    height: auto;
-    width: 100%;
   }
 }/*# sourceMappingURL=fiveDays.css.map */
