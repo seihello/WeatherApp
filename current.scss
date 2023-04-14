@@ -117,7 +117,17 @@ main {
 }
 
 #current-weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+#current-weather-detail {
+  padding-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #weather-icon {
@@ -125,14 +135,13 @@ main {
   height: auto;
 }
 
-#current-temperature-box {
-  
+#current-temperature {
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
-#current-temperature {
+#current-temperature-text {
   font-size: 3rem;
 }
 

@@ -6,8 +6,8 @@ const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 const currentWeatherSectionElement = document.querySelector("#current-weather-section")
 const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
-const currentTemperatureElement = document.querySelector("#current-temperature")
-const currentWeatherElement = document.querySelector("#current-weather")
+const currentTemperatureElement = document.querySelector("#current-temperature-text")
+const currentWeatherElement = document.querySelector("#current-weather-text")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
