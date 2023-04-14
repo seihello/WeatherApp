@@ -19,6 +19,7 @@ body {
     padding-right: 5rem;
     gap: 1.5rem;
     background-color: #81C3D7;
+    flex-wrap: wrap;
     
     height: 20rem;
     margin: 1rem 5rem 1rem 5rem;
@@ -197,5 +198,9 @@ body {
     }
 
     
+}
+
+@media only screen and (max-width: 375px) {
+
 }
 
