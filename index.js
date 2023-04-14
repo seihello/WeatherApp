@@ -307,7 +307,7 @@ function threeHRange () {
                 let threeHBox = document.getElementsByClassName("threeH-box");
 
                 
-
+                //For Each to show the Weather through all the hour Ranges
                 rangeIndex = 0
                 weatherList.forEach((weather, index) => {
                     
