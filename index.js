@@ -329,7 +329,24 @@ function threeHRange () {
                     }
                     
 
-                })
+                }) 
+                //if we have 5 data
+                //rangeindex = 5
+                if(rangeIndex < 8) {
+                    let hoursGap = 8 - rangeIndex; // 3
+                    for(let i = 7; i >= hoursGap; i--)// 7 6 5 4 3 
+                    {
+                        const weatherRangeOrigin = document.getElementsByClassName("weatherRange" + (i - hoursGap)) ;
+                        const weatherRangeDest = document.getElementsByClassName("weatherRange" + i);
+
+                        weatherRangeDest[0].innerText = weatherRangeOrigin[0].innerText;
+                        weatherIconElement[i].src = weatherIconElement[i - hoursGap].src;
+
+                        weatherRangeOrigin[0].innerText = ""
+                        weatherIconElement[i - hoursGap].src = ""
+
+                    } 
+                }
             })
         }
     )
