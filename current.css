@@ -158,7 +158,7 @@ main {
   padding-right: 0.5rem;
   text-align: right;
   font-size: 1rem;
-  color: rgb(66, 66, 66);
+  color: rgb(110, 110, 110);
 }
 
 @media only screen and (max-width: 375px) {
@@ -187,6 +187,10 @@ main {
   }
   #or {
     display: block;
+  }
+  #current-time {
+    text-align: center;
+    padding-right: 0;
   }
 }
 /*# sourceMappingURL=current.css.map */

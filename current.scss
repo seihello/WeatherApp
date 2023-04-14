@@ -1,3 +1,5 @@
+$caption-grey: rgb(110, 110, 110);
+
 * {
   margin: 0 0;
 }
@@ -100,7 +102,7 @@ main {
 }
 
 #country-code {
-  color: rgb(110, 110, 110);
+  color: $caption-grey;
 }
 
 #national-flag-box {
@@ -165,7 +167,7 @@ main {
   padding-right: .5rem;
   text-align: right;
   font-size: 1rem;
-  color: rgb(66, 66, 66);
+  color: $caption-grey;
 }
 
 @media only screen and (max-width: 375px) {
@@ -199,6 +201,11 @@ main {
 
   #or {
     display: block;
+  }
+
+  #current-time {
+    text-align: center;
+    padding-right: 0;
   }
 }
 
