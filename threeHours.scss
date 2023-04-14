@@ -6,23 +6,19 @@ body {
     
 }
 
-.threeH-title {
-    margin-left: 5rem;
-}
 
 .threeH-box {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding: 0 1.5rem 0 1.5rem;
     gap: 1.5rem;
     background-color: #81C3D7;
     flex-wrap: wrap;
     
     height: 20rem;
-    margin: 1rem 5rem 1rem 5rem;
+    margin: 0 0 1rem 0;
     border-radius: 0.5rem;
 }
 
@@ -31,10 +27,12 @@ body {
     flex-direction: column;
     justify-content: center;
     background-color: #9bd1e1;
-    width: 8rem;
+    width: 10%;
     height: 15rem;
     border-radius: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0 1rem 0;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
     
 
 
@@ -62,7 +60,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     .weatherRange1 {
@@ -70,6 +68,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
+        font-size: 120%;
 
     }
 
@@ -78,7 +77,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     .weatherRange3 {
@@ -86,7 +85,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     .weatherRange4 {
@@ -94,7 +93,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     .weatherRange5 {
@@ -102,7 +101,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     .weatherRange6 {
@@ -110,7 +109,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     .weatherRange7 {
@@ -118,7 +117,7 @@ body {
         flex-direction: row;
         justify-content: center;
         color:#3d4a4f;
-
+        font-size: 120%;
     }
 
     //Degrees
@@ -200,12 +199,12 @@ body {
     
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 376px) {
     .threeH-box {
-        width: 95%;
+        width: 100%;
         height: auto;
-        margin: 0 0;
-        padding: 0 0;
+        margin: 0 0 0 0;
+        padding: 5% 0;
     }
 
     .threeH-container {
@@ -213,6 +212,8 @@ body {
         height: auto;
         flex-direction: row;
         align-items: center;
+        padding: 0 ;
+        margin: 0 2% 0 2%;
     }
 
     .rangeH {
@@ -220,7 +221,7 @@ body {
     }
 
     .weatherImg{
-        width: 50%;
+        width: 20%;
         height: auto;
     }
 }
