@@ -311,7 +311,9 @@ function showFiveDaysWeather() {
 
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
                             weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
-                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]
+
+                            let temp = Math.floor(eachWeatherInfo["main"]["temp"])
+                            document.getElementById(`day${day}-temp`).innerHTML= temp + "℃"
                             
                             day = day +1; 
                         }
