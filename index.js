@@ -319,7 +319,7 @@ function threeHRange () {
                         weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
                         
                         let threeHDegrees = document.getElementsByClassName("threeHRange-degrees" + rangeIndex);
-                        threeHDegrees[0].innerText = weather["main"]["temp"] + "°C";
+                        threeHDegrees[0].innerText = Math.floor(weather["main"]["temp"]) + "°C";
 
                         rangeIndex += 1;
 
