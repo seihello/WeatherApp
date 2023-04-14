@@ -9,6 +9,7 @@ const nationalFlagElement = document.querySelector("#national-flag")
 const currentTemperatureElement = document.querySelector("#current-temperature-text")
 const currentWeatherElement = document.querySelector("#current-weather-text")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
+const currentTimeElement = document.querySelector("#current-time")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
@@ -168,6 +169,9 @@ function showWeather(request) {
         const countryCode = currentWeather["sys"]["country"]
         countryCodeElement.innerText = countryCode
         nationalFlagElement.src = `https://flagsapi.com/${countryCode}/flat/64.png`
+        const currentTime = new Date(currentWeather["dt"]*1000)
+        const currentTimeText = `As of ${toMonthText(currentTime.getMonth())}${currentTime.getDate()}, ${currentTime.getFullYear()} ${toAMPM(currentTime.getHours(), currentTime.getMinutes())}`
+        currentTimeElement.innerText = currentTimeText
 
         // Update the star sign
         setFavoriteStar()
@@ -409,4 +413,48 @@ function threeHRange () {
             })
         }
     )
+}
+
+function toMonthText(month) {
+    switch(month) {
+        case 0:
+            return "Jan."
+        case 1:
+            return "Fab."
+        case 2:
+            return "Mar."
+        case 3:
+            return "Apr."
+        case 4:
+            return "May."
+        case 5:
+            return "Jun."
+        case 6:
+            return "Jul."
+        case 7:
+            return "Aug."
+        case 8:
+            return "Sep."
+        case 9:
+            return "Oct."
+        case 10:
+            return "Nov."
+        case 11:
+            return "Dec."
+    }
+}
+
+function toAMPM(hour, minute) {
+    if(hour === 0) {
+        return `${12}:${minute} AM`
+    }
+    else if(hour < 12) {
+        return `${hour}:${minute} AM`
+    }
+    else if(hour === 12) {
+        return `${12}:${minute} PM`
+    }
+    else if(hour > 12) {
+        return `${hour-12}:${minute} PM`
+    }
 }

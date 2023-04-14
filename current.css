@@ -34,21 +34,20 @@ main {
 }
 
 #main-section {
-  width: 60%;
+  width: 50%;
   margin: 1rem auto;
   padding: 1rem 0;
   border-radius: 10px;
 }
 
 #current-weather-section {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   font-size: 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: white;
   border-radius: 5px;
 }
 
@@ -112,6 +111,7 @@ main {
 }
 
 #current-weather {
+  width: 70%;
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -133,7 +133,7 @@ main {
 }
 
 #weather-icon {
-  width: 200px;
+  width: 60%;
   height: auto;
 }
 
@@ -152,12 +152,22 @@ main {
   padding-bottom: 0.2rem;
 }
 
+#current-time {
+  width: 70%;
+  margin-top: 0.2rem;
+  padding-right: 0.5rem;
+  text-align: right;
+  font-size: 1rem;
+  color: rgb(66, 66, 66);
+}
+
 @media only screen and (max-width: 375px) {
   main {
     width: 95%;
     margin: 0 auto;
   }
   #main-section {
+    width: 100%;
     padding: 0 0;
   }
   #input-section {
