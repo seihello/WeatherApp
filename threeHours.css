@@ -28,6 +28,8 @@ body {
   height: 15rem;
   border-radius: 1rem;
   margin: 1rem 0 1rem 0;
+  padding-bottom: 0.5%;
+  padding-top: 0.5%;
 }
 .threeH-container img:hover {
   opacity: 0.8;
@@ -46,48 +48,56 @@ body {
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .weatherRange7 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: #3d4a4f;
+  font-size: 120%;
 }
 .threeH-container .threeHRange-degrees0 {
   display: flex;
