@@ -26,8 +26,8 @@ body {
 
 .threeH-container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   background-color: #9bd1e1;
   width: 8rem;
   height: 15rem;
@@ -149,4 +149,26 @@ body {
   justify-content: center;
   color: #3d4a4f;
   font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 375px) {
+  .threeH-box {
+    width: 95%;
+    height: auto;
+    margin: 0 0;
+    padding: 0 0;
+  }
+  .threeH-container {
+    width: 90%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+  .rangeH {
+    padding-right: 1rem;
+  }
+  .weatherImg {
+    width: 50%;
+    height: auto;
+  }
 }/*# sourceMappingURL=threeHours.css.map */
