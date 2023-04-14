@@ -283,23 +283,20 @@ function showFiveDaysWeather() {
 // threeHRange("Vancouver", 1);
 
 let weatherIconElement = document.getElementsByClassName("weatherImg");
+
 let rangeIndex = 0;
 
 function threeHRange () {
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&appid=42da94770c5c8f2ed979107d60b61299`)
+    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=42da94770c5c8f2ed979107d60b61299`)
     .then(
         function(response) {
             response.json().then(function(data) {
-                console.log(data);
 
                 console.log(data["list"][0]);
                 let date = new Date(data["list"][0]["dt"] * 1000);
-                console.log(date)
 
                 let weatherList = data["list"]
                 
-                console.log(weatherList[0]["weather"][0]["main"])
-
 
                 const currentDate = new Date();
                 const compareDate = currentDate.getDate() + selectedDay;
@@ -321,6 +318,9 @@ function threeHRange () {
                         
                         weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
                         
+                        let threeHDegrees = document.getElementsByClassName("threeHRange-degrees" + rangeIndex);
+                        threeHDegrees[0].innerText = Math.floor(weather["main"]["temp"]) + "°C";
+
                         rangeIndex += 1;
 
                         console.log(weatherRange)
@@ -329,7 +329,31 @@ function threeHRange () {
                     }
                     
 
-                })
+                }) 
+                //if we have 5 data
+                //rangeindex = 5
+                if(rangeIndex < 8) {
+                    let hoursGap = 8 - rangeIndex; // 3
+                    for(let i = 7; i >= hoursGap; i--)// 7 6 5 4 3 
+                    {
+                        const weatherRangeOrigin = document.getElementsByClassName("weatherRange" + (i - hoursGap)) ;
+                        const weatherRangeDest = document.getElementsByClassName("weatherRange" + i);
+
+                        const threeHDegreesOrigin = document.getElementsByClassName("threeHRange-degrees" + (i - hoursGap));
+                        const threeHDegreesDest = document.getElementsByClassName("threeHRange-degrees" + i); 
+
+                        weatherRangeDest[0].innerText = weatherRangeOrigin[0].innerText;
+                        weatherIconElement[i].src = weatherIconElement[i - hoursGap].src;
+
+                        threeHDegreesDest[0].innerText = threeHDegreesOrigin[0].innerText;
+
+                        weatherRangeOrigin[0].innerText = ""
+                        weatherIconElement[i - hoursGap].src = ""
+
+                        threeHDegreesOrigin[0].innerText = ""
+
+                    } 
+                }
             })
         }
     )
