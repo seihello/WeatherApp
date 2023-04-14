@@ -343,6 +343,17 @@ function threeHRange () {
 
                 let threeHBox = document.getElementsByClassName("threeH-box");
 
+                // Set empty value to all the 3-hourly range
+                for(let i = 0; i < 8; i++) {
+                    const weatherRange = document.getElementsByClassName("weatherRange" + i);
+                    weatherRange[0].innerText = "";
+                    
+                    weatherIconElement[i].src = "";
+                    
+                    let threeHDegrees = document.getElementsByClassName("threeHRange-degrees" + i);
+                    threeHDegrees[0].innerText = "";
+                }
+
                 
                 //For Each to show the Weather through all the hour Ranges
                 rangeIndex = 0
@@ -372,7 +383,8 @@ function threeHRange () {
                 }) 
                 //if we have 5 data
                 //rangeindex = 5
-                if(rangeIndex < 8) {
+                if(rangeIndex < 8 && selectedDay === 0) {
+
                     let hoursGap = 8 - rangeIndex; // 3
                     for(let i = 7; i >= hoursGap; i--)// 7 6 5 4 3 
                     {
