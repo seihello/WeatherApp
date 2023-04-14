@@ -137,6 +137,11 @@ main {
   height: auto;
 }
 
+#weather-icon:hover {
+  opacity: 0.8;
+  transform: scale(1.04);
+}
+
 #current-temperature {
   display: flex;
   justify-content: center;
