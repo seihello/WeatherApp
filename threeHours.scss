@@ -19,6 +19,7 @@ body {
     padding-right: 5rem;
     gap: 1.5rem;
     background-color: #81C3D7;
+    flex-wrap: wrap;
     
     height: 20rem;
     margin: 1rem 5rem 1rem 5rem;
@@ -27,8 +28,8 @@ body {
 
 .threeH-container {
     display: flex;
-    justify-content: center; 
     flex-direction: column;
+    justify-content: center;
     background-color: #9bd1e1;
     width: 8rem;
     height: 15rem;
@@ -197,5 +198,30 @@ body {
     }
 
     
+}
+
+@media only screen and (max-width: 375px) {
+    .threeH-box {
+        width: 95%;
+        height: auto;
+        margin: 0 0;
+        padding: 0 0;
+    }
+
+    .threeH-container {
+        width: 90%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .rangeH {
+        padding-right: 1rem;
+    }
+
+    .weatherImg{
+        width: 50%;
+        height: auto;
+    }
 }
 
