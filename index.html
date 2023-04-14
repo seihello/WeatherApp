@@ -18,15 +18,16 @@
     </header>
     <main>
       <!-- Write your codes here -->
+      <div id="input-section">
+        <select id="favorite-cities">
+          <option class="favorite-city" value="">Favorite Cities</option>
+        </select>
+        <div id="or">OR</div>
+        <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
+      </div>
+
       <div id="main-section">
-        <div id="input-section">
-          <select id="favorite-cities">
-            <option class="favorite-city" value="">Favorite Cities</option>
-          </select>
-          <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
-        </div>
         <div id="current-weather-section">
-          
           <div id="place">
             <div id="city">
               <p id="city-name"></p>
@@ -37,9 +38,12 @@
               <div id="national-flag-box"><img id="national-flag"></div>
             </div>
           </div>
-          <div id="current-temperature"></div>
-          <div id="current-weather"></div>
-          <img id="weather-icon">
+          <div id="current-weather">Clouds</div>
+          <img id="weather-icon" src="img/default.png">
+          <div id="current-temperature-box">
+            <p id="current-temperature">00</p>
+            <p id="current-temperature-sign">℃</p>
+          </div>
         </div>
       </div>
 
