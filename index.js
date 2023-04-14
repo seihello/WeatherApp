@@ -6,9 +6,10 @@ const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 const currentWeatherSectionElement = document.querySelector("#current-weather-section")
 const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
-const currentTemperatureElement = document.querySelector("#current-temperature-text")
-const currentWeatherElement = document.querySelector("#current-weather-text")
+const currentWeatherElement = document.querySelector("#current-weather")
+const currentWeatherTextElement = document.querySelector("#current-weather-text")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
+const currentTemperatureElement = document.querySelector("#current-temperature-text")
 const currentTimeElement = document.querySelector("#current-time")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
@@ -163,7 +164,7 @@ function showWeather(request) {
         // Update the display using the data
         cityNameElement.innerText = currentWeather["name"]
         currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
-        currentWeatherElement.innerText = currentWeather["weather"][0]["main"]
+        currentWeatherTextElement.innerText = currentWeather["weather"][0]["main"]
         currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
         const countryCode = currentWeather["sys"]["country"]
@@ -206,7 +207,11 @@ function showWeatherByLocation(latitude, longtitude) {
     showWeather(request)
 }
 
-
+// Display today's 3-hourly weather when the user clickes the current weather
+currentWeatherElement.addEventListener("click", () => {
+    selectedDay = 0
+    threeHRange()
+})
 
 
 //const apiKey ="3b2df1883208190d986bcd1b1e48eff4"
