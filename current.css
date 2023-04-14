@@ -53,7 +53,7 @@ main {
 }
 
 #place {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -112,10 +112,17 @@ main {
 }
 
 #current-weather {
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #9bd1e1;
+  border-radius: 20px;
+}
+
+#current-weather-text {
+  font-size: 1.5rem;
 }
 
 #current-weather-detail {
@@ -149,6 +156,9 @@ main {
   main {
     width: 95%;
     margin: 0 auto;
+  }
+  #main-section {
+    padding: 0 0;
   }
   #input-section {
     width: 100%;
