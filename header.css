@@ -13,5 +13,6 @@
 @media only screen and (min-width: 375px) {
   #header {
     height: 60px;
+    position: static;
   }
 }/*# sourceMappingURL=header.css.map */

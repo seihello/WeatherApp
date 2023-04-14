@@ -143,11 +143,17 @@ main {
 @media only screen and (max-width: 375px) {
   main {
     width: 95%;
-    margin: calc(60px + 20px) auto 1rem;
+    margin: 0 auto;
   }
 
   #input-section {
     width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    left: 0;
   }
   
   #favorite-cities {
