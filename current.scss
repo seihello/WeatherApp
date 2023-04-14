@@ -1,3 +1,5 @@
+@import "common.scss";
+
 * {
   margin: 0 0;
 }
@@ -7,13 +9,13 @@ p {
 }
 
 main {
-  margin: calc(80px + 20px) auto 1rem;
+  margin: calc(60px + 20px) auto 0;
 }
 
 
 
 #input-section {
-  width: 60%;
+  width: 50%;
   height: 2.5rem;
   margin: 0 auto;
   display: flex;
@@ -22,7 +24,7 @@ main {
 }
 
 #favorite-cities {
-  width: 25%;
+  width: 30%;
   height: 100%;
 }
 
@@ -31,12 +33,12 @@ main {
 }
 
 #search-city {
-  width: 25%;
+  width: 30%;
   height: 90%;
 }
 
 #main-section {
-  width: 60%;
+  width: 50%;
   margin: 1rem auto;
   padding: 1rem 0;
 
@@ -45,7 +47,7 @@ main {
 }
 
 #current-weather-section {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   font-size: 1.2rem;
   display: flex;
@@ -53,12 +55,11 @@ main {
   justify-content: flex-start;
   align-items: center;
 
-  background-color: white;
   border-radius: 5px;
 }
 
 #place {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -101,7 +102,7 @@ main {
 }
 
 #country-code {
-  color: rgb(110, 110, 110);
+  color: $caption-grey;
 }
 
 #national-flag-box {
@@ -113,25 +114,45 @@ main {
 #national-flag {
   height: 100%;
   width: auto;
+  border-radius: 15px;
 }
 
 #current-weather {
+  width: 70%;
+  padding-top: 2rem;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #9bd1e1;
+  border-radius: 20px;
+}
+
+#current-weather-text {
+  font-size: 1.5rem;
+}
+
+#current-weather-detail {
+  padding-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #weather-icon {
-  width: 200px;
+  width: 60%;
   height: auto;
 }
 
-#current-temperature-box {
-  
+#current-temperature {
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
-#current-temperature {
+#current-temperature-text {
   font-size: 3rem;
 }
 
@@ -140,14 +161,34 @@ main {
   padding-bottom: 0.2rem;
 }
 
+#current-time {
+  width: 70%;
+  margin-top: .2rem;
+  padding-right: .5rem;
+  text-align: right;
+  font-size: 1rem;
+  color: $caption-grey;
+}
+
 @media only screen and (max-width: 375px) {
   main {
     width: 95%;
-    margin: calc(60px + 20px) auto 1rem;
+    margin: 0 auto;
+  }
+
+  #main-section {
+    width: 100%;
+    padding: 0 0;
   }
 
   #input-section {
     width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    left: 0;
   }
   
   #favorite-cities {
@@ -160,6 +201,11 @@ main {
 
   #or {
     display: block;
+  }
+
+  #current-time {
+    text-align: center;
+    padding-right: 0;
   }
 }
 
