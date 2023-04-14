@@ -3,7 +3,7 @@ Display weather information of a selected city
 
 ## API
 - [Current Weather](https://openweathermap.org/current)
-- [Three-hourly Forcast](https://openweathermap.org/forecast5)
+- [Three-hourly Forecast](https://openweathermap.org/forecast5)
 - [National Flag](https://flagsapi.com/)
 
 
