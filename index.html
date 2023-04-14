@@ -18,15 +18,16 @@
     </header>
     <main>
       <!-- Write your codes here -->
+      <div id="input-section">
+        <select id="favorite-cities">
+          <option class="favorite-city" value="">Favorite Cities</option>
+        </select>
+        <div id="or">OR</div>
+        <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
+      </div>
+
       <div id="main-section">
-        <div id="input-section">
-          <select id="favorite-cities">
-            <option class="favorite-city" value="">Favorite Cities</option>
-          </select>
-          <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
-        </div>
         <div id="current-weather-section">
-          
           <div id="place">
             <div id="city">
               <p id="city-name"></p>
@@ -37,9 +38,12 @@
               <div id="national-flag-box"><img id="national-flag"></div>
             </div>
           </div>
-          <div id="current-temperature"></div>
-          <div id="current-weather"></div>
-          <img id="weather-icon">
+          <div id="current-weather">Clouds</div>
+          <img id="weather-icon" src="img/default.png">
+          <div id="current-temperature-box">
+            <p id="current-temperature">00</p>
+            <p id="current-temperature-sign">℃</p>
+          </div>
         </div>
       </div>
 
@@ -47,34 +51,39 @@
 
       <div class="five-days-forecast">
         <div class="daily-forecast" id= "firstDay">
+          <p id="showDay1"></p>
           <p id="day1"></p>
-          <img class="dayWeatherImg" src="" alt="Weather Icon">
           <p id="day1-temp"></p>
+          <img class="dayWeatherImg" src="" alt="Weather Icon">
         </div>
         <div class="daily-forecast" id="secondDay">
+          <p id="showDay2"></p>
           <p id="day2"></p>
-          <img class="dayWeatherImg" src="" alt="Weather Icon">
           <p id="day2-temp"></p>
+          <img class="dayWeatherImg" src="" alt="Weather Icon">
         </div>
         <div class="daily-forecast" id="thirdDay">
+          <p id="showDay3"></p>
           <p id="day3"></p>
-          <img class="dayWeatherImg" src="" alt="Weather Icon">
           <p id="day3-temp"></p>
+          <img class="dayWeatherImg" src="" alt="Weather Icon">
         </div>
         <div class="daily-forecast" id="forthDay">
+          <p id="showDay4"></p>
           <p id="day4"></p>
-          <img class="dayWeatherImg" src="" alt="Weather Icon">
           <p id="day4-temp"></p>
+          <img class="dayWeatherImg" src="" alt="Weather Icon">
         </div>
         <div class="daily-forecast" id="fifthDay">
+          <p id="showDay5"></p>
           <p id="day5"></p>
-          <img class="dayWeatherImg" src="" alt="Weather Icon">
           <p id="day5-temp"></p>
+          <img class="dayWeatherImg" src="" alt="Weather Icon">
         </div>
       </div>
 
-      
 
+      <h1 class="threeH-title">3 Hours Range</h1>
       <div class="threeH-box">
 
         <div class="threeH-container">

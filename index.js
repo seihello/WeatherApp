@@ -3,17 +3,21 @@ const searchCityInput = document.querySelector("#search-city")
 const cityNameElement = document.querySelector("#city-name")
 const favoriteStarElement = document.querySelector("#favorite-star")
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
+const currentWeatherSectionElement = document.querySelector("#current-weather-section")
 const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
 const currentTemperatureElement = document.querySelector("#current-temperature")
 const currentWeatherElement = document.querySelector("#current-weather")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
 
-const apiKey = "c5b83392add58be24fb5a7bd362ced83"  
+const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
 const isCelsius = true
 
 let favoriteCities = []
+
+// Hide the current weather until calling all API finishes
+currentWeatherSectionElement.style["opacity"] = 0
 
 /* User's location */
 // If user's current location is sucessful to get, display the weather there
@@ -142,8 +146,12 @@ function changeSelectedFavoriteCityOption(displayedCityName) {
 function showWeather(request) {
     // Call OpenWeather API to get data
     fetch(request).then((response) => {
-        if(response.status !== 200) {
+        if(response.status === 404) {
+            alert("No weather data of the selected place.")
             return;
+        } else if(response.status !== 200) {
+            console.log("Status Error!", response.status)
+            return
         }
         return response.json()
     })
@@ -163,6 +171,9 @@ function showWeather(request) {
 
         // Update the star sign
         setFavoriteStar()
+
+        // Show the current weather
+        currentWeatherSectionElement.style["opacity"] = 1
 
         // Change the selected city on the pull-down menu
         changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
@@ -202,6 +213,7 @@ const temperatureType = "metric"
 let selectedCity = ""
 let selectedDay = 0
 
+
 const firstDayWeather = document.getElementById("firstDay")
 const secondDayWeather = document.getElementById("secondDay")
 const thirdDayWeather = document.getElementById("thirdDay")
@@ -239,6 +251,7 @@ fifthDayWeather.addEventListener("click", ()=> {
 
 function showFiveDaysWeather() {
     const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=${apiKey}`
+
     fetch(request)
     .then(
         function(response) {
@@ -266,9 +279,36 @@ function showFiveDaysWeather() {
                     // show the next 5 days' weather              
                     if(date.getDate() === currentDate.getDate() + day) {
                         if(date.getHours() >=6 && date.getHours() <=9) {
+
+                            
+                            // show days for the next 5 days
+                            if(date.getDay() === 0){
+                                let showDay = "Sun"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            } else if(date.getDay()=== 1){
+                                let showDay = "Mon"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            } else if(date.getDay() === 2){
+                                let showDay = "Tue"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            } else if(date.getDay() === 3){
+                                let showDay = "Wed"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            } else if(date.getDay() === 4){
+                                let showDay = "Thu"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            } else if(date.getDay() === 5){
+                                let showDay = "Fri"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            } else if(date.getDay() === 6){
+                                let showDay = "Sat"
+                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                            }
+
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
                             weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
-                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]                                    
+                            document.getElementById(`day${day}-temp`).innerHTML= eachWeatherInfo["main"]["temp"]
+                            
                             day = day +1; 
                         }
                     }
