@@ -15,6 +15,7 @@ const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
 const isCelsius = true
 
+const storageKey = "favoriteCities"
 let favoriteCities = {}
 
 // Hide the current weather until calling all API finishes
@@ -57,8 +58,7 @@ getFavoriteCitiesFromStorage()
 
 function getFavoriteCitiesFromStorage() {
     // Get user's favorite cities from local storage
-    const key = "favorite-cities"
-    let favoriteCitiesJSON = localStorage.getItem(key)
+    let favoriteCitiesJSON = localStorage.getItem(storageKey)
 
     // If data exists
     if(favoriteCitiesJSON !== null) {
@@ -149,15 +149,13 @@ function onFavoriteStarClicked() {
     }
 
     // Update user's local storage (Just fully copy the array as JSON)
-    localStorage.setItem("favorite-cities", JSON.stringify(favoriteCities))
+    localStorage.setItem(storageKey, JSON.stringify(favoriteCities))
 
     // Update the star sign
     setFavoriteStar()
 
     // Change the selected city on the pull-down menu
     changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
-
-    console.log(favoriteCities)
 }
 
 function setFavoriteStar() {
