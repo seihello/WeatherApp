@@ -219,7 +219,7 @@ currentWeatherElement.addEventListener("click", () => {
 // to change the unit of temperature from Kelvin to Celsius
 const temperatureType = "metric"
 
-let selectedCity = ""
+// let selectedCity = ""
 let selectedDay = 0
 
 
@@ -284,36 +284,44 @@ function showFiveDaysWeather() {
                     console.log(eachWeatherInfo);
                 
                     // convert unix-time to date
-                    let date = new Date(eachWeatherInfo["dt"] * 1000);                   
+                    let date = new Date(eachWeatherInfo["dt"] * 1000);  
+                    
+                    
+                    
+
+
                     // show the next 5 days' weather              
                     if(date.getDate() === currentDate.getDate() + day) {
                         if(date.getHours() >=6 && date.getHours() <=9) {
 
-                            
+
                             // show days for the next 5 days
                             if(date.getDay() === 0){
                                 let showDay = "Sun"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate()     
                             } else if(date.getDay()=== 1){
                                 let showDay = "Mon"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 2){
                                 let showDay = "Tue"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 3){
                                 let showDay = "Wed"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 4){
                                 let showDay = "Thu"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 5){
                                 let showDay = "Fri"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 6){
                                 let showDay = "Sat"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             }
-
+                            
+                            // get the month and the day for the next 5days
+                            // document.getElementById(`monthOn${day}Day`).innerHTML= toMonthText(date.getMonth()) + date.getDate()
+                            
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
                             weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
 
@@ -326,7 +334,9 @@ function showFiveDaysWeather() {
                 })
             })
         }
-    )
+    ).catch((error) => {
+        console.log("Fetch Error: " + error)
+    })
 }
 
 
