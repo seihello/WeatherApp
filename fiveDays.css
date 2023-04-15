@@ -5,7 +5,7 @@
   height: auto;
   width: 100%;
   padding: 1em 0;
-  margin: 2em 0;
+  margin: 3em 0;
   background-color: #81C3D7;
   border-radius: 7px;
 }
@@ -15,6 +15,7 @@
   width: 15%;
   background-color: #9bd1e1;
   margin: auto;
+  cursor: pointer;
 }
 .five-days-forecast .daily-forecast p {
   text-align: center;
