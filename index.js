@@ -53,7 +53,7 @@ favoriteStarElement.addEventListener("click", onFavoriteStarClicked)
 favoriteCitiesMenu.addEventListener("change", onFavoriteCitySelected)
 
 // Set up for user's favorite cities
-//getFavoriteCitiesFromStorage()
+getFavoriteCitiesFromStorage()
 
 function getFavoriteCitiesFromStorage() {
     // Get user's favorite cities from local storage
@@ -66,11 +66,18 @@ function getFavoriteCitiesFromStorage() {
         favoriteCities = JSON.parse(favoriteCitiesJSON)
 
         // Deploy to the pull-down menu
-        for(let favoriteCity of favoriteCities) {
-            const favoriteCityOption = document.createElement("option")
-            favoriteCityOption.classList.add("favorite-city")
-            favoriteCityOption.innerText = favoriteCity
-            favoriteCitiesMenu.appendChild(favoriteCityOption)
+        for(let countryGroup of Object.keys(favoriteCities)) {
+
+            const countryOptionGroup = document.createElement("optgroup")
+            countryOptionGroup.label = countryGroup
+      
+            for(let favoriteCity of favoriteCities[countryGroup]) {
+                const favoriteCityOption = document.createElement("option")
+                favoriteCityOption.classList.add("favorite-city")
+                favoriteCityOption.innerText = favoriteCity
+                countryOptionGroup.appendChild(favoriteCityOption)
+            }
+            favoriteCitiesMenu.appendChild(countryOptionGroup)
         }
     }
 }
@@ -110,7 +117,6 @@ function onFavoriteStarClicked() {
 
             // Add a new option to its country group that already exists
             for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
-                console.log(favoriteCitiesMenu.children[i])
                 if(favoriteCitiesMenu.children[i].label === displayedCountry) {
                     favoriteCitiesMenu.children[i].appendChild(newFavoriteCityOption)
                 }
