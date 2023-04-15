@@ -214,7 +214,7 @@ function showWeatherByLocation(latitude, longtitude) {
 // to change the unit of temperature from Kelvin to Celsius
 const temperatureType = "metric"
 
-let selectedCity = ""
+// let selectedCity = ""
 let selectedDay = 0
 
 
@@ -329,7 +329,9 @@ function showFiveDaysWeather() {
                 })
             })
         }
-    )
+    ).catch((error) => {
+        console.log("Fetch Error: " + error)
+    })
 }
 
 
