@@ -16,7 +16,8 @@ const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
 const isCelsius = true
 
-let favoriteCities = []
+const storageKey = "favoriteCities"
+let favoriteCities = {}
 
 // Hide the current weather until calling all API finishes
 currentWeatherSectionElement.style["opacity"] = 0
@@ -58,8 +59,7 @@ getFavoriteCitiesFromStorage()
 
 function getFavoriteCitiesFromStorage() {
     // Get user's favorite cities from local storage
-    const key = "favorite-cities"
-    let favoriteCitiesJSON = localStorage.getItem(key)
+    let favoriteCitiesJSON = localStorage.getItem(storageKey)
 
     // If data exists
     if(favoriteCitiesJSON !== null) {
@@ -67,42 +67,90 @@ function getFavoriteCitiesFromStorage() {
         favoriteCities = JSON.parse(favoriteCitiesJSON)
 
         // Deploy to the pull-down menu
-        for(let favoriteCity of favoriteCities) {
-            const favoriteCityOption = document.createElement("option")
-            favoriteCityOption.classList.add("favorite-city")
-            favoriteCityOption.innerText = favoriteCity
-            favoriteCitiesMenu.appendChild(favoriteCityOption)
+        for(let countryGroup of Object.keys(favoriteCities)) {
+
+            const countryOptionGroup = document.createElement("optgroup")
+            countryOptionGroup.label = countryGroup
+      
+            for(let favoriteCity of favoriteCities[countryGroup]) {
+                const favoriteCityOption = document.createElement("option")
+                favoriteCityOption.classList.add("favorite-city")
+                favoriteCityOption.innerText = favoriteCity
+                countryOptionGroup.appendChild(favoriteCityOption)
+            }
+            favoriteCitiesMenu.appendChild(countryOptionGroup)
         }
     }
 }
 
-function onFavoriteStarClicked() {
+function onFavoriteStarClicked() {    
     const displayedCity = cityNameElement.innerText
+    const displayedCountry = countryCodeElement.innerText
+    let isNewCity = true
+    let isNewCountry = true
 
+    if(displayedCountry in favoriteCities) {
+        isNewCountry = false
+        if(favoriteCities[displayedCountry].includes(displayedCity)) {
+            isNewCity = false
+        }
+    }
+    
     // If the displayed city is new
-    if(!favoriteCities.includes(displayedCity)) {
-        // Add to the list of the favorite cities
-        favoriteCities.push(displayedCity)
-
-        // Add to the pull-down menu
+    if(isNewCity) {
+        // Create an option element that will be added to the pull-down menu
         const newFavoriteCityOption = document.createElement("option")
         newFavoriteCityOption.classList.add("favorite-city")
         newFavoriteCityOption.innerText = displayedCity
-        favoriteCitiesMenu.appendChild(newFavoriteCityOption)
+        
+        if(isNewCountry) {
+            // Add a new country group with a new city to the favorite cities
+            favoriteCities[displayedCountry] = [displayedCity]
+
+            // Add a new country group with a new option to the pull-down menu
+            const newCountryGroup = document.createElement("optgroup")
+            newCountryGroup.label = displayedCountry
+            newCountryGroup.appendChild(newFavoriteCityOption)
+            favoriteCitiesMenu.appendChild(newCountryGroup)
+        } else {
+            // Add a new city to its country group that already exists
+            favoriteCities[displayedCountry].push(displayedCity)
+
+            // Add a new option to its country group that already exists
+            for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
+                if(favoriteCitiesMenu.children[i].label === displayedCountry) {
+                    favoriteCitiesMenu.children[i].appendChild(newFavoriteCityOption)
+                }
+            }
+        }
         
     }
     // If the displayed city is already registered
     else {
         // Remove the displayed city from the favorite cities
-        let index = favoriteCities.indexOf(displayedCity)
-        favoriteCities.splice(index, 1)
+        let index = favoriteCities[displayedCountry].indexOf(displayedCity)
+        favoriteCities[displayedCountry].splice(index, 1)
+        if(favoriteCities[displayedCountry].length === 0) {
+            delete favoriteCities[displayedCountry]
+        }
 
         // Remove the displayed city from the pull-down menu
-        favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[index+1])
+        for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
+            if(favoriteCitiesMenu.children[i].label === displayedCountry) {
+                for(let j = 0; j < favoriteCitiesMenu.children[i].children.length; j++) {
+                    if(favoriteCitiesMenu.children[i].children[j].innerText === displayedCity) {
+                        favoriteCitiesMenu.children[i].removeChild(favoriteCitiesMenu.children[i].children[j])
+                    }
+                }
+            }
+            if(favoriteCitiesMenu.children[i].children.length === 0) {
+                favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[i])
+            }
+        }
     }
 
     // Update user's local storage (Just fully copy the array as JSON)
-    localStorage.setItem("favorite-cities", JSON.stringify(favoriteCities))
+    localStorage.setItem(storageKey, JSON.stringify(favoriteCities))
 
     // Update the star sign
     setFavoriteStar()
@@ -113,7 +161,14 @@ function onFavoriteStarClicked() {
 
 function setFavoriteStar() {
     // If displayed city is one of the favorite then the star should be filled
-    if(favoriteCities.includes(cityNameElement.innerHTML)) {
+    let cityExists = false
+    Object.values(favoriteCities).forEach((element, index) => {
+        if(element.includes(cityNameElement.innerHTML)) {
+            cityExists = true
+        }
+    })
+    
+    if(cityExists) {
         favoriteStarElement.src = "img/star-on.png"
     } else {
         favoriteStarElement.src = "img/star-off.png"
@@ -135,11 +190,13 @@ function changeSelectedFavoriteCityOption(displayedCityName) {
     favoriteCitiesMenu.children[0].selected = true
 
     // Check every option and make it selected if it matches the displayed city
-    for(favoriteCityOption of favoriteCitiesMenu.children) {
-        if(favoriteCityOption.innerText === displayedCityName) {
-            favoriteCityOption.selected = true
-        } else {
-            favoriteCityOption = false
+    for(favoriteCountryGroup of favoriteCitiesMenu.children) {
+        for(favoriteCityOption of favoriteCountryGroup.children) {
+            if(favoriteCityOption.innerText === displayedCityName) {
+                favoriteCityOption.selected = true
+            } else {
+                favoriteCityOption.selected = false
+            }
         }
     }
 }
@@ -187,6 +244,8 @@ function showWeather(request) {
         selectedCity = currentWeather["name"]
         showFiveDaysWeather()
         threeHRange()
+
+        console.log(favoriteCities, 99)
     })
     .catch((error) => {
         console.log("Fetch Error: " + error)
