@@ -1,10 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 #header {
   position: fixed;
   top: 0;
   width: 100%;
   height: 60px;
+  margin-bottom: 5px;
   background-color: #9bd1e1;
   background: linear-gradient(to bottom right, #64c3e0, #9bd1e1);
+  box-shadow: 1px 1px 5px #136d9a;
   color: white;
   text-shadow: 1px 1px 1px #136d9a;
   display: flex;

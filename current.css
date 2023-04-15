@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 * {
   margin: 0 0;
 }
@@ -9,7 +10,6 @@ p {
 main {
   width: 90%;
   margin: 80px auto 0;
-  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-style: normal;
   color: #3d4a4f;
@@ -27,15 +27,18 @@ main {
 #favorite-cities {
   width: 30%;
   height: 100%;
+  padding-left: 5px;
 }
 
 #or {
   display: none;
+  font-size: 0.8rem;
 }
 
 #search-city {
   width: 30%;
   height: 90%;
+  padding-left: 5px;
 }
 
 #main-section {
@@ -169,6 +172,7 @@ main {
   text-align: right;
   font-size: 1rem;
   color: rgb(110, 110, 110);
+  font-family: "Montserrat", sans-serif;
 }
 
 @media only screen and (max-width: 375px) {
