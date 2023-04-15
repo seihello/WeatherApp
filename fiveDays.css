@@ -1,11 +1,11 @@
 
 .five-days-forecast {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   height: auto;
   width: 100%;
-  padding: 1em 0;
-  margin: 3em 0;
+  padding: 2.1rem 0;
+  margin: 3em auto;
   background-color: #81C3D7;
   border-radius: 7px;
 }
@@ -14,7 +14,7 @@
   height: 100%;
   width: 15%;
   background-color: #9bd1e1;
-  margin: auto;
+  margin: 0 1.45rem;
   cursor: pointer;
 }
 .five-days-forecast .daily-forecast p {
@@ -24,6 +24,7 @@
 }
 .five-days-forecast .daily-forecast .fiveDaysTemp {
   padding: 0 0 10% 0;
+  font-size: 1.5rem;
 }
 .five-days-forecast .daily-forecast .dayWeatherImg {
   height: auto;
