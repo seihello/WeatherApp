@@ -4,7 +4,9 @@
   width: 100%;
   height: 60px;
   background-color: #9bd1e1;
+  background: linear-gradient(to bottom right, #64c3e0, #9bd1e1);
   color: white;
+  text-shadow: 1px 1px 1px #136d9a;
   display: flex;
   justify-content: center;
   align-items: center;

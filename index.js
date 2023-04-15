@@ -6,16 +6,18 @@ const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 const currentWeatherSectionElement = document.querySelector("#current-weather-section")
 const countryCodeElement = document.querySelector("#country-code")
 const nationalFlagElement = document.querySelector("#national-flag")
-const currentTemperatureElement = document.querySelector("#current-temperature-text")
-const currentWeatherElement = document.querySelector("#current-weather-text")
+const currentWeatherElement = document.querySelector("#current-weather")
+const currentWeatherTextElement = document.querySelector("#current-weather-text")
 const currentWeatherIconElement = document.querySelector("#weather-icon")
+const currentTemperatureElement = document.querySelector("#current-temperature-text")
 const currentTimeElement = document.querySelector("#current-time")
 
 const apiKey = "c5b83392add58be24fb5a7bd362ced83"
 const defaultCity = "Vancouver"
 const isCelsius = true
 
-let favoriteCities = []
+const storageKey = "favoriteCities"
+let favoriteCities = {}
 
 // Hide the current weather until calling all API finishes
 currentWeatherSectionElement.style["opacity"] = 0
@@ -57,8 +59,7 @@ getFavoriteCitiesFromStorage()
 
 function getFavoriteCitiesFromStorage() {
     // Get user's favorite cities from local storage
-    const key = "favorite-cities"
-    let favoriteCitiesJSON = localStorage.getItem(key)
+    let favoriteCitiesJSON = localStorage.getItem(storageKey)
 
     // If data exists
     if(favoriteCitiesJSON !== null) {
@@ -66,42 +67,90 @@ function getFavoriteCitiesFromStorage() {
         favoriteCities = JSON.parse(favoriteCitiesJSON)
 
         // Deploy to the pull-down menu
-        for(let favoriteCity of favoriteCities) {
-            const favoriteCityOption = document.createElement("option")
-            favoriteCityOption.classList.add("favorite-city")
-            favoriteCityOption.innerText = favoriteCity
-            favoriteCitiesMenu.appendChild(favoriteCityOption)
+        for(let countryGroup of Object.keys(favoriteCities)) {
+
+            const countryOptionGroup = document.createElement("optgroup")
+            countryOptionGroup.label = countryGroup
+      
+            for(let favoriteCity of favoriteCities[countryGroup]) {
+                const favoriteCityOption = document.createElement("option")
+                favoriteCityOption.classList.add("favorite-city")
+                favoriteCityOption.innerText = favoriteCity
+                countryOptionGroup.appendChild(favoriteCityOption)
+            }
+            favoriteCitiesMenu.appendChild(countryOptionGroup)
         }
     }
 }
 
-function onFavoriteStarClicked() {
+function onFavoriteStarClicked() {    
     const displayedCity = cityNameElement.innerText
+    const displayedCountry = countryCodeElement.innerText
+    let isNewCity = true
+    let isNewCountry = true
 
+    if(displayedCountry in favoriteCities) {
+        isNewCountry = false
+        if(favoriteCities[displayedCountry].includes(displayedCity)) {
+            isNewCity = false
+        }
+    }
+    
     // If the displayed city is new
-    if(!favoriteCities.includes(displayedCity)) {
-        // Add to the list of the favorite cities
-        favoriteCities.push(displayedCity)
-
-        // Add to the pull-down menu
+    if(isNewCity) {
+        // Create an option element that will be added to the pull-down menu
         const newFavoriteCityOption = document.createElement("option")
         newFavoriteCityOption.classList.add("favorite-city")
         newFavoriteCityOption.innerText = displayedCity
-        favoriteCitiesMenu.appendChild(newFavoriteCityOption)
+        
+        if(isNewCountry) {
+            // Add a new country group with a new city to the favorite cities
+            favoriteCities[displayedCountry] = [displayedCity]
+
+            // Add a new country group with a new option to the pull-down menu
+            const newCountryGroup = document.createElement("optgroup")
+            newCountryGroup.label = displayedCountry
+            newCountryGroup.appendChild(newFavoriteCityOption)
+            favoriteCitiesMenu.appendChild(newCountryGroup)
+        } else {
+            // Add a new city to its country group that already exists
+            favoriteCities[displayedCountry].push(displayedCity)
+
+            // Add a new option to its country group that already exists
+            for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
+                if(favoriteCitiesMenu.children[i].label === displayedCountry) {
+                    favoriteCitiesMenu.children[i].appendChild(newFavoriteCityOption)
+                }
+            }
+        }
         
     }
     // If the displayed city is already registered
     else {
         // Remove the displayed city from the favorite cities
-        let index = favoriteCities.indexOf(displayedCity)
-        favoriteCities.splice(index, 1)
+        let index = favoriteCities[displayedCountry].indexOf(displayedCity)
+        favoriteCities[displayedCountry].splice(index, 1)
+        if(favoriteCities[displayedCountry].length === 0) {
+            delete favoriteCities[displayedCountry]
+        }
 
         // Remove the displayed city from the pull-down menu
-        favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[index+1])
+        for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
+            if(favoriteCitiesMenu.children[i].label === displayedCountry) {
+                for(let j = 0; j < favoriteCitiesMenu.children[i].children.length; j++) {
+                    if(favoriteCitiesMenu.children[i].children[j].innerText === displayedCity) {
+                        favoriteCitiesMenu.children[i].removeChild(favoriteCitiesMenu.children[i].children[j])
+                    }
+                }
+            }
+            if(favoriteCitiesMenu.children[i].children.length === 0) {
+                favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[i])
+            }
+        }
     }
 
     // Update user's local storage (Just fully copy the array as JSON)
-    localStorage.setItem("favorite-cities", JSON.stringify(favoriteCities))
+    localStorage.setItem(storageKey, JSON.stringify(favoriteCities))
 
     // Update the star sign
     setFavoriteStar()
@@ -112,7 +161,14 @@ function onFavoriteStarClicked() {
 
 function setFavoriteStar() {
     // If displayed city is one of the favorite then the star should be filled
-    if(favoriteCities.includes(cityNameElement.innerHTML)) {
+    let cityExists = false
+    Object.values(favoriteCities).forEach((element, index) => {
+        if(element.includes(cityNameElement.innerHTML)) {
+            cityExists = true
+        }
+    })
+    
+    if(cityExists) {
         favoriteStarElement.src = "img/star-on.png"
     } else {
         favoriteStarElement.src = "img/star-off.png"
@@ -134,11 +190,13 @@ function changeSelectedFavoriteCityOption(displayedCityName) {
     favoriteCitiesMenu.children[0].selected = true
 
     // Check every option and make it selected if it matches the displayed city
-    for(favoriteCityOption of favoriteCitiesMenu.children) {
-        if(favoriteCityOption.innerText === displayedCityName) {
-            favoriteCityOption.selected = true
-        } else {
-            favoriteCityOption = false
+    for(favoriteCountryGroup of favoriteCitiesMenu.children) {
+        for(favoriteCityOption of favoriteCountryGroup.children) {
+            if(favoriteCityOption.innerText === displayedCityName) {
+                favoriteCityOption.selected = true
+            } else {
+                favoriteCityOption.selected = false
+            }
         }
     }
 }
@@ -163,7 +221,7 @@ function showWeather(request) {
         // Update the display using the data
         cityNameElement.innerText = currentWeather["name"]
         currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
-        currentWeatherElement.innerText = currentWeather["weather"][0]["main"]
+        currentWeatherTextElement.innerText = currentWeather["weather"][0]["main"]
         currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
         const countryCode = currentWeather["sys"]["country"]
@@ -186,6 +244,8 @@ function showWeather(request) {
         selectedCity = currentWeather["name"]
         showFiveDaysWeather()
         threeHRange()
+
+        console.log(favoriteCities, 99)
     })
     .catch((error) => {
         console.log("Fetch Error: " + error)
@@ -206,7 +266,11 @@ function showWeatherByLocation(latitude, longtitude) {
     showWeather(request)
 }
 
-
+// Display today's 3-hourly weather when the user clickes the current weather
+currentWeatherElement.addEventListener("click", () => {
+    selectedDay = 0
+    threeHRange()
+})
 
 
 //const apiKey ="3b2df1883208190d986bcd1b1e48eff4"
@@ -214,7 +278,7 @@ function showWeatherByLocation(latitude, longtitude) {
 // to change the unit of temperature from Kelvin to Celsius
 const temperatureType = "metric"
 
-let selectedCity = ""
+// let selectedCity = ""
 let selectedDay = 0
 
 
@@ -279,36 +343,44 @@ function showFiveDaysWeather() {
                     console.log(eachWeatherInfo);
                 
                     // convert unix-time to date
-                    let date = new Date(eachWeatherInfo["dt"] * 1000);                   
+                    let date = new Date(eachWeatherInfo["dt"] * 1000);  
+                    
+                    
+                    
+
+
                     // show the next 5 days' weather              
                     if(date.getDate() === currentDate.getDate() + day) {
                         if(date.getHours() >=6 && date.getHours() <=9) {
 
-                            
+
                             // show days for the next 5 days
                             if(date.getDay() === 0){
                                 let showDay = "Sun"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate()     
                             } else if(date.getDay()=== 1){
                                 let showDay = "Mon"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 2){
                                 let showDay = "Tue"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 3){
                                 let showDay = "Wed"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 4){
                                 let showDay = "Thu"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 5){
                                 let showDay = "Fri"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             } else if(date.getDay() === 6){
                                 let showDay = "Sat"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay
+                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
                             }
-
+                            
+                            // get the month and the day for the next 5days
+                            // document.getElementById(`monthOn${day}Day`).innerHTML= toMonthText(date.getMonth()) + date.getDate()
+                            
                             document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
                             weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
 
@@ -321,7 +393,9 @@ function showFiveDaysWeather() {
                 })
             })
         }
-    )
+    ).catch((error) => {
+        console.log("Fetch Error: " + error)
+    })
 }
 
 

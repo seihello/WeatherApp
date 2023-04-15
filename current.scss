@@ -9,6 +9,7 @@ p {
 }
 
 main {
+  width: 90%;
   margin: calc(60px + 20px) auto 0;
 }
 
@@ -144,6 +145,15 @@ main {
 #weather-icon {
   width: 60%;
   height: auto;
+}
+
+#weather-icon:hover {
+  opacity: 0.8;
+  -webkit-transform: scale(1.04);
+  -moz-transform: scale(1.04);
+  -o-transform: scale(1.04);
+  -ms-transform: scale(1.04);
+  transform: scale(1.04);
 }
 
 #current-temperature {
