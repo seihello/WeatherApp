@@ -56,14 +56,16 @@
         border-radius: 9px;
         display: flex;
         margin: 0;
+        margin-bottom: 1rem;
         justify-content: space-evenly;
-    
+        padding: 1% 0;
 
         .daily-forecast {
             width: 18%;
             height: auto;
             border-radius: 5px;
-
+            margin-left: 0;
+            margin-right: 0;
             
             p {
                 font-size: 1rem;
