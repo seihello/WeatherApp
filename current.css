@@ -65,6 +65,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  position: relative;
 }
 
 #city {
@@ -79,6 +80,7 @@ main {
   height: auto;
   text-align: center;
   font-size: 2rem;
+  line-height: 0;
 }
 
 #favorite-star-box {
@@ -90,11 +92,14 @@ main {
 #favorite-star {
   width: 100%;
   height: 100%;
-  padding-top: 5px;
+  padding-top: 8px;
   opacity: 0;
 }
 
 #country {
+  position: absolute;
+  left: 0;
+  top: 2rem;
   padding: 0 0 0 30px;
   display: flex;
   justify-content: flex-start;
@@ -120,6 +125,7 @@ main {
 
 #current-weather {
   width: 70%;
+  margin-top: 2rem;
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -127,6 +133,7 @@ main {
   align-items: center;
   background-color: #9bd1e1;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 #current-weather-text {
@@ -201,6 +208,19 @@ main {
   }
   #or {
     display: block;
+  }
+  #city-name {
+    font-size: 1.8rem;
+  }
+  #country-code {
+    font-size: 1rem;
+  }
+  #national-flag-box {
+    width: 25px;
+    height: 25px;
+  }
+  #current-weather {
+    padding-top: 0.8rem;
   }
   #current-time {
     text-align: center;
