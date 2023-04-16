@@ -164,7 +164,6 @@
   text-align: right;
   font-size: 1rem;
   color: rgb(110, 110, 110);
-  font-family: "Montserrat", sans-serif;
 }
 
 @media only screen and (max-width: 375px) {
@@ -204,6 +203,7 @@
     padding-top: 0.8rem;
   }
   #current-time {
+    font-size: 0.8rem;
     text-align: center;
     padding-right: 0;
   }
