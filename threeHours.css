@@ -1,10 +1,4 @@
-body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 .threeH-box {
   display: flex;
   flex-direction: row;
@@ -39,7 +33,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   margin: 0.5rem 0 0.5rem 0;
   font-size: 1rem;
 }
@@ -47,112 +40,96 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange7 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .threeHRange-degrees0 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees7 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 

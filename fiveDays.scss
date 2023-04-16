@@ -1,13 +1,14 @@
 /*# sourceMappingURL=fiveDays.css.map */
-@import "common.scss";
+@import "_common.scss";
+
 
 .five-days-forecast {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     height: auto;
     width: 100%;
-    padding: 1em 0;
-    margin: 3em 0;
+    padding: 2.1rem 0;
+    margin: 3em auto;
     background-color: $dark-blue;
     border-radius: 7px;
     
@@ -17,7 +18,7 @@
         height: 100%;
         width: 15%;
         background-color: $light-blue;
-        margin: auto;
+        margin: 0 1.45rem;
         cursor: pointer;
 
         p {
@@ -28,6 +29,7 @@
 
         .fiveDaysTemp {
             padding: 0 0 10% 0;
+            font-size: 1.5rem;
         }
 
         .dayWeatherImg {
@@ -54,14 +56,16 @@
         border-radius: 9px;
         display: flex;
         margin: 0;
+        margin-bottom: 1rem;
         justify-content: space-evenly;
-    
+        padding: 1% 0;
 
         .daily-forecast {
             width: 18%;
             height: auto;
             border-radius: 5px;
-
+            margin-left: 0;
+            margin-right: 0;
             
             p {
                 font-size: 1rem;

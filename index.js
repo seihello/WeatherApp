@@ -521,6 +521,9 @@ function toMonthText(month) {
 }
 
 function toAMPM(hour, minute) {
+    if(minute < 10) {
+        minute = "0" + minute
+    }
     if(hour === 0) {
         return `${12}:${minute} AM`
     }
