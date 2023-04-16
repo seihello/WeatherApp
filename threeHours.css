@@ -1,33 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-* {
-  margin: 0 0;
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
-}
-
-p {
-  margin: 0 0;
-}
-
-main {
-  width: 90%;
-  margin: 80px auto 0;
-  font-weight: 400;
-  font-style: normal;
-  color: #3d4a4f;
-}
-
-@media only screen and (max-width: 375px) {
-  main {
-    width: 95%;
-    margin: 0 auto;
-  }
-}
 .threeH-box {
   display: flex;
   flex-direction: row;
@@ -62,7 +33,6 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   margin: 0.5rem 0 0.5rem 0;
   font-size: 1rem;
 }
@@ -70,112 +40,96 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .weatherRange7 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 120%;
 }
 .threeH-container .threeHRange-degrees0 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 .threeH-container .threeHRange-degrees7 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #3d4a4f;
   font-size: 1.5rem;
 }
 

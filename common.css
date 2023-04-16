@@ -8,6 +8,7 @@ body {
   font-size: 14px;
   font-weight: 400;
   font-style: normal;
+  color: #3d4a4f;
 }
 
 main {
@@ -15,16 +16,11 @@ main {
   margin: 80px auto 0;
   font-weight: 400;
   font-style: normal;
-  color: #3d4a4f;
-}
-
-p {
-  margin: 0 0;
 }
 
 @media only screen and (max-width: 375px) {
   main {
-    width: 95%;
+    width: 96%;
     margin: 0 auto;
   }
 }/*# sourceMappingURL=common.css.map */
