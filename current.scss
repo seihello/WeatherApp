@@ -1,20 +1,5 @@
 @import "common.scss";
 
-* {
-  margin: 0 0;
-}
-
-p {
-  margin: 0 0;
-}
-
-main {
-  width: 90%;
-  margin: calc(60px + 20px) auto 0;
-  font-weight: 400;
-  font-style: normal;
-  color: #3d4a4f
-}
 
 
 
@@ -25,6 +10,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 99;
 }
 
 #favorite-cities {
@@ -196,10 +182,6 @@ main {
 }
 
 @media only screen and (max-width: 375px) {
-  main {
-    width: 95%;
-    margin: 0 auto;
-  }
 
   #main-section {
     width: 100%;
