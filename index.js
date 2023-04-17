@@ -40,7 +40,11 @@ function showWeatherInDefaultCity() {
 
 /* Auto Complete */
 window.initMap = function() {
-    const autocomplete = new google.maps.places.Autocomplete(searchCityInput);
+    // Suggest only cities
+    let option = {
+        types: ['(cities)']
+       };
+    const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         showWeatherByCityName(searchCityInput.value)
