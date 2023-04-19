@@ -1,6 +1,8 @@
 # WeatherApp
 Display weather information of a selected city
 
+https://seisuke.info/weather/
+
 ## API
 - [Current Weather](https://openweathermap.org/current)
 - [Three-hourly Forecast](https://openweathermap.org/forecast5)
