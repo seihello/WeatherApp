@@ -285,47 +285,14 @@ const temperatureType = "metric"
 // let selectedCity = ""
 let selectedDay = 0
 
+// $("...").on("click", () => {
+// })
 
-const firstDayWeather = document.getElementById("firstDay")
-const secondDayWeather = document.getElementById("secondDay")
-const thirdDayWeather = document.getElementById("thirdDay")
-const forthDayWeather = document.getElementById("forthDay")
-const fifthDayWeather = document.getElementById("fifthDay")
-
-
-let weatherIcon =document.getElementsByClassName("dayWeatherImg")
-
-
-firstDayWeather.addEventListener("click", ()=> {
-    selectedDay = 1
-    threeHRange()
-})
-
-secondDayWeather.addEventListener("click", ()=> {
-    selectedDay = 2
-    threeHRange()
-})
-
-thirdDayWeather.addEventListener("click", ()=> {
-    selectedDay = 3
-    threeHRange()
-})
-
-forthDayWeather.addEventListener("click", ()=> {
-    selectedDay = 4
-    threeHRange()
-})
-
-fifthDayWeather.addEventListener("click", ()=> {
-    selectedDay = 5
-    threeHRange()
-})
 
 function showFiveDaysWeather() {
     const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=${apiKey}`
 
-    fetch(request)
-    .then(
+    fetch(request).then(
         function(response) {
             if(response.status !== 200){
                 return;
@@ -333,66 +300,34 @@ function showFiveDaysWeather() {
             response.json().then(function(fiveDaysWeather) {
                 console.log(fiveDaysWeather);
 
-
                 // get currentDate
                 let currentDate = new Date();
-
-                
                 // for the if statement to specific the date, the time and weather infos
                 let day = 1;
 
-
                 // get all the weather info
-                fiveDaysWeather["list"].forEach( eachWeatherInfo=> {
-                    console.log(eachWeatherInfo);
+                fiveDaysWeather["list"].forEach( (threeHourlyWeather, index) => {
+                    console.log(threeHourlyWeather);
                 
                     // convert unix-time to date
-                    let date = new Date(eachWeatherInfo["dt"] * 1000);  
+                    let date = new Date(threeHourlyWeather["dt"] * 1000);  
                     
-                    
-                    
-
-
                     // show the next 5 days' weather              
-                    if(date.getDate() === currentDate.getDate() + day) {
-                        if(date.getHours() >=6 && date.getHours() <=9) {
+                    if(date.getDate() === currentDate.getDate() + day && (date.getHours() >= 6 && date.getHours() <= 9)) {
 
+                        const dateText = `${toDay(date.getDay())} ${toMonthText(date.getMonth())} ${date.getDate()}`
+                        $(".daily-forecast").eq(day-1).children("p").eq(0).text(dateText)
+                        
+                        // get the month and the day for the next 5days
+                        // document.getElementById(`monthOn${day}Day`).innerHTML= toMonthText(date.getMonth()) + date.getDate()
+                        
+                        $(".daily-forecast").eq(day-1).children("p").eq(1).text(threeHourlyWeather["weather"][0]["main"])
+                        $(".daily-forecast").eq(day-1).children("img").attr("src", `https://openweathermap.org/img/wn/${threeHourlyWeather["weather"][0]["icon"]}@4x.png`);
 
-                            // show days for the next 5 days
-                            if(date.getDay() === 0){
-                                let showDay = "Sun"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate()     
-                            } else if(date.getDay()=== 1){
-                                let showDay = "Mon"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
-                            } else if(date.getDay() === 2){
-                                let showDay = "Tue"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
-                            } else if(date.getDay() === 3){
-                                let showDay = "Wed"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
-                            } else if(date.getDay() === 4){
-                                let showDay = "Thu"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
-                            } else if(date.getDay() === 5){
-                                let showDay = "Fri"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
-                            } else if(date.getDay() === 6){
-                                let showDay = "Sat"
-                                document.getElementById(`showDay${day}`).innerHTML= showDay + " " + toMonthText(date.getMonth()) + date.getDate() 
-                            }
-                            
-                            // get the month and the day for the next 5days
-                            // document.getElementById(`monthOn${day}Day`).innerHTML= toMonthText(date.getMonth()) + date.getDate()
-                            
-                            document.getElementById(`day${day}`).innerHTML= eachWeatherInfo["weather"][0]["main"]
-                            weatherIcon[day-1].src = "https://openweathermap.org/img/wn/" + eachWeatherInfo["weather"][0]["icon"] + "@4x.png";
-
-                            let temp = Math.floor(eachWeatherInfo["main"]["temp"])
-                            document.getElementById(`day${day}-temp`).innerHTML= temp + "℃"
-                            
-                            day = day +1; 
-                        }
+                        const temperature = Math.floor(threeHourlyWeather["main"]["temp"])
+                        $(".daily-forecast").eq(day-1).children("p").eq(3).text(`${temperature}℃`)
+                        
+                        day++;
                     }
                 })
             })
@@ -539,5 +474,26 @@ function toAMPM(hour, minute) {
     }
     else if(hour > 12) {
         return `${hour-12}:${minute} PM`
+    }
+}
+
+function toDay(day) {
+    switch(day) {
+        case 0:
+            return "Sun"
+        case 1:
+            return "Mon"
+        case 2:
+            return "Tue"
+        case 3:
+            return "Wed"
+        case 4:
+            return "Thu"
+        case 5:
+            return "Fri"
+        case 6:
+            return "Sat"
+        default:
+            return "None"
     }
 }
