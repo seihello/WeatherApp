@@ -151,7 +151,22 @@
     </main>
     <footer>
     </footer>
-    <script src="index.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHXnuh6VwUBycp7bsnUM8-18N8h9ESHZM&libraries=places&callback=initMap"></script>
+    <script src="common.js" type="module"></script>
+    <script src="favoriteCity.js" type="module"></script>
+    <script src="weather.js" type="module"></script>
+    <script src="index.js" type="module"></script>
+    <script>
+      /* Auto Complete */
+      window.initMap = function() {
+        // Suggest only cities
+        let option = {
+            types: ['(cities)']
+        }
+        const searchCityInput = document.querySelector("#search-city")
+        const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option)
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHXnuh6VwUBycp7bsnUM8-18N8h9ESHZM&libraries=places&callback=initMap" type="module"></script>
+
   </body>
 </html>
