@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-.threeH-box {
+.three-hourly-forecast {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -13,7 +13,7 @@
   border-radius: 0.5rem;
 }
 
-.threeH-container {
+.three-hour-forecast {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,108 +25,108 @@
   padding-bottom: 0.5%;
   padding-top: 0.5%;
 }
-.threeH-container img:hover {
+.three-hour-forecast img:hover {
   opacity: 0.8;
   transform: scale(1.04);
 }
-.threeH-container .rangeH {
+.three-hour-forecast .rangeH {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 0.5rem 0 0.5rem 0;
   font-size: 1rem;
 }
-.threeH-container .weatherRange0 {
+.three-hour-forecast .weatherRange0 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange1 {
+.three-hour-forecast .weatherRange1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange2 {
+.three-hour-forecast .weatherRange2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange3 {
+.three-hour-forecast .weatherRange3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange4 {
+.three-hour-forecast .weatherRange4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange5 {
+.three-hour-forecast .weatherRange5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange6 {
+.three-hour-forecast .weatherRange6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .weatherRange7 {
+.three-hour-forecast .weatherRange7 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 120%;
 }
-.threeH-container .threeHRange-degrees0 {
+.three-hour-forecast .threeHRange-degrees0 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees1 {
+.three-hour-forecast .threeHRange-degrees1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees2 {
+.three-hour-forecast .threeHRange-degrees2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees3 {
+.three-hour-forecast .threeHRange-degrees3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees4 {
+.three-hour-forecast .threeHRange-degrees4 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees5 {
+.three-hour-forecast .threeHRange-degrees5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees6 {
+.three-hour-forecast .threeHRange-degrees6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
 }
-.threeH-container .threeHRange-degrees7 {
+.three-hour-forecast .threeHRange-degrees7 {
   display: flex;
   flex-direction: row;
   justify-content: center;

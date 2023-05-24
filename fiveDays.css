@@ -27,7 +27,7 @@
   padding: 0 0 10% 0;
   font-size: 1.5rem;
 }
-.five-days-forecast .daily-forecast .dayWeatherImg {
+.five-days-forecast .daily-forecast .daily-forecast-image {
   height: auto;
   width: 100%;
 }

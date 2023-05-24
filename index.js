@@ -219,9 +219,6 @@ function showWeather(request) {
         return response.json()
     })
     .then((currentWeather) => {
-        // Show the data obtained from API (Debug)
-        console.log(currentWeather)
-
         // Update the display using the data
         cityNameElement.innerText = currentWeather["name"]
         currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
@@ -247,9 +244,7 @@ function showWeather(request) {
         // Call the function to display the weather of the next 5 days here
         selectedCity = currentWeather["name"]
         showFiveDaysWeather()
-        threeHRange()
-
-        console.log(favoriteCities, 99)
+        threeHRange(0)
     })
     .catch((error) => {
         console.log("Fetch Error: " + error)
@@ -272,8 +267,8 @@ function showWeatherByLocation(latitude, longtitude) {
 
 // Display today's 3-hourly weather when the user clickes the current weather
 currentWeatherElement.addEventListener("click", () => {
-    selectedDay = 0
-    threeHRange()
+    selectedDateOffset = 0
+    threeHRange(0)
 })
 
 
@@ -283,10 +278,18 @@ currentWeatherElement.addEventListener("click", () => {
 const temperatureType = "metric"
 
 // let selectedCity = ""
-let selectedDay = 0
+//let selectedDateOffset = 0
 
-// $("...").on("click", () => {
-// })
+
+$(() => {
+    $(".daily-forecast").each((index, element) => {
+        $(element).on("click", () => {
+            threeHRange(index+1)
+        })
+    })
+});
+
+
 
 
 function showFiveDaysWeather() {
@@ -307,7 +310,6 @@ function showFiveDaysWeather() {
 
                 // get all the weather info
                 fiveDaysWeather["list"].forEach( (threeHourlyWeather, index) => {
-                    console.log(threeHourlyWeather);
                 
                     // convert unix-time to date
                     let date = new Date(threeHourlyWeather["dt"] * 1000);  
@@ -345,86 +347,41 @@ let weatherIconElement = document.getElementsByClassName("weatherImg");
 
 let rangeIndex = 0;
 
-function threeHRange () {
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=42da94770c5c8f2ed979107d60b61299`)
+function threeHRange (selectedDateOffset) {
+    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=${apiKey}`)
     .then(
         function(response) {
             response.json().then(function(data) {
 
-                console.log(data["list"][0]);
-                let date = new Date(data["list"][0]["dt"] * 1000);
-
                 let weatherList = data["list"]
                 
-
-                const currentDate = new Date();
-                const compareDate = currentDate.getDate() + selectedDay;
-
-                let threeHBox = document.getElementsByClassName("threeH-box");
+                const selectedDate = new Date().getDate() + selectedDateOffset;
 
                 // Set empty value to all the 3-hourly range
-                for(let i = 0; i < 8; i++) {
-                    const weatherRange = document.getElementsByClassName("weatherRange" + i);
-                    weatherRange[0].innerText = "";
-                    
-                    weatherIconElement[i].src = "";
-                    
-                    let threeHDegrees = document.getElementsByClassName("threeHRange-degrees" + i);
-                    threeHDegrees[0].innerText = "";
-                }
+                $(".three-hour-forecast").each((index, element) => {
+                    $(element).children("p").eq(1).text("")
+                    $(element).children("p").eq(2).text("")
+                    $(element).children("img").attr("src", "")
+                })
 
                 
                 //For Each to show the Weather through all the hour Ranges
                 rangeIndex = 0
                 weatherList.forEach((weather, index) => {
                     
-
                     let date = new Date(weather["dt"] * 1000);
-                    
-
-                    if (date.getDate() === compareDate) {
-                        const weatherRange = document.getElementsByClassName("weatherRange" + rangeIndex);
-                        weatherRange[0].innerText = weather["weather"][0]["main"];
+        
+                    console.log(weather)
+                    if (date.getDate() === selectedDate) {
+                        $(".three-hour-forecast").eq(rangeIndex).children("p").eq(1).text(weather["weather"][0]["main"]);
                         
-                        weatherIconElement[rangeIndex].src = "https://openweathermap.org/img/wn/" + weather["weather"][0]["icon"] + "@4x.png";
+                        $(".three-hour-forecast").eq(rangeIndex).children("img").attr("src", `https://openweathermap.org/img/wn/${weather["weather"][0]["icon"]}@4x.png`);
                         
-                        let threeHDegrees = document.getElementsByClassName("threeHRange-degrees" + rangeIndex);
-                        threeHDegrees[0].innerText = Math.floor(weather["main"]["temp"]) + "°C";
+                        $(".three-hour-forecast").eq(rangeIndex).children("p").eq(2).text(`${weather["weather"][0]["main"]}°C`);
 
-                        rangeIndex += 1;
-
-                        console.log(weatherRange)
-                    
-                    
+                        rangeIndex += 1;                    
                     }
-                    
-
                 }) 
-                //if we have 5 data
-                //rangeindex = 5
-                if(rangeIndex < 8 && selectedDay === 0) {
-
-                    let hoursGap = 8 - rangeIndex; // 3
-                    for(let i = 7; i >= hoursGap; i--)// 7 6 5 4 3 
-                    {
-                        const weatherRangeOrigin = document.getElementsByClassName("weatherRange" + (i - hoursGap)) ;
-                        const weatherRangeDest = document.getElementsByClassName("weatherRange" + i);
-
-                        const threeHDegreesOrigin = document.getElementsByClassName("threeHRange-degrees" + (i - hoursGap));
-                        const threeHDegreesDest = document.getElementsByClassName("threeHRange-degrees" + i); 
-
-                        weatherRangeDest[0].innerText = weatherRangeOrigin[0].innerText;
-                        weatherIconElement[i].src = weatherIconElement[i - hoursGap].src;
-
-                        threeHDegreesDest[0].innerText = threeHDegreesOrigin[0].innerText;
-
-                        weatherRangeOrigin[0].innerText = ""
-                        weatherIconElement[i - hoursGap].src = ""
-
-                        threeHDegreesOrigin[0].innerText = ""
-
-                    } 
-                }
             })
         }
     )

@@ -1,6 +1,6 @@
 @import "_common.scss";
 
-.threeH-box {
+.three-hourly-forecast {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -15,7 +15,7 @@
     border-radius: 0.5rem;
 }
 
-.threeH-container {
+.three-hour-forecast {
     display: flex;
     flex-direction: column;
     justify-content: center;
