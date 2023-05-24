@@ -6,7 +6,7 @@ const currentWeatherSectionElement = document.querySelector("#current-weather-se
 const currentWeatherElement = document.querySelector("#current-weather")
 let selectedCity = ""
 
-let currentWeatherManager = null
+let weatherManager = null
 let favorityCityManager = null
 
 /* Auto Complete */
@@ -18,52 +18,24 @@ window.initMap = function() {
     const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option);
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
-        currentWeatherManager.showWeatherByCityName(searchCityInput.value)
+        weatherManager.showWeatherByCityName(searchCityInput.value)
     });
 }
 
 $(() => {
 
-    currentWeatherManager = new CurrentWeather()
-    favorityCityManager = new FavoriteCity(currentWeatherManager)
-    currentWeatherManager.setFavoriteCity(favorityCityManager)
-
-    // Hide the current weather until calling all API finishes
-    currentWeatherSectionElement.style["opacity"] = 0
+    weatherManager = new Weather()
+    favorityCityManager = new FavoriteCity(weatherManager)
+    weatherManager.setFavoriteCity(favorityCityManager)
 
     /* User's location */
     // If user's current location is sucessful to get, display the weather there
     // If it's failed to get, display the weather of the default city
     navigator.geolocation.getCurrentPosition((currentLocation) => {
-        currentWeatherManager.showWeatherInCurrentLocation(currentLocation)
+        weatherManager.showWeatherInCurrentLocation(currentLocation)
     }, () => {
-        currentWeatherManager.showWeatherInDefaultCity()
+        weatherManager.showWeatherInDefaultCity()
     });
-
-
-    /* Favorite Cities */
-    // Add an event listener to the favorite star icon
-    favoriteStarElement.addEventListener("click", () => {
-        favorityCityManager.onFavoriteStarClicked()
-    })
-    // Add an event listener to the pull-down menu
-    favoriteCitiesMenu.addEventListener("change", () => {
-        favorityCityManager.onFavoriteCitySelected()
-    })
-
-    // Set up for user's favorite cities
-    favorityCityManager.getFavoriteCitiesFromStorage()
-
-    // Display today's 3-hourly weather when the user clickes the current weather
-    currentWeatherElement.addEventListener("click", () => {
-        threeHRange(0)
-    })
-
-    $(".daily-forecast").each((index, element) => {
-        $(element).on("click", () => {
-            threeHRange(index+1)
-        })
-    })
 });
 
 class Admin {
@@ -80,6 +52,18 @@ class FavoriteCity {
     constructor(currentWeather) {
         this.currentWeather = currentWeather
         this.favoriteCities = {}
+
+        // Add an event listener to the favorite star icon
+        favoriteStarElement.addEventListener("click", () => {
+            this.onFavoriteStarClicked()
+        })
+        // Add an event listener to the pull-down menu
+        favoriteCitiesMenu.addEventListener("change", () => {
+            this.onFavoriteCitySelected()
+        })
+
+        // Set up for user's favorite cities
+        this.getFavoriteCitiesFromStorage()
     }
 
     getFavoriteCitiesFromStorage() {
@@ -228,7 +212,23 @@ class FavoriteCity {
     }
 }
 
-class CurrentWeather {
+class Weather {
+
+    constructor() {
+        // Hide the current weather until calling all API finishes
+        currentWeatherSectionElement.style["opacity"] = 0
+
+        // Display today's 3-hourly weather when the user clickes the current weather
+        currentWeatherElement.addEventListener("click", () => {
+            weatherManager.showThreeHourlyWeather(0)
+        })
+
+        $(".daily-forecast").each((index, element) => {
+            $(element).on("click", () => {
+                weatherManager.showThreeHourlyWeather(index+1)
+            })
+        })
+    }
 
     setFavoriteCity(favoriteCity) {
         this.favoriteCity = favoriteCity
@@ -258,7 +258,7 @@ class CurrentWeather {
             $("#country-code").text(countryCode)
             $("#national-flag").attr("src", `https://flagsapi.com/${countryCode}/flat/64.png`)
             const currentTime = new Date(currentWeather["dt"]*1000)
-            const currentTimeText = `As of ${toMonthText(currentTime.getMonth())}${currentTime.getDate()}, ${currentTime.getFullYear()} ${toAMPM(currentTime.getHours(), currentTime.getMinutes())}`
+            const currentTimeText = `As of ${Common.toMonthText(currentTime.getMonth())}${currentTime.getDate()}, ${currentTime.getFullYear()} ${Common.toAMPM(currentTime.getHours(), currentTime.getMinutes())}`
             $("#current-time").text(currentTimeText)
 
             // Update the star sign
@@ -272,8 +272,8 @@ class CurrentWeather {
 
             // Call the function to display the weather of the next 5 days here
             selectedCity = currentWeather["name"]
-            showFiveDaysWeather()
-            threeHRange(0)
+            this.showFiveDaysWeather()
+            this.showThreeHourlyWeather(0)
         })
         .catch((error) => {
             console.log("Fetch Error: " + error)
@@ -303,164 +303,170 @@ class CurrentWeather {
         favoriteStarElement.style["opacity"] = 100
         this.showWeatherByCityName(Setting.defaultCity)
     }
-}
 
 
+    showFiveDaysWeather() {
+        const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=metric&appid=${Admin.apiKey}`
 
+        fetch(request).then(
+            function(response) {
+                if(response.status !== 200){
+                    return;
+                }
+                response.json().then(function(fiveDaysWeather) {
+                    console.log(fiveDaysWeather);
 
+                    // get currentDate
+                    let currentDate = new Date();
+                    // for the if statement to specific the date, the time and weather infos
+                    let day = 1;
 
+                    // get all the weather info
+                    fiveDaysWeather["list"].forEach( (threeHourlyWeather, index) => {
+                    
+                        // convert unix-time to date
+                        let date = new Date(threeHourlyWeather["dt"] * 1000);  
+                        
+                        // show the next 5 days' weather              
+                        if(date.getDate() === currentDate.getDate() + day && (date.getHours() >= 6 && date.getHours() <= 9)) {
 
+                            const dateText = `${Common.toDay(date.getDay())} ${Common.toMonthText(date.getMonth())} ${date.getDate()}`
+                            $(".daily-forecast").eq(day-1).children("p").eq(0).text(dateText)
 
-function showFiveDaysWeather() {
-    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=metric&appid=${Admin.apiKey}`
+                            $(".daily-forecast").eq(day-1).children("p").eq(1).text(threeHourlyWeather["weather"][0]["main"])
+                            $(".daily-forecast").eq(day-1).children("img").attr("src", `https://openweathermap.org/img/wn/${threeHourlyWeather["weather"][0]["icon"]}@4x.png`);
 
-    fetch(request).then(
-        function(response) {
-            if(response.status !== 200){
-                return;
+                            const temperature = Math.floor(threeHourlyWeather["main"]["temp"])
+                            $(".daily-forecast").eq(day-1).children("p").eq(3).text(`${temperature}℃`)
+                            
+                            day++;
+                        }
+                    })
+                })
             }
-            response.json().then(function(fiveDaysWeather) {
-                console.log(fiveDaysWeather);
+        ).catch((error) => {
+            console.log("Fetch Error: " + error)
+        })
+    }
 
-                // get currentDate
-                let currentDate = new Date();
-                // for the if statement to specific the date, the time and weather infos
-                let day = 1;
 
-                // get all the weather info
-                fiveDaysWeather["list"].forEach( (threeHourlyWeather, index) => {
-                
-                    // convert unix-time to date
-                    let date = new Date(threeHourlyWeather["dt"] * 1000);  
+    showThreeHourlyWeather(selectedDateOffset) {
+        fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=metric&appid=${Admin.apiKey}`)
+        .then(
+            function(response) {
+                response.json().then(function(data) {
+
+                    let weatherList = data["list"]
                     
-                    // show the next 5 days' weather              
-                    if(date.getDate() === currentDate.getDate() + day && (date.getHours() >= 6 && date.getHours() <= 9)) {
+                    const selectedDate = new Date().getDate() + selectedDateOffset;
 
-                        const dateText = `${toDay(date.getDay())} ${toMonthText(date.getMonth())} ${date.getDate()}`
-                        $(".daily-forecast").eq(day-1).children("p").eq(0).text(dateText)
+                    // Set empty value to all the 3-hourly range
+                    $(".three-hour-forecast").each((index, element) => {
+                        $(element).children("p").eq(1).text("")
+                        $(element).children("p").eq(2).text("")
+                        $(element).children("img").attr("src", "")
+                    })
 
-                        $(".daily-forecast").eq(day-1).children("p").eq(1).text(threeHourlyWeather["weather"][0]["main"])
-                        $(".daily-forecast").eq(day-1).children("img").attr("src", `https://openweathermap.org/img/wn/${threeHourlyWeather["weather"][0]["icon"]}@4x.png`);
-
-                        const temperature = Math.floor(threeHourlyWeather["main"]["temp"])
-                        $(".daily-forecast").eq(day-1).children("p").eq(3).text(`${temperature}℃`)
-                        
-                        day++;
-                    }
-                })
-            })
-        }
-    ).catch((error) => {
-        console.log("Fetch Error: " + error)
-    })
-}
-
-
-
-function threeHRange (selectedDateOffset) {
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=metric&appid=${Admin.apiKey}`)
-    .then(
-        function(response) {
-            response.json().then(function(data) {
-
-                let weatherList = data["list"]
-                
-                const selectedDate = new Date().getDate() + selectedDateOffset;
-
-                // Set empty value to all the 3-hourly range
-                $(".three-hour-forecast").each((index, element) => {
-                    $(element).children("p").eq(1).text("")
-                    $(element).children("p").eq(2).text("")
-                    $(element).children("img").attr("src", "")
-                })
-
-                
-                //For Each to show the Weather through all the hour Ranges
-                let rangeIndex = 0
-                weatherList.forEach((weather, index) => {
                     
-                    let date = new Date(weather["dt"] * 1000);
-        
-                    console.log(weather)
-                    if (date.getDate() === selectedDate) {
-                        $(".three-hour-forecast").eq(rangeIndex).children("p").eq(1).text(weather["weather"][0]["main"]);
+                    //For Each to show the Weather through all the hour Ranges
+                    let rangeIndex = 0
+                    weatherList.forEach((weather, index) => {
                         
-                        $(".three-hour-forecast").eq(rangeIndex).children("img").attr("src", `https://openweathermap.org/img/wn/${weather["weather"][0]["icon"]}@4x.png`);
-                        
-                        $(".three-hour-forecast").eq(rangeIndex).children("p").eq(2).text(`${weather["weather"][0]["main"]}°C`);
+                        let date = new Date(weather["dt"] * 1000);
+            
+                        console.log(weather)
+                        if (date.getDate() === selectedDate) {
+                            $(".three-hour-forecast").eq(rangeIndex).children("p").eq(1).text(weather["weather"][0]["main"]);
+                            
+                            $(".three-hour-forecast").eq(rangeIndex).children("img").attr("src", `https://openweathermap.org/img/wn/${weather["weather"][0]["icon"]}@4x.png`);
+                            
+                            $(".three-hour-forecast").eq(rangeIndex).children("p").eq(2).text(`${weather["weather"][0]["main"]}°C`);
 
-                        rangeIndex += 1;                    
-                    }
-                }) 
-            })
+                            rangeIndex += 1;                    
+                        }
+                    }) 
+                })
+            }
+        )
+    }
+}
+
+
+
+
+
+class Common {
+
+    static toMonthText(month) {
+        switch(month) {
+            case 0:
+                return "Jan."
+            case 1:
+                return "Fab."
+            case 2:
+                return "Mar."
+            case 3:
+                return "Apr."
+            case 4:
+                return "May."
+            case 5:
+                return "Jun."
+            case 6:
+                return "Jul."
+            case 7:
+                return "Aug."
+            case 8:
+                return "Sep."
+            case 9:
+                return "Oct."
+            case 10:
+                return "Nov."
+            case 11:
+                return "Dec."
         }
-    )
-}
-
-function toMonthText(month) {
-    switch(month) {
-        case 0:
-            return "Jan."
-        case 1:
-            return "Fab."
-        case 2:
-            return "Mar."
-        case 3:
-            return "Apr."
-        case 4:
-            return "May."
-        case 5:
-            return "Jun."
-        case 6:
-            return "Jul."
-        case 7:
-            return "Aug."
-        case 8:
-            return "Sep."
-        case 9:
-            return "Oct."
-        case 10:
-            return "Nov."
-        case 11:
-            return "Dec."
+    }
+    
+    static toAMPM(hour, minute) {
+        if(minute < 10) {
+            minute = "0" + minute
+        }
+        if(hour === 0) {
+            return `${12}:${minute} AM`
+        }
+        else if(hour < 12) {
+            return `${hour}:${minute} AM`
+        }
+        else if(hour === 12) {
+            return `${12}:${minute} PM`
+        }
+        else if(hour > 12) {
+            return `${hour-12}:${minute} PM`
+        }
+    }
+    
+    static toDay(day) {
+        switch(day) {
+            case 0:
+                return "Sun"
+            case 1:
+                return "Mon"
+            case 2:
+                return "Tue"
+            case 3:
+                return "Wed"
+            case 4:
+                return "Thu"
+            case 5:
+                return "Fri"
+            case 6:
+                return "Sat"
+            default:
+                return "None"
+        }
     }
 }
 
-function toAMPM(hour, minute) {
-    if(minute < 10) {
-        minute = "0" + minute
-    }
-    if(hour === 0) {
-        return `${12}:${minute} AM`
-    }
-    else if(hour < 12) {
-        return `${hour}:${minute} AM`
-    }
-    else if(hour === 12) {
-        return `${12}:${minute} PM`
-    }
-    else if(hour > 12) {
-        return `${hour-12}:${minute} PM`
-    }
-}
 
-function toDay(day) {
-    switch(day) {
-        case 0:
-            return "Sun"
-        case 1:
-            return "Mon"
-        case 2:
-            return "Tue"
-        case 3:
-            return "Wed"
-        case 4:
-            return "Thu"
-        case 5:
-            return "Fri"
-        case 6:
-            return "Sat"
-        default:
-            return "None"
-    }
-}
+
+
+
