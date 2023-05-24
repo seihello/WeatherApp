@@ -1,287 +1,64 @@
 /* Elements */
 const searchCityInput = document.querySelector("#search-city")
-const cityNameElement = document.querySelector("#city-name")
 const favoriteStarElement = document.querySelector("#favorite-star")
 const favoriteCitiesMenu = document.querySelector("#favorite-cities")
 const currentWeatherSectionElement = document.querySelector("#current-weather-section")
-const countryCodeElement = document.querySelector("#country-code")
-const nationalFlagElement = document.querySelector("#national-flag")
 const currentWeatherElement = document.querySelector("#current-weather")
-const currentWeatherTextElement = document.querySelector("#current-weather-text")
-const currentWeatherIconElement = document.querySelector("#weather-icon")
-const currentTemperatureElement = document.querySelector("#current-temperature-text")
-const currentTimeElement = document.querySelector("#current-time")
+let selectedCity = ""
 
-const apiKey = "c5b83392add58be24fb5a7bd362ced83"
-const defaultCity = "Vancouver"
-const isCelsius = true
-
-const storageKey = "favoriteCities"
-let favoriteCities = {}
-
-// Hide the current weather until calling all API finishes
-currentWeatherSectionElement.style["opacity"] = 0
-
-/* User's location */
-// If user's current location is sucessful to get, display the weather there
-// If it's failed to get, display the weather of the default city
-navigator.geolocation.getCurrentPosition(showWeatherInCurrentLocation, showWeatherInDefaultCity);
-
-function showWeatherInCurrentLocation(currentLocation) {
-    favoriteStarElement.style["opacity"] = 100
-    showWeatherByLocation(currentLocation["coords"]["latitude"], currentLocation["coords"]["longitude"])
-}
-
-function showWeatherInDefaultCity() {
-    favoriteStarElement.style["opacity"] = 100
-    showWeatherByCityName(defaultCity)
-}
-
+let currentWeatherManager = null
+let favorityCityManager = null
 
 /* Auto Complete */
 window.initMap = function() {
     // Suggest only cities
     let option = {
         types: ['(cities)']
-       };
+    };
     const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option);
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        showWeatherByCityName(searchCityInput.value)
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        currentWeatherManager.showWeatherByCityName(searchCityInput.value)
     });
 }
 
+$(() => {
 
-/* Favorite Cities */
-// Add an event listener to the favorite star icon
-favoriteStarElement.addEventListener("click", onFavoriteStarClicked)
-// Add an event listener to the pull-down menu
-favoriteCitiesMenu.addEventListener("change", onFavoriteCitySelected)
+    currentWeatherManager = new CurrentWeather()
+    favorityCityManager = new FavoriteCity(currentWeatherManager)
+    currentWeatherManager.setFavoriteCity(favorityCityManager)
 
-// Set up for user's favorite cities
-getFavoriteCitiesFromStorage()
+    // Hide the current weather until calling all API finishes
+    currentWeatherSectionElement.style["opacity"] = 0
 
-function getFavoriteCitiesFromStorage() {
-    // Get user's favorite cities from local storage
-    let favoriteCitiesJSON = localStorage.getItem(storageKey)
+    /* User's location */
+    // If user's current location is sucessful to get, display the weather there
+    // If it's failed to get, display the weather of the default city
+    navigator.geolocation.getCurrentPosition((currentLocation) => {
+        currentWeatherManager.showWeatherInCurrentLocation(currentLocation)
+    }, () => {
+        currentWeatherManager.showWeatherInDefaultCity()
+    });
 
-    // If data exists
-    if(favoriteCitiesJSON !== null) {
-        // Convert to an array
-        favoriteCities = JSON.parse(favoriteCitiesJSON)
 
-        // Deploy to the pull-down menu
-        for(let countryGroup of Object.keys(favoriteCities)) {
-
-            const countryOptionGroup = document.createElement("optgroup")
-            countryOptionGroup.label = countryGroup
-      
-            for(let favoriteCity of favoriteCities[countryGroup]) {
-                const favoriteCityOption = document.createElement("option")
-                favoriteCityOption.classList.add("favorite-city")
-                favoriteCityOption.innerText = favoriteCity
-                countryOptionGroup.appendChild(favoriteCityOption)
-            }
-            favoriteCitiesMenu.appendChild(countryOptionGroup)
-        }
-    }
-}
-
-function onFavoriteStarClicked() {    
-    const displayedCity = cityNameElement.innerText
-    const displayedCountry = countryCodeElement.innerText
-    let isNewCity = true
-    let isNewCountry = true
-
-    if(displayedCountry in favoriteCities) {
-        isNewCountry = false
-        if(favoriteCities[displayedCountry].includes(displayedCity)) {
-            isNewCity = false
-        }
-    }
-    
-    // If the displayed city is new
-    if(isNewCity) {
-        // Create an option element that will be added to the pull-down menu
-        const newFavoriteCityOption = document.createElement("option")
-        newFavoriteCityOption.classList.add("favorite-city")
-        newFavoriteCityOption.innerText = displayedCity
-        
-        if(isNewCountry) {
-            // Add a new country group with a new city to the favorite cities
-            favoriteCities[displayedCountry] = [displayedCity]
-
-            // Add a new country group with a new option to the pull-down menu
-            const newCountryGroup = document.createElement("optgroup")
-            newCountryGroup.label = displayedCountry
-            newCountryGroup.appendChild(newFavoriteCityOption)
-            favoriteCitiesMenu.appendChild(newCountryGroup)
-        } else {
-            // Add a new city to its country group that already exists
-            favoriteCities[displayedCountry].push(displayedCity)
-
-            // Add a new option to its country group that already exists
-            for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
-                if(favoriteCitiesMenu.children[i].label === displayedCountry) {
-                    favoriteCitiesMenu.children[i].appendChild(newFavoriteCityOption)
-                }
-            }
-        }
-        
-    }
-    // If the displayed city is already registered
-    else {
-        // Remove the displayed city from the favorite cities
-        let index = favoriteCities[displayedCountry].indexOf(displayedCity)
-        favoriteCities[displayedCountry].splice(index, 1)
-        if(favoriteCities[displayedCountry].length === 0) {
-            delete favoriteCities[displayedCountry]
-        }
-
-        // Remove the displayed city from the pull-down menu
-        for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
-            if(favoriteCitiesMenu.children[i].label === displayedCountry) {
-                for(let j = 0; j < favoriteCitiesMenu.children[i].children.length; j++) {
-                    if(favoriteCitiesMenu.children[i].children[j].innerText === displayedCity) {
-                        favoriteCitiesMenu.children[i].removeChild(favoriteCitiesMenu.children[i].children[j])
-                    }
-                }
-            }
-            if(favoriteCitiesMenu.children[i].children.length === 0) {
-                favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[i])
-            }
-        }
-    }
-
-    // Update user's local storage (Just fully copy the array as JSON)
-    localStorage.setItem(storageKey, JSON.stringify(favoriteCities))
-
-    // Update the star sign
-    setFavoriteStar()
-
-    // Change the selected city on the pull-down menu
-    changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
-}
-
-function setFavoriteStar() {
-    // If displayed city is one of the favorite then the star should be filled
-    let cityExists = false
-    Object.values(favoriteCities).forEach((element, index) => {
-        if(element.includes(cityNameElement.innerHTML)) {
-            cityExists = true
-        }
+    /* Favorite Cities */
+    // Add an event listener to the favorite star icon
+    favoriteStarElement.addEventListener("click", () => {
+        favorityCityManager.onFavoriteStarClicked()
     })
-    
-    if(cityExists) {
-        favoriteStarElement.src = "img/star-on.png"
-    } else {
-        favoriteStarElement.src = "img/star-off.png"
-    }
-}
-
-function onFavoriteCitySelected(event) {
-    // Show the weather based on the selected city
-    showWeatherByCityName(event.target.value)
-
-    // Update the star sign
-    setFavoriteStar()
-}
-
-
-// Make the displayed city selected if it's one of the favorite cities
-function changeSelectedFavoriteCityOption(displayedCityName) {
-    // Make the title selected in case the displayed city is not a favorite city
-    favoriteCitiesMenu.children[0].selected = true
-
-    // Check every option and make it selected if it matches the displayed city
-    for(favoriteCountryGroup of favoriteCitiesMenu.children) {
-        for(favoriteCityOption of favoriteCountryGroup.children) {
-            if(favoriteCityOption.innerText === displayedCityName) {
-                favoriteCityOption.selected = true
-            } else {
-                favoriteCityOption.selected = false
-            }
-        }
-    }
-}
-
-/* Current Weather */
-function showWeather(request) {
-    // Call OpenWeather API to get data
-    fetch(request).then((response) => {
-        if(response.status === 404) {
-            alert("No weather data of the selected place.")
-            return;
-        } else if(response.status !== 200) {
-            console.log("Status Error!", response.status)
-            return
-        }
-        return response.json()
+    // Add an event listener to the pull-down menu
+    favoriteCitiesMenu.addEventListener("change", () => {
+        favorityCityManager.onFavoriteCitySelected()
     })
-    .then((currentWeather) => {
-        // Update the display using the data
-        cityNameElement.innerText = currentWeather["name"]
-        currentTemperatureElement.innerText = Math.floor(currentWeather["main"]["temp"])
-        currentWeatherTextElement.innerText = currentWeather["weather"][0]["main"]
-        currentWeatherIconElement.src = "https://openweathermap.org/img/wn/" + currentWeather["weather"][0]["icon"] + "@4x.png"
 
-        const countryCode = currentWeather["sys"]["country"]
-        countryCodeElement.innerText = countryCode
-        nationalFlagElement.src = `https://flagsapi.com/${countryCode}/flat/64.png`
-        const currentTime = new Date(currentWeather["dt"]*1000)
-        const currentTimeText = `As of ${toMonthText(currentTime.getMonth())}${currentTime.getDate()}, ${currentTime.getFullYear()} ${toAMPM(currentTime.getHours(), currentTime.getMinutes())}`
-        currentTimeElement.innerText = currentTimeText
+    // Set up for user's favorite cities
+    favorityCityManager.getFavoriteCitiesFromStorage()
 
-        // Update the star sign
-        setFavoriteStar()
-
-        // Show the current weather
-        currentWeatherSectionElement.style["opacity"] = 1
-
-        // Change the selected city on the pull-down menu
-        changeSelectedFavoriteCityOption(cityNameElement.innerHTML)
-
-        // Call the function to display the weather of the next 5 days here
-        selectedCity = currentWeather["name"]
-        showFiveDaysWeather()
+    // Display today's 3-hourly weather when the user clickes the current weather
+    currentWeatherElement.addEventListener("click", () => {
         threeHRange(0)
     })
-    .catch((error) => {
-        console.log("Fetch Error: " + error)
-    })
-}
 
-function showWeatherByCityName(cityName) {
-    const temperatureType = isCelsius ? "metric" : "imperial" 
-    const request = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${temperatureType}&appid=${apiKey}`
-
-    showWeather(request)
-}
-
-function showWeatherByLocation(latitude, longtitude) {
-    const temperatureType = isCelsius ? "metric" : "imperial" 
-    const request = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&units=${temperatureType}&appid=${apiKey}`
-
-    showWeather(request)
-}
-
-// Display today's 3-hourly weather when the user clickes the current weather
-currentWeatherElement.addEventListener("click", () => {
-    selectedDateOffset = 0
-    threeHRange(0)
-})
-
-
-//const apiKey ="3b2df1883208190d986bcd1b1e48eff4"
-
-// to change the unit of temperature from Kelvin to Celsius
-const temperatureType = "metric"
-
-// let selectedCity = ""
-//let selectedDateOffset = 0
-
-
-$(() => {
     $(".daily-forecast").each((index, element) => {
         $(element).on("click", () => {
             threeHRange(index+1)
@@ -289,11 +66,253 @@ $(() => {
     })
 });
 
+class Admin {
+    static apiKey = "c5b83392add58be24fb5a7bd362ced83"
+}
+
+class Setting {
+    static isCelsius = true
+    static defaultCity = "Vancouver"
+    static storageKey = "favoriteCities"
+}
+
+class FavoriteCity {
+    constructor(currentWeather) {
+        this.currentWeather = currentWeather
+        this.favoriteCities = {}
+    }
+
+    getFavoriteCitiesFromStorage() {
+        // Get user's favorite cities from local storage
+        let favoriteCitiesJSON = localStorage.getItem(Setting.storageKey)
+
+        // If data exists
+        if(favoriteCitiesJSON !== null) {
+            // Convert to an array
+            this.favoriteCities = JSON.parse(favoriteCitiesJSON)
+
+            // Deploy to the pull-down menu
+            for(let countryGroup of Object.keys(this.favoriteCities)) {
+
+                const countryOptionGroup = document.createElement("optgroup")
+                countryOptionGroup.label = countryGroup
+        
+                for(let favoriteCity of this.favoriteCities[countryGroup]) {
+                    const favoriteCityOption = document.createElement("option")
+                    favoriteCityOption.classList.add("favorite-city")
+                    favoriteCityOption.innerText = favoriteCity
+                    countryOptionGroup.appendChild(favoriteCityOption)
+                }
+                favoriteCitiesMenu.appendChild(countryOptionGroup)
+            }
+        }
+    }
+
+    onFavoriteStarClicked() {    
+        const displayedCity = $("#city-name").text()
+        const displayedCountry = $("#country-code").text()
+        let isNewCity = true
+        let isNewCountry = true
+
+        if(displayedCountry in this.favoriteCities) {
+            isNewCountry = false
+            if(this.favoriteCities[displayedCountry].includes(displayedCity)) {
+                isNewCity = false
+            }
+        }
+        
+        // If the displayed city is new
+        if(isNewCity) {
+            // Create an option element that will be added to the pull-down menu
+            const newFavoriteCityOption = document.createElement("option")
+            newFavoriteCityOption.classList.add("favorite-city")
+            newFavoriteCityOption.innerText = displayedCity
+            
+            if(isNewCountry) {
+                // Add a new country group with a new city to the favorite cities
+                this.favoriteCities[displayedCountry] = [displayedCity]
+
+                // Add a new country group with a new option to the pull-down menu
+                const newCountryGroup = document.createElement("optgroup")
+                newCountryGroup.label = displayedCountry
+                newCountryGroup.appendChild(newFavoriteCityOption)
+                favoriteCitiesMenu.appendChild(newCountryGroup)
+            } else {
+                // Add a new city to its country group that already exists
+                this.favoriteCities[displayedCountry].push(displayedCity)
+
+                // Add a new option to its country group that already exists
+                for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
+                    if(favoriteCitiesMenu.children[i].label === displayedCountry) {
+                        favoriteCitiesMenu.children[i].appendChild(newFavoriteCityOption)
+                    }
+                }
+            }
+            
+        }
+        // If the displayed city is already registered
+        else {
+            // Remove the displayed city from the favorite cities
+            let index = this.favoriteCities[displayedCountry].indexOf(displayedCity)
+            this.favoriteCities[displayedCountry].splice(index, 1)
+            if(this.favoriteCities[displayedCountry].length === 0) {
+                delete this.favoriteCities[displayedCountry]
+            }
+
+            // Remove the displayed city from the pull-down menu
+            for(let i = 1; i < favoriteCitiesMenu.children.length; i++) {
+                if(favoriteCitiesMenu.children[i].label === displayedCountry) {
+                    for(let j = 0; j < favoriteCitiesMenu.children[i].children.length; j++) {
+                        if(favoriteCitiesMenu.children[i].children[j].innerText === displayedCity) {
+                            favoriteCitiesMenu.children[i].removeChild(favoriteCitiesMenu.children[i].children[j])
+                        }
+                    }
+                }
+                if(favoriteCitiesMenu.children[i].children.length === 0) {
+                    favoriteCitiesMenu.removeChild(favoriteCitiesMenu.children[i])
+                }
+            }
+        }
+
+        // Update user's local storage (Just fully copy the array as JSON)
+        localStorage.setItem(Setting.storageKey, JSON.stringify(this.favoriteCities))
+
+        // Update the star sign
+        this.setFavoriteStar()
+
+        // Change the selected city on the pull-down menu
+        this.changeSelectedFavoriteCityOption($("#city-name").text())
+    }
+
+    setFavoriteStar() {
+        // If displayed city is one of the favorite then the star should be filled
+        let cityExists = false
+        Object.values(this.favoriteCities).forEach((element, index) => {
+            if(element.includes($("#city-name").text())) {
+                cityExists = true
+            }
+        })
+        
+        if(cityExists) {
+            favoriteStarElement.src = "img/star-on.png"
+        } else {
+            favoriteStarElement.src = "img/star-off.png"
+        }
+    }
+
+    onFavoriteCitySelected(event) {
+        // Show the weather based on the selected city
+        this.currentWeather.showWeatherByCityName(event.target.value)
+
+        // Update the star sign
+        this.setFavoriteStar()
+    }
+
+
+    // Make the displayed city selected if it's one of the favorite cities
+    changeSelectedFavoriteCityOption(displayedCityName) {
+        // Make the title selected in case the displayed city is not a favorite city
+        favoriteCitiesMenu.children[0].selected = true
+        console.log(favoriteCitiesMenu)
+
+        // Check every option and make it selected if it matches the displayed city
+        for(const favoriteCountryGroup of favoriteCitiesMenu.children) {
+            for(const favoriteCityOption of favoriteCountryGroup.children) {
+                if(favoriteCityOption.innerText === displayedCityName) {
+                    favoriteCityOption.selected = true
+                } else {
+                    favoriteCityOption.selected = false
+                }
+            }
+        }
+    }
+}
+
+class CurrentWeather {
+
+    setFavoriteCity(favoriteCity) {
+        this.favoriteCity = favoriteCity
+    }
+
+    /* Current Weather */
+    showWeather(request) {
+        // Call OpenWeather API to get data
+        fetch(request).then((response) => {
+            if(response.status === 404) {
+                alert("No weather data of the selected place.")
+                return;
+            } else if(response.status !== 200) {
+                console.log("Status Error!", response.status)
+                return
+            }
+            return response.json()
+        })
+        .then((currentWeather) => {
+            // Update the display using the data
+            $("#city-name").text(currentWeather["name"])
+            $("#current-temperature-text").text(Math.floor(currentWeather["main"]["temp"]))
+            $("#current-weather-text").text(currentWeather["weather"][0]["main"])
+            $("#weather-icon").attr("src", `https://openweathermap.org/img/wn/${currentWeather["weather"][0]["icon"]}@4x.png`)
+
+            const countryCode = currentWeather["sys"]["country"]
+            $("#country-code").text(countryCode)
+            $("#national-flag").attr("src", `https://flagsapi.com/${countryCode}/flat/64.png`)
+            const currentTime = new Date(currentWeather["dt"]*1000)
+            const currentTimeText = `As of ${toMonthText(currentTime.getMonth())}${currentTime.getDate()}, ${currentTime.getFullYear()} ${toAMPM(currentTime.getHours(), currentTime.getMinutes())}`
+            $("#current-time").text(currentTimeText)
+
+            // Update the star sign
+            this.favoriteCity.setFavoriteStar()
+
+            // Show the current weather
+            currentWeatherSectionElement.style["opacity"] = 1
+
+            // Change the selected city on the pull-down menu
+            this.favoriteCity.changeSelectedFavoriteCityOption($("#city-name").text())
+
+            // Call the function to display the weather of the next 5 days here
+            selectedCity = currentWeather["name"]
+            showFiveDaysWeather()
+            threeHRange(0)
+        })
+        .catch((error) => {
+            console.log("Fetch Error: " + error)
+        })
+    }
+
+    showWeatherByCityName(cityName) {
+        const temperatureType = Setting.isCelsius ? "metric" : "imperial" 
+        const request = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${Setting.temperatureType}&appid=${Admin.apiKey}`
+
+        this.showWeather(request)
+    }
+
+    showWeatherByLocation(latitude, longtitude) {
+        const temperatureType = Setting.isCelsius ? "metric" : "imperial" 
+        const request = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&units=${temperatureType}&appid=${Admin.apiKey}`
+
+        this.showWeather(request)
+    }
+
+    showWeatherInCurrentLocation(currentLocation) {
+        favoriteStarElement.style["opacity"] = 100
+        this.showWeatherByLocation(currentLocation["coords"]["latitude"], currentLocation["coords"]["longitude"])
+    }
+
+    showWeatherInDefaultCity() {
+        favoriteStarElement.style["opacity"] = 100
+        this.showWeatherByCityName(Setting.defaultCity)
+    }
+}
+
+
+
+
 
 
 
 function showFiveDaysWeather() {
-    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=${apiKey}`
+    const request = `https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=metric&appid=${Admin.apiKey}`
 
     fetch(request).then(
         function(response) {
@@ -319,10 +338,7 @@ function showFiveDaysWeather() {
 
                         const dateText = `${toDay(date.getDay())} ${toMonthText(date.getMonth())} ${date.getDate()}`
                         $(".daily-forecast").eq(day-1).children("p").eq(0).text(dateText)
-                        
-                        // get the month and the day for the next 5days
-                        // document.getElementById(`monthOn${day}Day`).innerHTML= toMonthText(date.getMonth()) + date.getDate()
-                        
+
                         $(".daily-forecast").eq(day-1).children("p").eq(1).text(threeHourlyWeather["weather"][0]["main"])
                         $(".daily-forecast").eq(day-1).children("img").attr("src", `https://openweathermap.org/img/wn/${threeHourlyWeather["weather"][0]["icon"]}@4x.png`);
 
@@ -341,14 +357,8 @@ function showFiveDaysWeather() {
 
 
 
-// threeHRange("Vancouver", 1);
-
-let weatherIconElement = document.getElementsByClassName("weatherImg");
-
-let rangeIndex = 0;
-
 function threeHRange (selectedDateOffset) {
-    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=${temperatureType}&appid=${apiKey}`)
+    fetch (`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&units=metric&appid=${Admin.apiKey}`)
     .then(
         function(response) {
             response.json().then(function(data) {
@@ -366,7 +376,7 @@ function threeHRange (selectedDateOffset) {
 
                 
                 //For Each to show the Weather through all the hour Ranges
-                rangeIndex = 0
+                let rangeIndex = 0
                 weatherList.forEach((weather, index) => {
                     
                     let date = new Date(weather["dt"] * 1000);
