@@ -97,18 +97,20 @@ export class FavoriteCity {
             }
 
             // Remove the displayed city from the pull-down menu
-            for(let i = 1; i < $("#favorite-cities").children().length; i++) {
-                if($("#favorite-cities").children().eq(i).attr("label") === displayedCountry) {
-                    for(let j = 0; j < $("#favorite-cities").children().eq(i).children().length; j++) {
-                        if($("#favorite-cities").children().eq(i).children().eq(j).text() === displayedCity) {
-                            $("#favorite-cities").children().eq(i).children().eq(j).remove()
-                        }
+            $("#favorite-cities").children().each((index, countryGroup) => {
+                if(index !== 0) {
+                    if($(countryGroup).attr("label") === displayedCountry) {
+                        $(countryGroup).children().each((index, cityOption) => {
+                            if($(cityOption).text() === displayedCity) {
+                                $(cityOption).remove()
+                            }
+                        })
+                    }
+                    if($(countryGroup).children().length === 0) {
+                        $(countryGroup).remove()
                     }
                 }
-                if($("#favorite-cities").children().eq(i).children().length === 0) {
-                    $("#favorite-cities").children().eq(i).remove()
-                }
-            }
+            })
         }
 
         // Update user's local storage (Just fully copy the array as JSON)
