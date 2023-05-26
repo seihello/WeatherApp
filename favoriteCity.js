@@ -11,8 +11,8 @@ export class FavoriteCity {
             this.onFavoriteStarClicked()
         })
         // Add an event listener to the pull-down menu
-        $("#favorite-cities").on("change", () => {
-            this.onFavoriteCitySelected()
+        $("#favorite-cities").on("change", (event) => {
+            this.onFavoriteCitySelected(event)
         })
 
         // Set up for user's favorite cities
@@ -80,8 +80,8 @@ export class FavoriteCity {
 
                 // Add a new option to its country group that already exists
                 for(let i = 1; i < $("#favorite-cities").children.length; i++) {
-                    if($("#favorite-cities").children[i].label === displayedCountry) {
-                        $("#favorite-cities").children[i].appendChild(newFavoriteCityOption)
+                    if($("#favorite-cities").children().eq(i).attr("label") === displayedCountry) {
+                        $("#favorite-cities").children().eq(i).append(newFavoriteCityOption)
                     }
                 }
             }
@@ -97,16 +97,16 @@ export class FavoriteCity {
             }
 
             // Remove the displayed city from the pull-down menu
-            for(let i = 1; i < $("#favorite-cities").children.length; i++) {
-                if($("#favorite-cities").children[i].label === displayedCountry) {
-                    for(let j = 0; j < $("#favorite-cities").children[i].children.length; j++) {
-                        if($("#favorite-cities").children[i].children[j].innerText === displayedCity) {
-                            $("#favorite-cities").children[i].removeChild($("#favorite-cities").children[i].children[j])
+            for(let i = 1; i < $("#favorite-cities").children().length; i++) {
+                if($("#favorite-cities").children().eq(i).attr("label") === displayedCountry) {
+                    for(let j = 0; j < $("#favorite-cities").children().eq(i).children().length; j++) {
+                        if($("#favorite-cities").children().eq(i).children().eq(j).text() === displayedCity) {
+                            $("#favorite-cities").children().eq(i).children().eq(j).remove()
                         }
                     }
                 }
-                if($("#favorite-cities").children[i].children.length === 0) {
-                    $("#favorite-cities").removeChild($("#favorite-cities").children[i])
+                if($("#favorite-cities").children().eq(i).children().length === 0) {
+                    $("#favorite-cities").children().eq(i).remove()
                 }
             }
         }
@@ -139,6 +139,7 @@ export class FavoriteCity {
 
     onFavoriteCitySelected(event) {
         // Show the weather based on the selected city
+        console.log(event)
         this.currentWeather.showWeatherByCityName(event.target.value)
 
         // Update the star sign

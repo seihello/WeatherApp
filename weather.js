@@ -1,17 +1,18 @@
 import { Setting, Admin, Common } from "./common.js"
-const currentWeatherSectionElement = document.querySelector("#current-weather-section")
-const currentWeatherElement = document.querySelector("#current-weather")
+import { FavoriteCity } from "./favoriteCity.js"
 
 export class Weather {
 
     constructor() {
+        this.favoriteCity = new FavoriteCity(this)
+
         this.selectedCity = ""
 
         // Hide the current weather until calling all API finishes
-        currentWeatherSectionElement.style["opacity"] = 0
+        $("#current-weather-section").css("opacity", 0)
 
         // Display today's 3-hourly weather when the user clickes the current weather
-        currentWeatherElement.addEventListener("click", () => {
+        $("#current-weather").on("click", () => {
             this.showThreeHourlyWeather(0)
         })
 
@@ -22,12 +23,9 @@ export class Weather {
         })
     }
 
-    setFavoriteCity(favoriteCity) {
-        this.favoriteCity = favoriteCity
-    }
-
     /* Current Weather */
     showWeather(request) {
+        console.log(request)
         // Call OpenWeather API to get data
         fetch(request).then((response) => {
             if(response.status === 404) {
@@ -40,6 +38,7 @@ export class Weather {
             return response.json()
         })
         .then((currentWeather) => {
+            console.log(currentWeather)
             // Update the display using the data
             $("#city-name").text(currentWeather["name"])
             $("#current-temperature-text").text(Math.floor(currentWeather["main"]["temp"]))
@@ -57,7 +56,7 @@ export class Weather {
             this.favoriteCity.setFavoriteStar()
 
             // Show the current weather
-            currentWeatherSectionElement.style["opacity"] = 1
+            $("#current-weather-section").css("opacity", 1)
 
             // Change the selected city on the pull-down menu
             this.favoriteCity.changeSelectedFavoriteCityOption($("#city-name").text())
@@ -110,7 +109,6 @@ export class Weather {
                     return;
                 }
                 response.json().then(function(fiveDaysWeather) {
-                    console.log(fiveDaysWeather);
 
                     // get currentDate
                     let currentDate = new Date();
@@ -170,7 +168,6 @@ export class Weather {
                         
                         let date = new Date(weather["dt"] * 1000);
             
-                        console.log(weather)
                         if (date.getDate() === selectedDate) {
                             $(".three-hour-forecast").eq(rangeIndex).children("p").eq(1).text(weather["weather"][0]["main"]);
                             

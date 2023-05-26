@@ -1,11 +1,7 @@
 import { Weather } from "./weather.js"
-import { FavoriteCity } from "./favoriteCity.js"
-
 
 $(() => {
     let weatherManager = new Weather()
-    let favorityCityManager = new FavoriteCity(weatherManager)
-    weatherManager.setFavoriteCity(favorityCityManager)
 
     /* User's location */
     // If user's current location is sucessful to get, display the weather there
@@ -16,9 +12,13 @@ $(() => {
         weatherManager.showWeatherInDefaultCity()
     });
 
-    $("#search-city").on("change", () => {
-        weatherManager.showWeatherByCityName($("#search-city").val())
-    })
+    const searchCityInput = document.querySelector("#search-city")
+    let option = { types: ['(cities)'] };
+    const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        weatherManager.showWeatherByCityName(searchCityInput.value)
+    });
 })
 
 
