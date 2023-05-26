@@ -1,4 +1,4 @@
-import { Setting } from "./common.js"
+import { Setting, API } from "./common.js"
 
 export class FavoriteCity {
     constructor(currentWeather) {
@@ -141,8 +141,7 @@ export class FavoriteCity {
 
     onFavoriteCitySelected(event) {
         // Show the weather based on the selected city
-        console.log(event)
-        this.currentWeather.showWeatherByCityName(event.target.value)
+        this.currentWeather.showWeather(API.getCurrentWeatherUrlByCity(event.target.value))
 
         // Update the star sign
         this.setFavoriteStar()

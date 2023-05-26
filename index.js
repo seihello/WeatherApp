@@ -1,3 +1,4 @@
+import { API } from "./common.js"
 import { Weather } from "./weather.js"
 
 $(() => {
@@ -17,7 +18,7 @@ $(() => {
     const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option);
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
-        weatherManager.showWeatherByCityName(searchCityInput.value)
+        weatherManager.showWeather(API.getCurrentWeatherUrlByCity(searchCityInput.value))
     });
 })
 

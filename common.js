@@ -1,6 +1,22 @@
 
-export class Admin {
-    static apiKey = "c5b83392add58be24fb5a7bd362ced83"
+export class API {
+    static KEY = "c5b83392add58be24fb5a7bd362ced83"
+
+    static getCurrentWeatherUrlByCity(city) {
+        return `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API.KEY}`
+    }
+
+    static getCurrentWeatherUrlByLocation(latitude, longitude) {
+        return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API.KEY}`
+    }
+
+    static getForecastUrl(city) {
+        return `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API.KEY}`
+    }
+
+    static getImageUrl(weatherCode) {
+        return `https://openweathermap.org/img/wn/${weatherCode}@4x.png`
+    }
 }
 
 export class Setting {
