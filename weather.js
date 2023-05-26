@@ -5,7 +5,6 @@ export class Weather {
 
     constructor() {
         this.favoriteCity = new FavoriteCity(this)
-
         this.selectedCity = ""
 
         // Hide the current weather until calling all API finishes
@@ -163,21 +162,20 @@ export class Weather {
 
                     
                     //For Each to show the Weather through all the hour Ranges
-                    let rangeIndex = 0
                     weatherList.forEach((weather, index) => {
                         
                         let date = new Date(weather["dt"] * 1000);
             
                         if (date.getDate() === selectedDate) {
-                            $(".three-hour-forecast").eq(rangeIndex).children("p").eq(1).text(weather["weather"][0]["main"]);
-                            
-                            $(".three-hour-forecast").eq(rangeIndex).children("img").attr("src", `https://openweathermap.org/img/wn/${weather["weather"][0]["icon"]}@4x.png`);
-                            
-                            $(".three-hour-forecast").eq(rangeIndex).children("p").eq(2).text(`${weather["weather"][0]["main"]}°C`);
+                            // Calculate in which range the data should be
+                            const rangeIndex = Math.floor(date.getHours() / 3)
+                            const rangeDiv = $(".three-hour-forecast").eq(rangeIndex)
 
-                            rangeIndex += 1;                    
+                            rangeDiv.children("p").eq(1).text(weather["weather"][0]["main"]);
+                            rangeDiv.children("img").attr("src", `https://openweathermap.org/img/wn/${weather["weather"][0]["icon"]}@4x.png`);
+                            rangeDiv.children("p").eq(2).text(`${Math.floor(weather["main"]["temp"])}°C`);                      
                         }
-                    }) 
+                    })
                 })
             }
         )
