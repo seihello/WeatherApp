@@ -15,31 +15,28 @@
 </head>
 
 <body>
+
   <header>
     <div id="status-bar"></div>
     <div id="header">
       <div id="header-content">
         <h1>Weather App</h1>
-
         <div id="select-city">
           <select id="favorite-cities">
             <option class="favorite-city" value="">Favorite Cities</option>
           </select>
           <input id="search-city" type="text" placeholder="Search Bar (Cities)" />
-        </div >
+        </div>
       </div>
     </div>
   </header>
+
   <main>
-    <!-- Write your codes here -->
-    <div id="input-section">
 
-      <div id="or">OR</div>
+    <div id="current-weather-section" class="section">
+      <h2 class="section-title">Current Weather</h2>
 
-    </div>
-
-    <div id="main-section">
-      <div id="current-weather-section">
+      <div id="current-weather-container">
         <div id="place">
           <div id="city">
             <p id="city-name"></p>
@@ -50,6 +47,7 @@
             <div id="national-flag-box"><img id="national-flag"></div>
           </div>
         </div>
+
         <div id="current-weather">
           <p id="current-weather-text"></p>
           <div id="current-weather-detail">
@@ -60,6 +58,7 @@
             </div>
           </div>
         </div>
+
         <div id="current-time"></div>
       </div>
     </div>
@@ -157,6 +156,7 @@
       </div>
 
     </div>
+
 
   </main>
   <footer>

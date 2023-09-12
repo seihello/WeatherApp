@@ -4,10 +4,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
   font-size: 16px;
+}
+
+main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 3rem auto;
+}
+main .section .seciton-title {
+  font-size: 2rem;
 }
 
 header #status-bar {
@@ -23,7 +33,7 @@ header #header {
   box-shadow: 1px 1px 3px #7e7e7e;
 }
 header #header #header-content {
-  width: 80%;
+  width: 95%;
   height: 100%;
   max-width: 1200px;
   display: flex;

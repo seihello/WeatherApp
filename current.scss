@@ -1,225 +1,101 @@
 @import "_common.scss";
 
-#input-section {
-  width: 50%;
-  height: 2.5rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 99;
-}
-
-
-
-#or {
-  display: none;
-  font-size: .8rem;
-}
-
-
-
-#main-section {
-  width: 50%;
-  margin: 1rem auto;
-  padding: 1rem 0;
-
-  //background-color: #81C3D7;
-  border-radius: 10px;
-}
-
 #current-weather-section {
-  width: 100%;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  border-radius: 5px;
-}
-
-#place {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  position: relative;
-}
-
-#city {
-  padding: 0 0 0 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0 10px;
-}
-
-#city-name {
-  height: auto;
-  text-align: center;
-  font-size: 2rem;
-  line-height: 0;
-}
-
-#favorite-star-box {
-  padding: 0 0;
-  width: 25px;
-  height: auto;
-}
-
-#favorite-star {
-  width: 100%;
-  height: 100%;
-  padding-top: 8px;
-  opacity: 0;
-}
-
-#country {
-  position: absolute;
-  left: 0;
-  top: 2rem;
-  padding: 0 0 0 30px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0 1px;
-}
-
-#country-code {
-  color: $caption-grey;
-}
-
-#national-flag-box {
-  width: 30px;
-  height: 30px;
-  padding: auto auto;
-}
-
-#national-flag {
-  height: 100%;
-  width: auto;
-  border-radius: 15px;
-}
-
-#current-weather {
-  width: 70%;
-  margin-top: 2rem;
-  padding-top: 2rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background-color: $light-blue;
-  border-radius: 20px;
-
-  cursor: pointer;
-}
-
-#current-weather-text {
-  font-size: 1.5rem;
-}
-
-#current-weather-detail {
-  padding-right: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#weather-icon {
-  width: 60%;
-  height: auto;
-}
-
-#weather-icon:hover {
-  opacity: 0.8;
-  -webkit-transform: scale(1.04);
-  -moz-transform: scale(1.04);
-  -o-transform: scale(1.04);
-  -ms-transform: scale(1.04);
-  transform: scale(1.04);
-}
-
-#current-temperature {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-#current-temperature-text {
-  font-size: 3rem;
-}
-
-#current-temperature-sign {
-  font-size: 2rem;
-  padding-bottom: 0.2rem;
-}
-
-#current-time {
-  width: 70%;
-  margin-top: .2rem;
-  padding-right: .5rem;
-  text-align: right;
-  font-size: 1rem;
-  color: $caption-grey;
-}
-
-@media only screen and (max-width: 375px) {
-
-  #main-section {
+  #current-weather-container {
     width: 100%;
-    padding: 0 0;
-  }
+    max-width: 500px;
 
-  #input-section {
-    width: 100%;
-    margin: 0 auto;
-    padding: 10px 0;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    left: 0;
-  }
-  
-  #favorite-cities {
-    width: 45%;
-  }
-  
-  #search-city {
-    width: 45%;
-  }
+    margin: 2rem auto;
 
-  #or {
-    display: block;
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  #city-name {
-    font-size: 1.8rem;
-  }
 
-  #country-code {
-    font-size: 1rem;
-  }
-  
-  #national-flag-box {
-    width: 25px;
-    height: 25px;
-  }
-  
-  #current-weather {
-    padding-top: .8rem;
-  }
+    background: linear-gradient(160deg, $dark-blue 0%, rgba(0,22,40,1) 100%);
+    color: white;
+    padding: 2rem;
 
-  #current-time {
-    font-size: .8rem;
-    text-align: center;
-    padding-right: 0;
+    #place {
+      #city {
+        display: flex;
+        align-items: center;
+        column-gap: .5rem;
+
+        #city-name {
+          font-size: 2rem;
+        }
+
+        #favorite-star-box {
+          width: 1.8rem;
+          height: 1.8rem;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      #country {
+        display: flex;
+        align-items: center;
+
+        #country-code {
+        }
+
+        #national-flag-box {
+          width: 1.5rem;
+          height: 1.5rem;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    #current-weather {
+      margin-bottom: .5rem;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      position: relative;
+
+      #current-weather-text {
+        position: absolute;
+        inset: 20% auto auto 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #current-weather-detail {
+        #weather-icon {
+
+        }
+        #current-temperature {
+          display: flex;
+          align-items: flex-end;
+
+          position: absolute;
+          inset: auto auto 5% 50%;
+          transform: translate(-50%, -50%);
+
+          #current-temperature-text {
+            font-size: 1.5rem;
+          }
+
+          #current-temperature-sign {
+
+          }
+        }
+
+      }
+
+    }
+
+    #current-time {
+      text-align: right;
+    }
   }
 }
-
-/*# sourceMappingURL=current.css.map */

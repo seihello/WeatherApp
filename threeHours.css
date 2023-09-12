@@ -3,166 +3,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
   font-size: 16px;
 }
 
-.three-hourly-forecast {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1.5rem 0 1.5rem;
-  gap: 1.5rem;
-  background-color: #01487e;
-  flex-wrap: wrap;
-  height: 20rem;
-  margin: 0 0 1rem 0;
-  border-radius: 0.5rem;
+main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 3rem auto;
 }
-
-.three-hour-forecast {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #184adf;
-  width: 10%;
-  height: 15rem;
-  border-radius: 1rem;
-  margin: 1rem 0 1rem 0;
-  padding-bottom: 0.5%;
-  padding-top: 0.5%;
-}
-.three-hour-forecast img:hover {
-  opacity: 0.8;
-  transform: scale(1.04);
-}
-.three-hour-forecast .rangeH {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 0.5rem 0 0.5rem 0;
-  font-size: 1rem;
-}
-.three-hour-forecast .weatherRange0 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange3 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange4 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange5 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange6 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .weatherRange7 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 120%;
-}
-.three-hour-forecast .threeHRange-degrees0 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees3 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees4 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees5 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees6 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.three-hour-forecast .threeHRange-degrees7 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-
-@media only screen and (max-width: 376px) {
-  .threeH-box {
-    width: 100%;
-    height: auto;
-    margin: 0 0 0 0;
-    padding: 5% 0;
-  }
-  .threeH-container {
-    width: 90%;
-    height: auto;
-    flex-direction: row;
-    align-items: center;
-    padding: 0;
-    margin: 0 2% 0 2%;
-  }
-  .rangeH {
-    padding-right: 1rem;
-  }
-  .weatherImg {
-    width: 20%;
-    height: auto;
-  }
+main .section .seciton-title {
+  font-size: 2rem;
 }/*# sourceMappingURL=threeHours.css.map */
