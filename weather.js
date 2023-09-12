@@ -10,11 +10,6 @@ export class Weather {
         // Hide the current weather until calling all API finishes
         $("#current-weather-section").css("opacity", 0)
 
-        // Display today's 3-hourly weather when the user clickes the current weather
-        $("#current-weather").on("click", () => {
-            this.showThreeHourlyWeather(0)
-        })
-
         $(".daily-forecast").each((index, element) => {
             $(element).on("click", () => {
                 this.showThreeHourlyWeather(index+1)

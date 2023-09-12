@@ -23,7 +23,7 @@ main .section .seciton-title {
   font-size: 2rem;
 }
 
-#current-weather-section #current-weather-container {
+.current-weather-section .current-weather-container {
   width: 100%;
   max-width: 500px;
   margin: 2rem auto;
@@ -35,57 +35,58 @@ main .section .seciton-title {
   color: white;
   box-shadow: 0.5rem 0.5rem 0 0 rgba(17, 17, 17, 0.3333333333);
 }
-#current-weather-section #current-weather-container #place #city {
+.current-weather-section .current-weather-container .place .city {
   display: flex;
   align-items: center;
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
 }
-#current-weather-section #current-weather-container #place #city #city-name {
+.current-weather-section .current-weather-container .place .city .city-name {
   font-size: 2rem;
 }
-#current-weather-section #current-weather-container #place #city #favorite-star-box {
+.current-weather-section .current-weather-container .place .city .favorite-star-box {
   width: 1.8rem;
   height: 1.8rem;
 }
-#current-weather-section #current-weather-container #place #city #favorite-star-box img {
+.current-weather-section .current-weather-container .place .city .favorite-star-box img {
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
-#current-weather-section #current-weather-container #place #country {
+.current-weather-section .current-weather-container .place .country {
   display: flex;
   align-items: center;
 }
-#current-weather-section #current-weather-container #place #country #national-flag-box {
+.current-weather-section .current-weather-container .place .country .national-flag-box {
   width: 1.5rem;
   height: 1.5rem;
 }
-#current-weather-section #current-weather-container #place #country #national-flag-box img {
+.current-weather-section .current-weather-container .place .country .national-flag-box img {
   width: 100%;
   height: 100%;
 }
-#current-weather-section #current-weather-container #current-weather {
+.current-weather-section .current-weather-container .current-weather {
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
-#current-weather-section #current-weather-container #current-weather #current-weather-text {
+.current-weather-section .current-weather-container .current-weather .current-weather-text {
   position: absolute;
   inset: 20% auto auto 50%;
   transform: translate(-50%, -50%);
 }
-#current-weather-section #current-weather-container #current-weather #current-weather-detail #current-temperature {
+.current-weather-section .current-weather-container .current-weather .current-weather-detail .current-temperature {
   display: flex;
   align-items: flex-end;
   position: absolute;
   inset: auto auto 5% 50%;
   transform: translate(-50%, -50%);
 }
-#current-weather-section #current-weather-container #current-weather #current-weather-detail #current-temperature #current-temperature-text {
+.current-weather-section .current-weather-container .current-weather .current-weather-detail .current-temperature .current-temperature-text {
   font-size: 1.5rem;
 }
-#current-weather-section #current-weather-container #current-time {
+.current-weather-section .current-weather-container .current-time {
   text-align: right;
 }/*# sourceMappingURL=current.css.map */

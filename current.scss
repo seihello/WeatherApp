@@ -1,7 +1,7 @@
 @import "_common.scss";
 
-#current-weather-section {
-  #current-weather-container {
+.current-weather-section {
+  .current-weather-container {
     width: 100%;
     max-width: 500px;
 
@@ -16,34 +16,36 @@
     color: white;
     box-shadow: .5rem .5rem 0 0 #11111155;
 
-    #place {
-      #city {
+    .place {
+      .city {
         display: flex;
         align-items: center;
         column-gap: .5rem;
 
-        #city-name {
+        .city-name {
           font-size: 2rem;
         }
 
-        #favorite-star-box {
+        .favorite-star-box {
           width: 1.8rem;
           height: 1.8rem;
           img {
             width: 100%;
             height: 100%;
+            
+            cursor: pointer;
           }
         }
       }
 
-      #country {
+      .country {
         display: flex;
         align-items: center;
 
-        #country-code {
+        .country-code {
         }
 
-        #national-flag-box {
+        .national-flag-box {
           width: 1.5rem;
           height: 1.5rem;
           img {
@@ -54,7 +56,7 @@
       }
     }
 
-    #current-weather {
+    .current-weather {
       margin-bottom: .5rem;
 
       display: flex;
@@ -63,17 +65,17 @@
 
       position: relative;
 
-      #current-weather-text {
+      .current-weather-text {
         position: absolute;
         inset: 20% auto auto 50%;
         transform: translate(-50%, -50%);
       }
 
-      #current-weather-detail {
-        #weather-icon {
+      .current-weather-detail {
+        .weather-icon {
 
         }
-        #current-temperature {
+        .current-temperature {
           display: flex;
           align-items: flex-end;
 
@@ -81,11 +83,11 @@
           inset: auto auto 5% 50%;
           transform: translate(-50%, -50%);
 
-          #current-temperature-text {
+          .current-temperature-text {
             font-size: 1.5rem;
           }
 
-          #current-temperature-sign {
+          .current-temperature-sign {
 
           }
         }
@@ -94,7 +96,7 @@
 
     }
 
-    #current-time {
+    .current-time {
       text-align: right;
     }
   }
