@@ -22,4 +22,34 @@ main {
 }
 main .section .seciton-title {
   font-size: 2rem;
+}
+
+.five-days-forecast {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(160deg, #01487e 0%, rgb(0, 22, 40) 100%);
+  color: white;
+}
+.five-days-forecast .daily-forecast {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.five-days-forecast .daily-forecast .daily-forecast-text {
+  height: 1rem;
+  position: absolute;
+  inset: 20% auto 0 50%;
+  transform: translate(-50%, -50%);
+}
+.five-days-forecast .daily-forecast .current-temperature {
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  inset: auto auto 10% 50%;
+  transform: translate(-50%, -50%);
+}
+.five-days-forecast .daily-forecast .current-temperature .current-temperature-text {
+  font-size: 1.5rem;
 }/*# sourceMappingURL=fiveDays.css.map */
