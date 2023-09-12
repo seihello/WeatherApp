@@ -2,11 +2,15 @@
 @import "_common.scss";
 
 .five-days-forecast {
+
+  margin-block: 1rem 2rem;
+
   display: flex;
   justify-content: space-between;
 
   background: linear-gradient(160deg, $dark-blue 0%, rgba(0,22,40,1) 100%);
   color: white;
+  box-shadow: .5rem .5rem 0 0 #11111155;
 
   .daily-forecast {
     padding: 1rem;
@@ -14,8 +18,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
     position: relative;
+
+    .daily-forecast-image {
+      width: 80%;
+      height: auto;
+    }
 
     .daily-forecast-date {
 

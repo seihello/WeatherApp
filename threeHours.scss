@@ -1,1 +1,27 @@
 @import "_common.scss";
+
+.three-hourly-forecast {
+  margin-block: 1rem 2rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  background: linear-gradient(160deg, $dark-blue 0%, rgba(0,22,40,1) 100%);
+  color: white;
+  box-shadow: .5rem .5rem 0 0 #11111155;
+
+  .three-hour-forecast {
+    width: calc(100 / 8) * 1%;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .three-hour-forecast-image {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
