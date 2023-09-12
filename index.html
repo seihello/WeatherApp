@@ -1,172 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./main.css" />
-    <link rel="stylesheet" href="./header.css" />
-    <link rel="stylesheet" href="./current.css" />
-    <link rel="stylesheet" href="./fiveDays.css" />
-    <link rel="stylesheet" href="./threeHours.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <title>Weather App</title>
-  </head>
-  <body>
-    <header>
-      <div id="header">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="./header.css" />
+  <link rel="stylesheet" href="./current.css" />
+  <link rel="stylesheet" href="./fiveDays.css" />
+  <link rel="stylesheet" href="./threeHours.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <title>Weather App</title>
+</head>
+
+<body>
+  <header>
+    <div id="status-bar"></div>
+    <div id="header">
+      <div id="header-content">
         <h1>Weather App</h1>
-      </div>
-    </header>
-    <main>
-      <!-- Write your codes here -->
-      <div id="input-section">
-        <select id="favorite-cities">
-          <option class="favorite-city" value="">Favorite Cities</option>
-        </select>
-        <div id="or">OR</div>
-        <input id="search-city" type="text" placeholder="Search Bar (Cities)"/>
-      </div>
 
-      <div id="main-section">
-        <div id="current-weather-section">
-          <div id="place">
-            <div id="city">
-              <p id="city-name"></p>
-              <div id="favorite-star-box"><img id="favorite-star" src="img/star-off.png"></div>
-            </div>
-            <div id="country">
-              <p id="country-code"></p>
-              <div id="national-flag-box"><img id="national-flag"></div>
+        <div id="select-city">
+          <select id="favorite-cities">
+            <option class="favorite-city" value="">Favorite Cities</option>
+          </select>
+          <input id="search-city" type="text" placeholder="Search Bar (Cities)" />
+        </div >
+      </div>
+    </div>
+  </header>
+  <main>
+    <!-- Write your codes here -->
+    <div id="input-section">
+
+      <div id="or">OR</div>
+
+    </div>
+
+    <div id="main-section">
+      <div id="current-weather-section">
+        <div id="place">
+          <div id="city">
+            <p id="city-name"></p>
+            <div id="favorite-star-box"><img id="favorite-star" src="img/star-off.png"></div>
+          </div>
+          <div id="country">
+            <p id="country-code"></p>
+            <div id="national-flag-box"><img id="national-flag"></div>
+          </div>
+        </div>
+        <div id="current-weather">
+          <p id="current-weather-text"></p>
+          <div id="current-weather-detail">
+            <img id="weather-icon" src="img/default.png">
+            <div id="current-temperature">
+              <p id="current-temperature-text">00</p>
+              <p id="current-temperature-sign">℃</p>
             </div>
           </div>
-          <div id="current-weather">
-            <p id="current-weather-text"></p>
-            <div id="current-weather-detail">
-              <img id="weather-icon" src="img/default.png">
-              <div id="current-temperature">
-                <p id="current-temperature-text">00</p>
-                <p id="current-temperature-sign">℃</p>
-              </div>
-            </div>
-          </div>
-          <div id="current-time"></div>
         </div>
+        <div id="current-time"></div>
+      </div>
+    </div>
+
+
+    <!-- 5 days section -->
+    <div class="five-days-forecast">
+      <div class="daily-forecast">
+        <p></p>
+        <p></p>
+        <p></p>
+        <img class="daily-forecast-image">
+        <p></p>
+      </div>
+      <div class="daily-forecast">
+        <p></p>
+        <p></p>
+        <p></p>
+        <img class="daily-forecast-image">
+        <p></p>
+      </div>
+      <div class="daily-forecast">
+        <p></p>
+        <p></p>
+        <p></p>
+        <img class="daily-forecast-image">
+        <p></p>
+      </div>
+      <div class="daily-forecast">
+        <p></p>
+        <p></p>
+        <p></p>
+        <img class="daily-forecast-image">
+        <p></p>
+      </div>
+      <div class="daily-forecast">
+        <p></p>
+        <p></p>
+        <p></p>
+        <img class="daily-weather-image">
+        <p></p>
       </div>
 
+    </div>
 
-      <!-- 5 days section -->
-      <div class="five-days-forecast">
-        <div class="daily-forecast">
-          <p></p>
-          <p></p>
-          <p></p>
-          <img class="daily-forecast-image">
-          <p></p>
-        </div>
-        <div class="daily-forecast">
-          <p></p>
-          <p></p>
-          <p></p>
-          <img class="daily-forecast-image">
-          <p></p>
-        </div>
-        <div class="daily-forecast">
-          <p></p>
-          <p></p>
-          <p></p>
-          <img class="daily-forecast-image">
-          <p></p>
-        </div>
-        <div class="daily-forecast">
-          <p></p>
-          <p></p>
-          <p></p>
-          <img class="daily-forecast-image">
-          <p></p>
-        </div>
-        <div class="daily-forecast">
-          <p></p>
-          <p></p>
-          <p></p>
-          <img class="daily-weather-image">
-          <p></p>
-        </div>
-        
+
+    <div class="three-hourly-forecast">
+      <div class="three-hour-forecast">
+        <p>12AM - 3AM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>3AM - 6AM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>6AM - 9AM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>9AM - 12PM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>12PM - 3PM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>3PM - 6PM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>6PM - 9PM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
+      </div>
+      <div class="three-hour-forecast">
+        <p>9PM - 12AM</p>
+        <p></p>
+        <img class="three-hour-forecast-image">
+        <p></p>
       </div>
 
+    </div>
 
-      <div class="three-hourly-forecast">
-        <div class="three-hour-forecast">
-          <p>12AM - 3AM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>3AM - 6AM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>6AM - 9AM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>9AM - 12PM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>12PM - 3PM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>3PM - 6PM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>6PM - 9PM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-        <div class="three-hour-forecast">
-          <p>9PM - 12AM</p>
-          <p></p>
-          <img class="three-hour-forecast-image">
-          <p></p>
-        </div>
-
-      </div>
-
-    </main>
-    <footer>
-    </footer>
-    <script src="common.js" type="module"></script>
-    <script src="favoriteCity.js" type="module"></script>
-    <script src="weather.js" type="module"></script>
-    <script src="index.js" type="module"></script>
-    <script>
-      /* Auto Complete */
-      window.initMap = function() {
-        // Suggest only cities
-        let option = {
-            types: ['(cities)']
-        }
-        const searchCityInput = document.querySelector("#search-city")
-        const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option)
+  </main>
+  <footer>
+  </footer>
+  <script src="common.js" type="module"></script>
+  <script src="favoriteCity.js" type="module"></script>
+  <script src="weather.js" type="module"></script>
+  <script src="index.js" type="module"></script>
+  <script>
+    /* Auto Complete */
+    window.initMap = function () {
+      // Suggest only cities
+      let option = {
+        types: ['(cities)']
       }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHXnuh6VwUBycp7bsnUM8-18N8h9ESHZM&libraries=places&callback=initMap" type="module"></script>
+      const searchCityInput = document.querySelector("#search-city")
+      const autocomplete = new google.maps.places.Autocomplete(searchCityInput, option)
+    }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHXnuh6VwUBycp7bsnUM8-18N8h9ESHZM&libraries=places&callback=initMap"
+    type="module"></script>
 
-  </body>
+</body>
+
 </html>

@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 16px;
+}
+
 #input-section {
   width: 50%;
   height: 2.5rem;
@@ -9,21 +19,9 @@
   z-index: 99;
 }
 
-#favorite-cities {
-  width: 30%;
-  height: 100%;
-  padding-left: 5px;
-}
-
 #or {
   display: none;
   font-size: 0.8rem;
-}
-
-#search-city {
-  width: 30%;
-  height: 90%;
-  padding-left: 5px;
 }
 
 #main-section {
@@ -116,7 +114,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #9bd1e1;
+  background-color: #184adf;
   border-radius: 20px;
   cursor: pointer;
 }

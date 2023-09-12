@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 16px;
+}
+
 .three-hourly-forecast {
   display: flex;
   flex-direction: row;
@@ -6,7 +16,7 @@
   align-items: center;
   padding: 0 1.5rem 0 1.5rem;
   gap: 1.5rem;
-  background-color: #81C3D7;
+  background-color: #01487e;
   flex-wrap: wrap;
   height: 20rem;
   margin: 0 0 1rem 0;
@@ -17,7 +27,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #9bd1e1;
+  background-color: #184adf;
   width: 10%;
   height: 15rem;
   border-radius: 1rem;

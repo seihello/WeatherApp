@@ -1,5 +1,15 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 16px;
+}
+
 .five-days-forecast {
   display: flex;
   justify-content: center;
@@ -7,14 +17,14 @@
   width: 100%;
   padding: 2.1rem 0;
   margin: 3em auto;
-  background-color: #81C3D7;
+  background-color: #01487e;
   border-radius: 7px;
 }
 .five-days-forecast .daily-forecast {
   border-radius: 15px;
   height: 100%;
   width: 15%;
-  background-color: #9bd1e1;
+  background-color: #184adf;
   margin: 0 1.45rem;
   cursor: pointer;
 }
