@@ -8,6 +8,10 @@
 
 body {
   font-size: 16px;
+  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
+  background-size: 32px 32px;
+  background-repeat: repeat;
+  background-position: center center;
 }
 
 main {

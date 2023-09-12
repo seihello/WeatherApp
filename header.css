@@ -9,6 +9,10 @@
 
 body {
   font-size: 16px;
+  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
+  background-size: 32px 32px;
+  background-repeat: repeat;
+  background-position: center center;
 }
 
 main {
@@ -30,6 +34,7 @@ header #header {
   height: 100px;
   display: flex;
   justify-content: center;
+  background-color: white;
   box-shadow: 1px 1px 3px #7e7e7e;
 }
 header #header #header-content {
