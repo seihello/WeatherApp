@@ -4,7 +4,7 @@
   margin-block: 1rem 2rem;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   background: linear-gradient(160deg, $dark-blue 0%, rgba(0,22,40,1) 100%);
   color: white;
@@ -24,4 +24,8 @@
       height: auto;
     }
   }
+}
+
+.today {
+  justify-content: flex-end!important;
 }

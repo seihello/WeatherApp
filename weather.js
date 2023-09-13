@@ -166,6 +166,12 @@ export class Weather {
                     $("#three-hourly-forecast").append(threeHoulyForecastElement);
                 }
             })
+
+            if(selectedDateOffset === 0) {
+                $("#three-hourly-forecast").addClass("today");
+            } else {
+                $("#three-hourly-forecast").removeClass("today");
+            }
         })
         .catch((error) => {
             console.log("Fetch Error: " + error)
