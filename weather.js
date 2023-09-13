@@ -10,11 +10,7 @@ export class Weather {
         // Hide the current weather until calling all API finishes
         $("#current-weather-section").css("opacity", 0)
 
-        $(".daily-forecast").each((index, element) => {
-            $(element).on("click", () => {
-                this.showThreeHourlyWeather(index+1)
-            })
-        })
+
     }
 
     /* Current Weather */
@@ -90,9 +86,7 @@ export class Weather {
         })
         .then((fiveDaysWeather) => {
 
-            // get currentDate
             let currentDate = new Date();
-            // for the if statement to specific the date, the time and weather infos
             let day = 1;
 
             // get all the weather info
@@ -105,13 +99,24 @@ export class Weather {
                 if(date.getDate() === currentDate.getDate() + day && (date.getHours() >= 6 && date.getHours() <= 9)) {
 
                     const dateText = `${Common.toDay(date.getDay())} ${Common.toMonthText(date.getMonth())} ${date.getDate()}`
-                    $(".daily-forecast").eq(day-1).children("p").eq(0).text(dateText)
-
-                    $(".daily-forecast").eq(day-1).children("p").eq(1).text(threeHourlyWeather["weather"][0]["main"])
-                    $(".daily-forecast").eq(day-1).children("img").attr("src", API.getImageUrl(threeHourlyWeather["weather"][0]["icon"]));
-
                     const temperature = Math.floor(threeHourlyWeather["main"]["temp"])
-                    $(".daily-forecast").eq(day-1).children("p").eq(3).text(`${temperature}℃`)
+
+
+                    const oneDayForecastElement = `
+                        <div class="daily-forecast">
+                            <p>${dateText}</p>
+                            <p>${threeHourlyWeather["weather"][0]["main"]}</p>
+                            <img class="daily-forecast-image" src="${API.getImageUrl(threeHourlyWeather["weather"][0]["icon"])}">
+                            <p>${temperature}℃</p>
+                        </div>
+                    `;
+                    $("#daily-forecast").append(oneDayForecastElement);
+
+                    $("#daily-forecast").children().each((index, element) => {
+                        $(element).on("click", () => {
+                            this.showThreeHourlyWeather(index+1)
+                        })
+                    })
                     
                     day++;
                 }
