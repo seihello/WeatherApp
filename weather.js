@@ -100,16 +100,18 @@ export class Weather {
                 // show the next 5 days' weather              
                 if(date.getDate() === currentDate.getDate() + day && (date.getHours() >= 6 && date.getHours() <= 9)) {
 
-                    const dateText = `${Common.toDay(date.getDay())} ${Common.toMonthText(date.getMonth())} ${date.getDate()}`
+                    const dateText = `${Common.toDay(date.getDay())} ${Common.toMonthText(date.getMonth())} ${date.getDate()}`;
+                    const weatherText = threeHourlyWeather["weather"][0]["main"];
+                    const iconSource = API.getImageUrl(threeHourlyWeather["weather"][0]["icon"]);
                     const temperature = Math.floor(threeHourlyWeather["main"]["temp"])
 
 
                     const oneDayForecastElement = `
-                        <div class="daily-forecast">
-                            <p>${dateText}</p>
-                            <p>${threeHourlyWeather["weather"][0]["main"]}</p>
-                            <img class="daily-forecast-image" src="${API.getImageUrl(threeHourlyWeather["weather"][0]["icon"])}">
-                            <p>${temperature}℃</p>
+                        <div class="one-day-forecast">
+                            <p class="date">${dateText}</p>
+                            <p class="weather">${weatherText}</p>
+                            <img class="icon" src="${iconSource}">
+                            <p class="temperature">${temperature}℃</p>
                         </div>
                     `;
                     $("#daily-forecast").append(oneDayForecastElement);
