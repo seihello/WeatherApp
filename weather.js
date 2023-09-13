@@ -89,6 +89,8 @@ export class Weather {
             let currentDate = new Date();
             let day = 1;
 
+            $("#daily-forecast").html("");
+
             // get all the weather info
             fiveDaysWeather["list"].forEach( (threeHourlyWeather, index) => {
             
@@ -139,12 +141,7 @@ export class Weather {
             
             const selectedDate = new Date().getDate() + selectedDateOffset;
 
-            // Set empty value to all the 3-hourly range
-            $(".three-hour-forecast").each((index, element) => {
-                $(element).children("p").eq(1).text("")
-                $(element).children("p").eq(2).text("")
-                $(element).children("img").attr("src", "")
-            })
+            $("#three-hourly-forecast").html("");
 
             //For Each to show the Weather through all the hour Ranges
             weatherList.forEach((weather, index) => {
@@ -154,11 +151,17 @@ export class Weather {
                 if (date.getDate() === selectedDate) {
                     // Calculate in which range the data should be
                     const rangeIndex = Math.floor(date.getHours() / 3)
-                    const rangeDiv = $(".three-hour-forecast").eq(rangeIndex)
 
-                    rangeDiv.children("p").eq(1).text(weather["weather"][0]["main"]);
-                    rangeDiv.children("img").attr("src", API.getImageUrl(weather["weather"][0]["icon"]))
-                    rangeDiv.children("p").eq(2).text(`${Math.floor(weather["main"]["temp"])}°C`);                      
+                    const threeHoulyForecastElement = `
+                        <div class="three-hour-forecast">
+                            <p>${threeHourSpanText[rangeIndex]}</p>
+                            <p>${weather["weather"][0]["main"]}</p>
+                            <img class="three-hour-forecast-image" src=${API.getImageUrl(weather["weather"][0]["icon"])}>
+                            <p>${Math.floor(weather["main"]["temp"])}°C</p>
+                        </div>
+                    `;
+
+                    $("#three-hourly-forecast").append(threeHoulyForecastElement);
                 }
             })
         })
@@ -167,4 +170,8 @@ export class Weather {
         })
     }
 }
+
+const threeHourSpanText = [
+    "12AM", "3AM", "6AM", "9AM", "12PM", "3PM", "6PM", "9PM"
+];
 
