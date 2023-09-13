@@ -1,0 +1,74 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  font-size: 16px;
+  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
+  background-size: 32px 32px;
+  background-repeat: repeat;
+  background-position: center center;
+}
+
+main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 1.5rem auto;
+}
+main .section .seciton-title {
+  font-size: 2rem;
+}
+
+.daily-forecast, .three-hourly-forecast {
+  margin-block: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(160deg, #01487e 0%, rgb(0, 22, 40) 100%);
+  color: white;
+  box-shadow: 0.5rem 0.5rem 0 0 rgba(17, 17, 17, 0.3333333333);
+}
+.daily-forecast .one-day-forecast, .daily-forecast .three-hour-forecast, .three-hourly-forecast .one-day-forecast, .three-hourly-forecast .three-hour-forecast {
+  width: 12.5%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  row-gap: 30px;
+}
+.daily-forecast .one-day-forecast .weather, .daily-forecast .three-hour-forecast .weather, .three-hourly-forecast .one-day-forecast .weather, .three-hourly-forecast .three-hour-forecast .weather {
+  height: 1rem;
+  position: absolute;
+  inset: 35% auto 0 50%;
+  transform: translate(-50%, -50%);
+}
+.daily-forecast .one-day-forecast .icon, .daily-forecast .three-hour-forecast .icon, .three-hourly-forecast .one-day-forecast .icon, .three-hourly-forecast .three-hour-forecast .icon {
+  width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.daily-forecast .one-day-forecast .temperature, .daily-forecast .three-hour-forecast .temperature, .three-hourly-forecast .one-day-forecast .temperature, .three-hourly-forecast .three-hour-forecast .temperature {
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  inset: auto auto 5% 50%;
+  transform: translate(-50%, -50%);
+}
+.daily-forecast .one-day-forecast, .three-hourly-forecast .one-day-forecast {
+  border: 6px solid rgba(0, 53, 185, 0);
+  box-sizing: border-box !important;
+  cursor: pointer;
+}
+.daily-forecast .one-day-forecast:hover, .three-hourly-forecast .one-day-forecast:hover {
+  border: 6px solid #0035b9;
+  transition: all 0.1s;
+}
+
+.today {
+  justify-content: flex-end !important;
+}/*# sourceMappingURL=forecast.css.map */

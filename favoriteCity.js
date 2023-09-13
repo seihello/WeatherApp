@@ -152,7 +152,6 @@ export class FavoriteCity {
     changeSelectedFavoriteCityOption(displayedCityName) {
         // Make the title selected in case the displayed city is not a favorite city
         $("#favorite-cities").children().eq(0).attr("selected", true)
-        console.log($("#favorite-cities"))
 
         // Check every option and make it selected if it matches the displayed city
         for(const favoriteCountryGroup of $("#favorite-cities").children()) {

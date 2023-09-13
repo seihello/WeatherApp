@@ -86,6 +86,8 @@ export class Weather {
             })
             .then((fiveDaysWeather) => {
 
+                console.log(fiveDaysWeather);
+
                 let currentDate = new Date();
                 let day = 0;
 
@@ -104,10 +106,10 @@ export class Weather {
                             if (12 <= date.getHours()) {
                                 isTarget = true;
                             }
-                        } else if (fiveDaysWeather["list"].length - 1) {
+                        } else if (index === fiveDaysWeather["list"].length - 1) {
                             isTarget = true;
                         } else {
-                            if ((12 <= date.getHours() && date.getHours() <= 15)) {
+                            if ((12 <= date.getHours() && date.getHours() < 15)) {
                                 isTarget = true;
                             }
                         }
@@ -169,12 +171,17 @@ export class Weather {
                         // Calculate in which range the data should be
                         const rangeIndex = Math.floor(date.getHours() / 3)
 
+                        const dateText = threeHourSpanText[rangeIndex];
+                        const weatherText = weather["weather"][0]["main"];
+                        const iconSource = API.getImageUrl(weather["weather"][0]["icon"]);
+                        const temperature = Math.floor(weather["main"]["temp"]);
+
                         const threeHoulyForecastElement = `
                         <div class="three-hour-forecast">
-                            <p>${threeHourSpanText[rangeIndex]}</p>
-                            <p>${weather["weather"][0]["main"]}</p>
-                            <img class="three-hour-forecast-image" src=${API.getImageUrl(weather["weather"][0]["icon"])}>
-                            <p>${Math.floor(weather["main"]["temp"])}°C</p>
+                            <p class="date">${dateText}</p>
+                            <p class="weather">${weatherText}</p>
+                            <img class="icon" src=${iconSource}>
+                            <p class="temperature">${temperature}°C</p>
                         </div>`;
 
                         $("#three-hourly-forecast").append(threeHoulyForecastElement);

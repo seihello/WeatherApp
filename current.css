@@ -17,7 +17,7 @@ body {
 main {
   width: 95%;
   max-width: 1200px;
-  margin: 3rem auto;
+  margin: 1.5rem auto;
 }
 main .section .seciton-title {
   font-size: 2rem;
@@ -74,14 +74,15 @@ main .section .seciton-title {
 }
 .current-weather-section .current-weather-container .current-weather .current-weather-text {
   position: absolute;
-  inset: 20% auto auto 50%;
+  inset: 15% auto auto 50%;
   transform: translate(-50%, -50%);
+  font-size: 1.5rem;
 }
 .current-weather-section .current-weather-container .current-weather .current-weather-detail .current-temperature {
   display: flex;
   align-items: flex-end;
   position: absolute;
-  inset: auto auto 5% 50%;
+  inset: auto auto 3% 50%;
   transform: translate(-50%, -50%);
 }
 .current-weather-section .current-weather-container .current-weather .current-weather-detail .current-temperature .current-temperature-text {

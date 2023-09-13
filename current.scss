@@ -67,8 +67,10 @@
 
       .current-weather-text {
         position: absolute;
-        inset: 20% auto auto 50%;
+        inset: 15% auto auto 50%;
         transform: translate(-50%, -50%);
+
+        font-size: 1.5rem;
       }
 
       .current-weather-detail {
@@ -80,7 +82,7 @@
           align-items: flex-end;
 
           position: absolute;
-          inset: auto auto 5% 50%;
+          inset: auto auto 3% 50%;
           transform: translate(-50%, -50%);
 
           .current-temperature-text {
