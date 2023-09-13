@@ -1,211 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-#input-section {
-  width: 50%;
-  height: 2.5rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 99;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
-#favorite-cities {
-  width: 30%;
-  height: 100%;
-  padding-left: 5px;
+body {
+  font-size: 16px;
+  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
+  background-size: 32px 32px;
+  background-repeat: repeat;
+  background-position: center center;
 }
 
-#or {
-  display: none;
-  font-size: 0.8rem;
+main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 1.5rem auto;
 }
-
-#search-city {
-  width: 30%;
-  height: 90%;
-  padding-left: 5px;
-}
-
-#main-section {
-  width: 50%;
-  margin: 1rem auto;
-  padding: 1rem 0;
-  border-radius: 10px;
-}
-
-#current-weather-section {
-  width: 100%;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 5px;
-}
-
-#place {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  position: relative;
-}
-
-#city {
-  padding: 0 0 0 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0 10px;
-}
-
-#city-name {
-  height: auto;
-  text-align: center;
+main .section .seciton-title {
   font-size: 2rem;
-  line-height: 0;
 }
 
-#favorite-star-box {
-  padding: 0 0;
-  width: 25px;
-  height: auto;
-}
-
-#favorite-star {
+.current-weather-section .current-weather-container {
   width: 100%;
-  height: 100%;
-  padding-top: 8px;
-  opacity: 0;
-}
-
-#country {
-  position: absolute;
-  left: 0;
-  top: 2rem;
-  padding: 0 0 0 30px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0 1px;
-}
-
-#country-code {
-  color: rgb(110, 110, 110);
-}
-
-#national-flag-box {
-  width: 30px;
-  height: 30px;
-  padding: auto auto;
-}
-
-#national-flag {
-  height: 100%;
-  width: auto;
-  border-radius: 15px;
-}
-
-#current-weather {
-  width: 70%;
-  margin-top: 2rem;
-  padding-top: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  background: linear-gradient(160deg, #01487e 0%, rgb(0, 22, 40) 100%);
+  color: white;
+  box-shadow: 0.5rem 0.5rem 0 0 rgba(17, 17, 17, 0.3333333333);
+}
+.current-weather-section .current-weather-container .place .city {
+  display: flex;
   align-items: center;
-  background-color: #9bd1e1;
-  border-radius: 20px;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.current-weather-section .current-weather-container .place .city .city-name {
+  font-size: 2rem;
+}
+.current-weather-section .current-weather-container .place .city .favorite-star-box {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.current-weather-section .current-weather-container .place .city .favorite-star-box img {
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
-
-#current-weather-text {
-  font-size: 1.5rem;
-}
-
-#current-weather-detail {
-  padding-right: 2rem;
+.current-weather-section .current-weather-container .place .country {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
-
-#weather-icon {
-  width: 60%;
-  height: auto;
+.current-weather-section .current-weather-container .place .country .national-flag-box {
+  width: 1.5rem;
+  height: 1.5rem;
 }
-
-#weather-icon:hover {
-  opacity: 0.8;
-  transform: scale(1.04);
+.current-weather-section .current-weather-container .place .country .national-flag-box img {
+  width: 100%;
+  height: 100%;
 }
-
-#current-temperature {
+.current-weather-section .current-weather-container .current-weather {
+  margin-bottom: 0.5rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.current-weather-section .current-weather-container .current-weather .current-weather-text {
+  position: absolute;
+  inset: 15% auto auto 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+}
+.current-weather-section .current-weather-container .current-weather .current-weather-detail .current-temperature {
+  display: flex;
   align-items: flex-end;
+  position: absolute;
+  inset: auto auto 3% 50%;
+  transform: translate(-50%, -50%);
 }
-
-#current-temperature-text {
-  font-size: 3rem;
+.current-weather-section .current-weather-container .current-weather .current-weather-detail .current-temperature .current-temperature-text {
+  font-size: 1.5rem;
 }
-
-#current-temperature-sign {
-  font-size: 2rem;
-  padding-bottom: 0.2rem;
-}
-
-#current-time {
-  width: 70%;
-  margin-top: 0.2rem;
-  padding-right: 0.5rem;
+.current-weather-section .current-weather-container .current-time {
   text-align: right;
-  font-size: 1rem;
-  color: rgb(110, 110, 110);
-}
-
-@media only screen and (max-width: 375px) {
-  #main-section {
-    width: 100%;
-    padding: 0 0;
-  }
-  #input-section {
-    width: 100%;
-    margin: 0 auto;
-    padding: 10px 0;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    left: 0;
-  }
-  #favorite-cities {
-    width: 45%;
-  }
-  #search-city {
-    width: 45%;
-  }
-  #or {
-    display: block;
-  }
-  #city-name {
-    font-size: 1.8rem;
-  }
-  #country-code {
-    font-size: 1rem;
-  }
-  #national-flag-box {
-    width: 25px;
-    height: 25px;
-  }
-  #current-weather {
-    padding-top: 0.8rem;
-  }
-  #current-time {
-    font-size: 0.8rem;
-    text-align: center;
-    padding-right: 0;
-  }
-}
-/*# sourceMappingURL=current.css.map */
+}/*# sourceMappingURL=current.css.map */

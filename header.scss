@@ -1,28 +1,60 @@
 @import "_common.scss";
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap");
 
-#header {
-  position: fixed;
-  top: 0;
-
+.status-bar {
   width: 100%;
-  height: 60px;
-  margin-bottom: 5px;
-  background-color: $light-blue; // Change this if you want
-  background: linear-gradient(to bottom right, #64c3e0, $light-blue);
-  box-shadow: 1px 1px 5px #136d9a;
-  color: white;
-  text-shadow: 1px 1px 1px #136d9a;
-  user-select: none;
+  height: 24px;
+  background-color: $dark-blue;
+}
+
+header {
+  width: 100%;
+  height: 80px;
 
   display: flex;
   justify-content: center;
-  align-items: center;
 
-  z-index: 99;
-}
+  background-color: white;
+  box-shadow: 1px 1px 3px #7e7e7e;
 
-@media only screen and (max-width: 375px) {
-  #header {
-    position: static;
+  .header-content {
+    width: 95%;
+    height: 100%;
+    max-width: 1200px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: white;
+
+    h1 {
+      font-family: "Comfortaa", cursive;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: $dark-blue;
+      text-shadow: 1px 1px 1px #898989;
+      user-select: none;
+    }
+
+    .select-city {
+      width: 50%;
+      max-width: 500px;
+
+      display: flex;
+      column-gap: 1rem;
+
+      .favorite-cities,
+      .search-city {
+        width: 45%;
+        height: 2.5rem;
+        padding-left: 5px;
+
+        border: none;
+        border-radius: 0.5rem;
+        background-color: #f8f8f8;
+        box-shadow: 1px 1px 5px #d8d8d8;
+      }
+    }
   }
 }

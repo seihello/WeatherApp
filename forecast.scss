@@ -1,0 +1,67 @@
+/*# sourceMappingURL=fiveDays.css.map */
+@import "_common.scss";
+
+.daily-forecast, .three-hourly-forecast {
+
+  margin-block: 1rem 2rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  background: linear-gradient(160deg, $dark-blue 0%, rgba(0,22,40,1) 100%);
+  color: white;
+  box-shadow: .5rem .5rem 0 0 #11111155;
+
+  .one-day-forecast, .three-hour-forecast {
+    width: calc(100/8) * 1%;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    row-gap: 30px;
+
+    .date {
+
+    }
+
+    .weather {
+      height: 1rem;
+      position: absolute;
+      inset: 35% auto 0 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .icon {
+      width: 80%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .temperature {
+      display: flex;
+      align-items: flex-end;
+
+      position: absolute;
+      inset: auto auto 5% 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .one-day-forecast {
+    border: 6px solid #0035b900;
+    box-sizing: border-box!important;
+    cursor: pointer;
+  }
+
+  .one-day-forecast:hover {
+    border: 6px solid #0035b9;
+    transition: all .1s;
+  }
+}
+
+.today {
+  justify-content: flex-end!important;
+}
+
