@@ -132,7 +132,7 @@ export class Weather {
 
                         $("#daily-forecast").children().each((index, element) => {
                             $(element).on("click", () => {
-                                this.showThreeHourlyWeather(index + 1)
+                                this.showThreeHourlyWeather(index)
                             })
                         })
 
