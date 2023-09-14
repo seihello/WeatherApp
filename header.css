@@ -7,8 +7,18 @@
   font-family: "Montserrat", sans-serif;
 }
 
+@media (width > 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (width <= 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 body {
-  font-size: 16px;
   background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
   background-size: 32px 32px;
   background-repeat: repeat;
@@ -20,13 +30,18 @@ main {
   max-width: 1200px;
   margin: 1.5rem auto;
 }
-main .section .seciton-title {
+main .section .section-title {
   font-size: 2rem;
 }
 
+@media (width <= 768px) {
+  .section-title {
+    text-align: center;
+  }
+}
 .status-bar {
   width: 100%;
-  height: 24px;
+  height: 1rem;
   background-color: #01487e;
 }
 
@@ -73,4 +88,25 @@ header .header-content .select-city .search-city {
   border-radius: 0.5rem;
   background-color: #f8f8f8;
   box-shadow: 1px 1px 5px #d8d8d8;
+  font-size: 1rem;
+}
+
+@media (width <= 768px) {
+  header {
+    height: auto;
+    padding-block: 1rem;
+  }
+  header .header-content {
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+  header .header-content .select-city {
+    width: min(100%, 360px);
+    flex-direction: column-reverse;
+    align-items: center;
+    row-gap: 1rem;
+  }
+  header .header-content .select-city .favorite-cities, header .header-content .select-city .search-city {
+    width: 100%;
+  }
 }/*# sourceMappingURL=header.css.map */

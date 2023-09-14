@@ -23,6 +23,7 @@
     position: relative;
     row-gap: 30px;
     
+    font-size: clamp(.5rem, 1vw, 1rem);
     border-radius: 1rem;
 
     .date {

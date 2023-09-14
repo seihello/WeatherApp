@@ -7,8 +7,18 @@
   font-family: "Montserrat", sans-serif;
 }
 
+@media (width > 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (width <= 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 body {
-  font-size: 16px;
   background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
   background-size: 32px 32px;
   background-repeat: repeat;
@@ -20,10 +30,15 @@ main {
   max-width: 1200px;
   margin: 1.5rem auto;
 }
-main .section .seciton-title {
+main .section .section-title {
   font-size: 2rem;
 }
 
+@media (width <= 768px) {
+  .section-title {
+    text-align: center;
+  }
+}
 .daily-forecast, .three-hourly-forecast {
   margin-block: 1rem 2rem;
   padding: 1rem;
@@ -41,6 +56,7 @@ main .section .seciton-title {
   align-items: center;
   position: relative;
   row-gap: 30px;
+  font-size: clamp(0.5rem, 1vw, 1rem);
   border-radius: 1rem;
 }
 .daily-forecast .one-day-forecast .weather, .daily-forecast .three-hour-forecast .weather, .three-hourly-forecast .one-day-forecast .weather, .three-hourly-forecast .three-hour-forecast .weather {

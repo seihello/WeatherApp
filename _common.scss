@@ -11,10 +11,18 @@ $caption-grey: rgb(110, 110, 110);
   font-family: "Montserrat", sans-serif;
 }
 
-body {
-  font-size: 16px;
+html {
+  @media (width > 768px) {
+    font-size: 16px;
+  }
+  @media (width <= 768px) {
+    font-size: 12px;
+  }
+}
 
-  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
+body {
+  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)),
+    linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
   background-size: 32px 32px;
   background-repeat: repeat;
   background-position: center center;
@@ -27,8 +35,14 @@ main {
   margin: 1.5rem auto;
 
   .section {
-    .seciton-title {
+    .section-title {
       font-size: 2rem;
     }
+  }
+}
+
+@media (width <= 768px) {
+  .section-title {
+    text-align: center;
   }
 }
