@@ -71,8 +71,6 @@ main .section .section-title {
   margin-bottom: 20px;
 }
 .daily-forecast .one-day-forecast .temperature, .daily-forecast .three-hour-forecast .temperature, .three-hourly-forecast .one-day-forecast .temperature, .three-hourly-forecast .three-hour-forecast .temperature {
-  display: flex;
-  align-items: flex-end;
   position: absolute;
   inset: auto auto 5% 50%;
   transform: translate(-50%, -50%);
@@ -92,4 +90,34 @@ main .section .section-title {
 
 .selected {
   box-shadow: 0px 0px 10px 2px rgba(165, 180, 255, 0.8);
+}
+
+@media (width <= 768px) {
+  .daily-forecast, .three-hourly-forecast {
+    flex-direction: column;
+  }
+  .daily-forecast .one-day-forecast, .daily-forecast .three-hour-forecast, .three-hourly-forecast .one-day-forecast, .three-hourly-forecast .three-hour-forecast {
+    width: 100%;
+    flex-direction: row;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    text-align: center;
+  }
+  .daily-forecast .one-day-forecast .date, .daily-forecast .three-hour-forecast .date, .three-hourly-forecast .one-day-forecast .date, .three-hourly-forecast .three-hour-forecast .date {
+    width: 30%;
+  }
+  .daily-forecast .one-day-forecast .weather, .daily-forecast .three-hour-forecast .weather, .three-hourly-forecast .one-day-forecast .weather, .three-hourly-forecast .three-hour-forecast .weather {
+    width: 25%;
+    height: auto;
+    position: static;
+    transform: none;
+  }
+  .daily-forecast .one-day-forecast .icon, .daily-forecast .three-hour-forecast .icon, .three-hourly-forecast .one-day-forecast .icon, .three-hourly-forecast .three-hour-forecast .icon {
+    width: 25%;
+    margin-bottom: 0;
+  }
+  .daily-forecast .one-day-forecast .temperature, .daily-forecast .three-hour-forecast .temperature, .three-hourly-forecast .one-day-forecast .temperature, .three-hourly-forecast .three-hour-forecast .temperature {
+    width: 20%;
+    position: static;
+    transform: none;
+  }
 }/*# sourceMappingURL=forecast.css.map */
