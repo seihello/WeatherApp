@@ -6,8 +6,18 @@
   font-family: "Montserrat", sans-serif;
 }
 
+@media (width > 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (width <= 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 body {
-  font-size: 16px;
   background-image: linear-gradient(0deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #f0f0f0 calc(100% - 1px));
   background-size: 32px 32px;
   background-repeat: repeat;
@@ -19,10 +29,15 @@ main {
   max-width: 1200px;
   margin: 1.5rem auto;
 }
-main .section .seciton-title {
+main .section .section-title {
   font-size: 2rem;
 }
 
+@media (width <= 768px) {
+  .section-title {
+    text-align: center;
+  }
+}
 .current-weather-section .current-weather-container {
   width: 100%;
   max-width: 500px;
@@ -90,4 +105,16 @@ main .section .seciton-title {
 }
 .current-weather-section .current-weather-container .current-time {
   text-align: right;
+}
+
+@media (width <= 768px) {
+  .current-weather-text {
+    inset: 15% auto auto 50% !important;
+  }
+  .weather-icon {
+    width: 140px;
+  }
+  .current-temperature {
+    inset: auto auto -3% 50% !important;
+  }
 }/*# sourceMappingURL=current.css.map */

@@ -74,9 +74,7 @@
       }
 
       .current-weather-detail {
-        .weather-icon {
 
-        }
         .current-temperature {
           display: flex;
           align-items: flex-end;
@@ -101,5 +99,18 @@
     .current-time {
       text-align: right;
     }
+  }
+}
+
+
+@media (width <= 768px) {
+  .current-weather-text {
+    inset: 15% auto auto 50%!important;
+  }
+  .weather-icon {
+    width: 140px;
+  }
+  .current-temperature {
+    inset: auto auto -3% 50%!important;
   }
 }
