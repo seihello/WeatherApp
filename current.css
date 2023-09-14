@@ -41,7 +41,7 @@ main .section .section-title {
 .current-weather-section .current-weather-container {
   width: 100%;
   max-width: 500px;
-  margin-block: 1rem 2rem;
+  margin: 1rem auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
