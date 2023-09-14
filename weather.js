@@ -134,6 +134,7 @@ export class Weather {
 
                         $("#daily-forecast").children().each((index, element) => {
                             $(element).on("click", () => {
+                                this.setSelectedDayStyle(index)
                                 this.showThreeHourlyWeather(index)
                             })
                         })
@@ -197,6 +198,11 @@ export class Weather {
             .catch((error) => {
                 console.log("Fetch Error: " + error)
             })
+    }
+
+    setSelectedDayStyle(selectedDateOffset) {
+        $("#daily-forecast").children().removeClass("selected");
+        $("#daily-forecast").children().eq(selectedDateOffset).addClass("selected");
     }
 }
 

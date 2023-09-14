@@ -26,6 +26,7 @@ main .section .seciton-title {
 
 .daily-forecast, .three-hourly-forecast {
   margin-block: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   background: linear-gradient(160deg, #01487e 0%, rgb(0, 22, 40) 100%);
@@ -40,6 +41,7 @@ main .section .seciton-title {
   align-items: center;
   position: relative;
   row-gap: 30px;
+  border-radius: 1rem;
 }
 .daily-forecast .one-day-forecast .weather, .daily-forecast .three-hour-forecast .weather, .three-hourly-forecast .one-day-forecast .weather, .three-hourly-forecast .three-hour-forecast .weather {
   height: 1rem;
@@ -60,15 +62,18 @@ main .section .seciton-title {
   transform: translate(-50%, -50%);
 }
 .daily-forecast .one-day-forecast, .three-hourly-forecast .one-day-forecast {
-  border: 6px solid rgba(0, 53, 185, 0);
   box-sizing: border-box !important;
   cursor: pointer;
 }
 .daily-forecast .one-day-forecast:hover, .three-hourly-forecast .one-day-forecast:hover {
-  border: 6px solid #0035b9;
+  box-shadow: 0px 0px 10px 2px rgba(165, 180, 255, 0.8);
   transition: all 0.1s;
 }
 
 .today {
   justify-content: flex-end !important;
+}
+
+.selected {
+  box-shadow: 0px 0px 10px 2px rgba(165, 180, 255, 0.8);
 }/*# sourceMappingURL=forecast.css.map */
