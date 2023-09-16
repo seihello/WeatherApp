@@ -8,7 +8,7 @@ export class Weather {
         this.selectedCity = ""
 
         // Hide the current weather until calling all API finishes
-        $("#current-weather-section").css("opacity", 0)
+        $("#current-weather-container").css("opacity", 0)
 
 
     }
@@ -45,7 +45,7 @@ export class Weather {
                 this.favoriteCity.setFavoriteStar()
 
                 // Show the current weather
-                $("#current-weather-section").css("opacity", 1)
+                $("#current-weather-container").css("opacity", 1)
 
                 // Change the selected city on the pull-down menu
                 this.favoriteCity.changeSelectedFavoriteCityOption($("#city-name").text())
