@@ -71,7 +71,7 @@ header {
         .clear-input {
           cursor: pointer;
           position: absolute;
-          inset: 50% 4% auto auto;
+          inset: 50% 0 auto auto;
           transform: translate(-50%, -50%);
         }
         
@@ -95,7 +95,7 @@ header {
         flex-direction: column-reverse;
         align-items: center;
         row-gap: 1rem;
-        .favorite-cities, .search-city {
+        .favorite-cities, .search-city-box {
           width: 100%;
         }
       }

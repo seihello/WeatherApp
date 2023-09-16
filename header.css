@@ -102,7 +102,7 @@ header .header-content .select-city .search-city-box .search-city {
 header .header-content .select-city .search-city-box .clear-input {
   cursor: pointer;
   position: absolute;
-  inset: 50% 4% auto auto;
+  inset: 50% 0 auto auto;
   transform: translate(-50%, -50%);
 }
 header .header-content .select-city .search-city-box .search-city::-moz-placeholder {
@@ -127,7 +127,7 @@ header .header-content .select-city .search-city-box .search-city::placeholder, 
     align-items: center;
     row-gap: 1rem;
   }
-  header .header-content .select-city .favorite-cities, header .header-content .select-city .search-city {
+  header .header-content .select-city .favorite-cities, header .header-content .select-city .search-city-box {
     width: 100%;
   }
 }/*# sourceMappingURL=header.css.map */
