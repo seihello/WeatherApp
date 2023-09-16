@@ -9,8 +9,6 @@ export class Weather {
 
         // Hide the current weather until calling all API finishes
         $("#current-weather-container").css("opacity", 0)
-
-
     }
 
     /* Current Weather */

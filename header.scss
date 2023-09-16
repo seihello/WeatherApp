@@ -45,8 +45,12 @@ header {
       column-gap: 1rem;
 
       .favorite-cities,
-      .search-city {
+      .search-city-box {
         width: 45%;
+      }
+
+      .favorite-cities,
+      .search-city {
         height: 2.5rem;
         padding-left: 5px;
 
@@ -54,8 +58,26 @@ header {
         border-radius: 0.5rem;
         background-color: #f8f8f8;
         box-shadow: 1px 1px 5px #d8d8d8;
-
         font-size: 1rem;
+      }
+
+      .search-city-box {
+        position: relative;
+
+        .search-city {
+          width: 100%;
+        }
+  
+        .clear-input {
+          cursor: pointer;
+          position: absolute;
+          inset: 50% 4% auto auto;
+          transform: translate(-50%, -50%);
+        }
+        
+        .search-city::placeholder, .clear-input {
+          color: gray;
+        }
       }
     }
   }
